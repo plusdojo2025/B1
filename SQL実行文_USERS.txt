@@ -1,0 +1,38 @@
+テーブルの名前は大文字or小文字で統一なので
+テーブル名は【大文字】で統一します。
+
+
+1.USERSテーブル
+①データベースを作成して使います。
+ CREATE DATABASE B1;
+ USE B1;
+
+②テーブルを作成します。
+ CREATE TABLE USERS(
+ id INT AUTO_INCREMENT PRIMARY KEY,      /*id(自動採番)*/
+ name VARCHAR(50) NOT NULL,              /*名前*/ 
+ email VARCHAR(100) NOT NULL,            /*ログインID(メール)*/
+ pw VARCHAR(20) NOT NULL,                 /*パスワード*/
+ role VARCHAR(10) NOT NULL,              /*役割*/
+ created_at TIMESTAMP,                   /*データを追加した日時*/
+ updated_at TIMESTAMP);                  /*データを更新した日時*/
+ 
+ 
+③テーブルに6件のデータを登録します。(デモデータ)
+INSERT INTO USERS (name,email,pw,role,created_at,updated_at) values
+('田村一徹','tamura@example.com','Boss4649','社員',
+CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO USERS (name,email,pw,role,created_at,updated_at) values
+('月島陽','tsukisima@example.jp','Tsukisima4','社員',
+CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO USERS (name,email,pw,role,created_at,updated_at) values
+('桃瀬流歌','lukaluka@example.com','Tunaaa0130','アルバイト',
+CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO USERS (name,email,pw,role,created_at,updated_at) values
+('青崎海斗','kaito@example.com','Iceeee0217','アルバイト',
+CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO USERS (name,email,pw,role,created_at,updated_at) values
+('赤城芽衣子','meiko@example.com','Beer1105','アルバイト',
+CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+④データが登録されたことを確認します。
+ SELECT * FROM USERS;
