@@ -34,4 +34,25 @@ footer{
 	background-color: #FFFFEE;
 	text-align: center;
 	padding: 10px 0 10px 0;
+	
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+/* 全てのボタン */
+.button{
+	padding: 10px 40px;
+	border: none;
+	background-color: #ec7d6a;
+	color: #FFFFEE;
+	font-weight: bold;
+	border-radius: 1em;
+}
+
+/* 全てのテキストボックス */
+input[type="text"]{
+	border: 2px solid #ec7d6a;
+	background-color: #FFFFEE;
+	border-radius: 0.5em;
 }
