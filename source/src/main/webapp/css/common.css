@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+body {
+  background-color: #FFFFFF;
+}
+
+/* ヘッダー */
+header{
+	background-color: #FFFFEE;
+	display: flex;
+	padding: 0 30px;
+	align-items: center;
+}
+header nav{
+	margin-left: auto;
+}
+header ul{
+	list-style: none;
+	display: flex;
+}
+header ul li{
+	margin-left: 20px;
+}
+header a {
+	color: #ec7d6a;
+	text-decoration: none;
+}
+header a:hover {
+	color: #D3381C;
+}
+
+/* フッター */
+footer{
+	background-color: #FFFFEE;
+	text-align: center;
+	padding: 10px 0 10px 0;
+}
