@@ -33,15 +33,15 @@ public class UserUpServlet extends HttpServlet {
 		//}
 		
 		// ユーザー情報の取得
-		LoginUser  = (LoginUser)session.getAttribute("email");
-		String userId = lu.getName();
-		UsersDao UserDao = new UsersDAO();
-		String userName = iDao.username(userId);
-		session.setAttribute("username", userName);
+		//LoginUser  = (LoginUser)session.getAttribute("email");
+		//String userId = lu.getName();
+		//UsersDao UserDao = new UsersDAO();
+		//String userName = iDao.username(userId);
+		//session.setAttribute("username", userName);
 		
 
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserUp.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userup.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -55,15 +55,15 @@ public class UserUpServlet extends HttpServlet {
 		String role = request.getParameter("role");
 		
 		//更新処理を行う
-		UsersDao UserDao = new UsersDAO();
-		if (UserDao.update(new User(name, email, pw, role))) { // 更新成功
+		//UsersDao UserDao = new UsersDAO();
+		//if (UserDao.update(new User(name, email, pw, role))) { // 更新成功
 		//	request.setAttribute("result", new Result("更新成功！", "レコードを更新しました。", "/webapp/MenuServlet"));
 		//	} else { // 更新失敗
 		///		request.setAttribute("result", new Result("更新失敗！", "レコードを更新できませんでした。", "/webapp/MenuServlet"));
 		//	}
 		
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/UserUp.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userup.jsp");
 		dispatcher.forward(request, response);
 	}
 }

@@ -6,27 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>ユーザー情報|NaviZaka</title>
-<link rel="Stylesheet" href="<c:url value='/css/UserUp.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>">
+<link rel="Stylesheet" href="<c:url value='/css/userup.css'/>">
 </head>
 <body>
   <!-- ヘッダー（ここから） -->
-  <header>
-  <div class="header">
-  <div class="logo">
-  　<a href="<c:url value='/LoginServlet' />"><img src="<c:url value='/img/logo.css'/>" alt="NaviZaka" width="300" height="180"></a>
-  </div>
-  <nav class="nav">
-    <ul>
-     <li><a href="<c:url value='/LoginServlet' />">ホーム</a></li>
-     <li><a href="<c:url value='/ManuListServlet' />">マニュアル一覧</a></li>
-     <li><a href="<c:url value='/UserUpServlet' />">ユーザー情報</a></li>
-    </ul>
-   </nav>
-   <div class="logout"> 
-   <a href="<c:url value='/LoginServlet' />"><img src="<c:url value='/img/logout.css'/>" alt="ログアウト"></a>
-  </div>  
-   </div>
-  </header>
+	<header>
+		<a href="/B1/LoginServlet">
+			<img src="img/logo.png" alt="NaviZaka"  height="130">
+		</a>
+		<nav>
+			<ul>
+			<li><a href="/B1/LoginServlet">ホーム</a></li>
+			<li><a href="/B1/ManuListServlet">マニュアル一覧</a></li>
+			<li><a href="/B1/UserUpServlet">ユーザー情報</a></li>
+			<li><a href="/B1/LoginServlet"><img src="img/logout.png" alt="ログアウト" width="100"></a>
+			</ul>
+		</nav>
+	</header>
   <!-- ヘッダー（ここまで） -->
   <div class="wrapper">
   <!-- メッセージエリア -->
