@@ -26,7 +26,7 @@
   </header>
   <!-- ヘッダー（ここまで） -->
   <section class="category-name">
-  <h2>${categoryName}</h2>
+  <h2>${taskName}</h2>
   </section>
   <main>
    <pre class="manual-body">${manualBody}</pre>

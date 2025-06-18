@@ -1,7 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,9 +37,19 @@ public class ManuListServlet extends HttpServlet {
 			ManualsDao dao = new ManualsDao();
 			List<Manual> manuList = dao.getManuList();
 			
+			//カテゴリ名をキーにして、Mapを作成
+			Map<String, List<Manual>> manualMap =new LinkedHashMap<>();
+			
+			//一件ずつ取り出し、カテゴリごとに
+			for (Manual m : manuList) {
+				//指定カテゴリ名がMap似ない場合、新しいリストを作成して追加
+				manualMap.computeIfAbsent(m.getCategoryName(), k -> new java.util.ArrayList<>()).add(m);
+			}
 		
 			//jspに渡す
-			request.setAttribute("manuList", manuList);
+			request.setAttribute("manualMap", manualMap);
+			
+			//フォワード
 			request.getRequestDispatcher("/WEB-INF/jsp/manulist.jsp").forward(request, response);
 			
 
