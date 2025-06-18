@@ -62,8 +62,9 @@ public class LoginServlet extends HttpServlet {
 			
 			//usersテーブルに会った場合
 			if(loginok == true) {
-	
-			
+				//homeempにリダイレクト
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeEmpServlet.java");
+				dispatcher.forward(request, response);
 			}else {
 			//なかった場合
 				doGet(request, response);
