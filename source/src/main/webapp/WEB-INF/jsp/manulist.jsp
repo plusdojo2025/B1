@@ -28,43 +28,30 @@
   </header>
   <!-- ヘッダー（ここまで） -->
   
-   <div class="manual-section">
-   
-    <!-- JSTLでループ開始。-->
-    <c:set var="currentCategory" value="" />
-    
-    <c:forEach var="manual" items="${manuList}" varStatus="status">
-    
-     <!-- 新規作成 -->
-     <c:if test="${manual.categoryName != currentCategory}">
-       <!-- 更新 -->
-       <c:set var="currentCategory" value="${manual.categoryName}" />
-        <!-- クリックで開閉 -->
-        <div class="category" onclick="toggleManual('manual-${manual.categoryName}')">
-                ▼ ${manual.categoryName}
-        </div>
-        
-        <div class="manual-content" id="manual-${manual.categoryName}" style="display:none;">
-         
-         <!-- 業務名、日付を表示 -->
-         <p class="task-line">
-            <!-- 業務名はクリックで詳細ページへリンク（後で詳細URLに修正） -->
-            <span class="task-name">
-            <a href="ManualDetailServlet?task=${manual.taskName}">
-             ${manual.taskName}
-            </a>
-            </span>
-            <span class="task-date">
-             <fmt:formatDate value="${manual.createDate}" pattern="yyyy/MM/dd" />
-            </span>
-         </p>
-         
-         <c:if test="${status.last || manuList[status.index + 1].categoryName != manual.categoryName}">
-         </c:if>
-        </div>     
-     </c:if>
-    </c:forEach>
-   </div>
+　　<!-- ループ -->
+<c:forEach var="entry" items="${manualMap}">
+ 
+ <!-- カテゴリ見出し（開閉） -->
+ <div class="category" onclick="toggleManual('manual-${entry.key}')">
+  ▼ ${entry.key}
+ </div>
+ 
+ <!-- カテゴリ内のマニュアル一覧 -->
+ <div class="manual-content" id="manual-${entry.key}" style="display:none;">
+  <c:forEach var="manual" items="${entry.value}">
+   <p class="task-line">
+    <span class="task-name">
+     <a href="ManuDetailServlet?task=${manual.taskName}">
+      ${manual.taskName}
+     </a>
+    </span>
+    <span class="task-date">
+     <fmt:formatDate value="${manual.createDate}" pattern="yyyy/mm/dd" />
+    </span>
+   </p>
+  </c:forEach>
+ </div>
+</c:forEach>
 
   <!-- フッダー(ここから) -->
   <footer>
