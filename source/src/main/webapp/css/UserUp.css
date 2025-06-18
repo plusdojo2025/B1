@@ -1,0 +1,69 @@
+/*ヘッダー仮*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo{
+	text-align: left;
+}
+
+.logout{
+	text-align: right;
+}
+
+.nav ul{
+  margin: 20 0 20 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 20px;
+}
+
+/*フッダー仮*/
+.copyright{
+  text-align: center;
+}
+
+/*エラーメッセージ*/
+#error_message{
+  text-align: center;
+}
+/*入力フォーム*/
+.wrapper {
+  margin: 0 auto 0 auto;	/* 中央揃え */
+  width: 700px;			/* 幅を固定 */
+}
+
+.upload{
+  margin: 0 auto;
+ }
+ 
+.tips{
+	font-size: 10px;
+
+ }
+ 
+.radio{
+  text-align: center;
+}
+
+.button{
+  text-align: center;
+}
+
+#name{
+	width: 100%
+}
+
+#email{
+	width: 100%
+}
+
+#pw{
+	width: 100%
+}
