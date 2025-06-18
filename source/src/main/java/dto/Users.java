@@ -70,6 +70,17 @@ public class Users implements Serializable {
         this.updatedAt = updatedAt;
     }
     
+    //Test用　中身が入ってるか確認
+    public String toString() {
+        return "User{id=" + id + 
+               ", name='" + name + '\'' + 
+               ", email='" + email + '\'' + 
+               ", pw='" + pw + '\'' +
+               ", role='" + role + '\'' +
+               ", createdAt=" + createdAt +
+               ", updatedAt=" + updatedAt + '}';
+    }
+    
     //コンストラクタ　ログイン用
     public Users(String email, String pw) {
 		this.email = email;
@@ -83,6 +94,17 @@ public class Users implements Serializable {
 		this.email = email;
 		this.pw = pw;
 		this.role = role;
+    }
+    
+    //コンストラクタ　情報取得用
+    public Users(int id, String name, String email, String pw, String role, Timestamp createdAt, Timestamp updatedAt) {
+    	this.id= id;
+		this.name = name;
+		this.email = email;
+		this.pw = pw;
+		this.role = role;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
     }
 
 }
