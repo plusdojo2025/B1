@@ -1,0 +1,91 @@
+@charset "UTF-8";
+/* カテゴリ名 */
+.category-name h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+  padding-left: 55px;
+}
+
+/* マニュアル本文 */
+.manual-body {
+  background-color: #f9f9f9;
+  padding: 20px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  white-space: pre-wrap; 
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 20px auto;     
+  width: 60%;           
+  max-width: 600px;      
+  box-sizing: border-box; 
+}
+
+/* 完了ボタンフォーム */
+.complete-form {
+  text-align: center;
+}
+
+
+#completeButton:hover {
+  background-color: #0056b3;
+}
+body {
+  background-color: #FFFFFF;
+}
+
+/* ヘッダー */
+header{
+	background-color: #FFFFEE;
+	display: flex;
+	padding: 0 30px;
+	align-items: center;
+}
+header nav{
+	margin-left: auto;
+}
+header ul{
+	list-style: none;
+	display: flex;
+}
+header ul li{
+	margin-left: 20px;
+}
+header a {
+	color: #ec7d6a;
+	text-decoration: none;
+}
+header a:hover {
+	color: #D3381C;
+}
+.logo {
+	height: 130px;
+}
+.logout {
+	width: 100px;
+}
+/* フッター */
+footer{
+	background-color: #FFFFEE;
+	text-align: center;
+	padding: 10px 0 10px 0;
+}
+/* 全てのボタン */
+.button{
+	padding: 10px 40px;
+	border: none;
+	background-color: #ec7d6a;
+	color: #FFFFEE;
+	font-weight: bold;
+	border-radius: 1em;
+}
+
+/* 全てのテキストボックス */
+input[type="text"]{
+	border: 2px solid #ec7d6a;
+	background-color: #FFFFEE;
+	border-radius: 0.5em;
+}
