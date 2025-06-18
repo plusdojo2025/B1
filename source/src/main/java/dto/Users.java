@@ -76,7 +76,7 @@ public class Users implements Serializable {
 		this.pw = pw;
     }
 	
-	//コンストラクタ 情報変更用
+	//コンストラクタ 情報変更用　登録用
     public Users(int id, String name, String email, String pw, String role) {
     	this.id= id;
 		this.name = name;
