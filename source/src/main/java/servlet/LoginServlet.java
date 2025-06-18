@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UsersDao;
+import dto.Users;
+
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -41,32 +45,32 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// リクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
-			String id = request.getParameter("id");
+			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
 			
-			System.out.print(id);
-			System.out.print(pw);
+			//id,pwを使ってdbのテーブルにこのセットがあるかどうかをチェックする
+			//dbを使うということはdaoがいるよ
 			
+			//UsersクラスのJavaBeansをインスタンス化して、コンストラクターに変数を渡す。
+			Users us = new Users(email,pw);
+			//Users型のデータをdaoのメソッドの引数として使う
+			//UsersDaoをインスタンス化
+			UsersDao ud = new UsersDao();
+			//usersdaoにあるisLoginOKメソッドにusers型のデータを引数としてわたす
+			//結果はtrue　or　falseで戻って来る
+			boolean loginok = ud.isLoginOK(us);
 			
-			// ログイン処理を行う
-//			IdPwDAO iDao = new IdPwDAO();
-//			if (iDao.isLoginOK(new IdPw(id, pw))) { // ログイン成功
-//				// セッションスコープにIDを格納する
-//				HttpSession session = request.getSession();
-//				session.setAttribute("id", new LoginUser(id));
-//
-//				// メニューサーブレットにリダイレクトする
-//				response.sendRedirect("/webapp/MenuServlet");
-//			} else { // ログイン失敗
-//				// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
-//				request.setAttribute("result", new Result("ログイン失敗！", "IDまたはPWに間違いがあります。", "/webapp/LoginServlet"));
-//
-//				// 結果ページにフォワードする
-//				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
-//				dispatcher.forward(request, response);
-//			}
+			//usersテーブルに会った場合
+			if(loginok == true) {
+	
 			
-		doGet(request, response);
+			}else {
+			//なかった場合
+				doGet(request, response);
+			}
+			 //ログイン処理を行う
+			
+		
 	}
 
 }
