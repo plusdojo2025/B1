@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-//import dao.BcDAO;
-//import dto.Bc;
+import dao.UsersDao;
+import dto.Result;
+import dto.Users;
 
 /**
  * Servlet implementation class UpdateDeleteServlet
@@ -26,19 +28,18 @@ public class UserUpServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		//HttpSession session = request.getSession();
-		//if (session.getAttribute("id") == null) {
-		//	response.sendRedirect("/webapp/LoginServlet");
-		//	return;
-		//}
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/B1/LoginServlet");
+			return;
+		}
 		
 		// ユーザー情報の取得
-		//LoginUser  = (LoginUser)session.getAttribute("email");
-		//String userId = lu.getName();
-		//UsersDao UserDao = new UsersDAO();
-		//String userName = iDao.username(userId);
-		//session.setAttribute("username", userName);
-		
+		// ログインサーブレットから渡されたemail情報を受け取る
+		String email = (String)session.getAttribute("email");
+		UsersDao uDao = new UsersDao();
+		Users user = uDao.userInfo(email);
+		session.setAttribute("user", user);
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userup.jsp");
@@ -49,18 +50,19 @@ public class UserUpServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
+		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
 		String role = request.getParameter("role");
 		
 		//更新処理を行う
-		//UsersDao UserDao = new UsersDAO();
-		//if (UserDao.update(new User(name, email, pw, role))) { // 更新成功
-		//	request.setAttribute("result", new Result("更新成功！", "レコードを更新しました。", "/webapp/MenuServlet"));
-		//	} else { // 更新失敗
-		///		request.setAttribute("result", new Result("更新失敗！", "レコードを更新できませんでした。", "/webapp/MenuServlet"));
-		//	}
+		UsersDao UserDao = new UsersDao();
+		if (UserDao.update(new Users(id,name, email, pw, role))) { // 更新成功
+			request.setAttribute("result", new Result("更新成功！", "ユーザー情報を更新しました。", "/B1/UserUpServlet"));
+		} else { // 更新失敗
+				request.setAttribute("result", new Result("更新失敗！", "ユーザー情報を更新できませんでした。", "/B1/UserUpServlet"));
+		}
 		
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userup.jsp");
