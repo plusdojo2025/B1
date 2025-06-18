@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.category {
+  text-align: center;
+  font-size: 1.2em;
+  background-color: #e0f7fa;
+  color: #00796b;
+  font-weight: bold;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category:hover {
+  background-color: #b2ebf2;
+}
+.manual-content {
+  display: none;
+  padding: 12px 16px;
+  background-color: #fff;
+  border-left: 4px solid #005BAC;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.manual-content p {
+  margin: 0 0 8px;
+}
+.manual-content a {
+  text-decoration: none;
+  color: #005BAC;
+  font-weight: bold;
+}
+
+.manual-content a:hover {
+  text-decoration: underline;
+}
+.task-line {
+  display: flex;              
+  justify-content: center;    
+  position: relative;
+  margin: 5px 0;
+}
+
+.task-name {
+  flex: 0 1 auto;             
+  font-weight: bold;
+}
+
+.task-date {
+  position: absolute;
+  right: 0;                   
+  font-size: 0.9em;
+  color: #666;
+}
+body {
+  background-color: #FFFFFF;
+}
+
+/* ヘッダー */
+header{
+	background-color: #FFFFEE;
+	display: flex;
+	padding: 0 30px;
+	align-items: center;
+}
+header nav{
+	margin-left: auto;
+}
+header ul{
+	list-style: none;
+	display: flex;
+}
+header ul li{
+	margin-left: 20px;
+}
+header a {
+	color: #ec7d6a;
+	text-decoration: none;
+}
+header a:hover {
+	color: #D3381C;
+}
+.logo {
+	height: 130px;
+}
+.logout {
+	width: 100px;
+}
+/* フッター */
+footer{
+	background-color: #FFFFEE;
+	text-align: center;
+	padding: 10px 0 10px 0;
+}
