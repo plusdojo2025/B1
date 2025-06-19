@@ -3,6 +3,7 @@ package dto;
 import java.util.Date;
 
 public class Manual {
+	private int id;
     private String categoryName; // カテゴリ名
     private String manualBody;   // 本文）
     private String taskName;     // 業務名
@@ -26,5 +27,9 @@ public class Manual {
     
     public Date getUpdateDate() { return updateDate; }
     public void setUpdateDate(Date updateDate) { this.updateDate = updateDate; }
+
+	public int getId() {return id;}
+
+	public void setId(int id) {this.id = id;}
 }
 

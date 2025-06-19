@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>マニュアル詳細 | NaviZaka</title>
-<link rel="stylesheet" href="<c:url value='/css/manudetail.css' />">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/manudetail.css'/>">
 </head>
 <body>
 <!-- ヘッダー（ここから） -->
@@ -28,33 +28,39 @@
 
   	</header>
   	<!-- ヘッダー（ここまで） -->
-	<!--メッセージエリア-->
-  	<p id="message">メッセージエリア</p>  
-	<form id="user_form" method="POST" action="/B1/ManuDetailServlet">
-		<table>
-			<tr>
-				<th><label>カテゴリ（キッチンなど）業務名（皿洗いなど）</label></th>
-			</tr>
-			<tr>
-        		<td><input type="text" readonly name="name" id="name" class="form" size="50"></td>
-      		</tr>
-		</table>
-		
-		<div id="stars">
-        	<span class="star" data-star="1">☆</span>
-        	<span class="star" data-star="2">☆</span>
-        	<span class="star" data-star="3">☆</span>
-        	<span class="star" data-star="4">☆</span>
-        	<span class="star" data-star="5">☆</span>
-    	</div>
-    	<input type="text">
-    	<br>
-    	<button type="submit">評価</button>
-	</form>
+	<h2>${manual.categoryName}｜${manual.taskName}</h2>
+
+<div class="manual-body-container">
+    <div class="manual-body-box">
+    ${manual.manualBody}
+    </div>
+</div>
+
+<!-- 評価 -->
+<div>
+    評価：
+    <span class="star" onclick="setRating(1)">☆</span>
+    <span class="star" onclick="setRating(2)">☆</span>
+    <span class="star" onclick="setRating(3)">☆</span>
+    <span class="star" onclick="setRating(4)">☆</span>
+    <span class="star" onclick="setRating(5)">☆</span>
+    <input type="hidden" name="rating" id="rating" value="0">
+</div>
+
+<!-- コメント入力 -->
+<form action="/B1/ManuDetailServlet" method="POST">
+    <p>
+        <textarea name="comment" rows="4" cols="50" placeholder="コメント"></textarea>
+    </p>
+
+    <input type="hidden" name="manualId" value="${manual.id}">
+    <button type="submit">完了</button>
+</form>
 	<!-- フッダー(ここから) -->
 	<footer>
   		<p class="copyright">&copy;せんこうはなび</p>
 	</footer>
 	<!-- フッダー(ここまで) -->  
 </body>
+<script src="<c:url value='/js/manudetail.js' />"></script>
 </html>

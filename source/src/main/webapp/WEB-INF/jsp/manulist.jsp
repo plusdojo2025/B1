@@ -41,7 +41,7 @@
   <c:forEach var="manual" items="${entry.value}">
    <p class="task-line">
     <span class="task-name">
-     <a href="ManuDetailServlet?task=${manual.taskName}">
+     <a href="ManuDetailServlet?manualId=${manual.id}">
       ${manual.taskName}
      </a>
     </span>
