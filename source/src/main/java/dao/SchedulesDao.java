@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dto.SchedulesDto;
 import dto.Users;
 
 public class SchedulesDao {
@@ -60,7 +59,7 @@ public class SchedulesDao {
 			return loginResult;
 		}
 		
-		public boolean insert(SchedulesDto schedules) {
+		public boolean insert(int user_id,String date,int category_id) {
 			Connection conn = null;
 			boolean result = false;
 
@@ -69,42 +68,54 @@ public class SchedulesDao {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b1?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B1?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
-				// SQL文を準備する
-				String sql = "INSERT INTO SCHEDULES VALUES (?, ?, ?, ?, ?, ?)";
-				PreparedStatement pStmt = conn.prepareStatement(sql);
-
-				// SQL文を完成させる
-				
-
-				// SQL文を実行する
-				if (pStmt.executeUpdate() == 1) {
-					result = true;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
+				for(String work: work1) {
+					// SQL文を準備する
+					String sql = "INSERT INTO schedules (user_id,date,category_id) VALUES ( ?, ?, ?,)";
+					PreparedStatement pStmt = conn.prepareStatement(sql);
+	
+					// SQL文を完成させる
+					if (user_id != 0) {
+						pStmt.setInt(1, user_id);
+					} else {
+						pStmt.setString(1, "");
+					}
+					if (date != null) {
+						pStmt.setString(2, date);
+					} else {
+						pStmt.setString(2, "");
+					}
+					if (category_id != 0) {
+						pStmt.setInt(3, category_id);
+					} else {
+						pStmt.setString(3, "");
+					}
+	
+					// SQL文を実行する
+					if (pStmt.executeUpdate() == 1) {
+						result = true;
+					}
+				}catch (SQLException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} finally {
+					// データベースを切断
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
 					}
 				}
-			}
+			
 
 			// 結果を返す
 			return result;
 		}
-	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
 
 }
