@@ -22,7 +22,14 @@
 }
 
 /*３列にする*/
+.row{
+	justify-content: center;
+}
 .selectContainer{
 	display: flex;
+	text-align: center;
+}
+.job_block{
+	margin-right: 20px;
 }
 .
