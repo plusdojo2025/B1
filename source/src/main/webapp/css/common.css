@@ -64,3 +64,7 @@ input[type="text"]{
 	border-radius: 0.5em;
 }
 
+/*centerクラス*/
+.center{
+	text-align: center;
+}

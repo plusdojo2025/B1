@@ -74,7 +74,7 @@ public class SchedulesDao {
 
 				for(String work: work1) {
 					// SQL文を準備する
-					String sql = "INSERT INTO schedules (user_id,date,category_id) VALUES ( ?, ?, ?,)";
+					String sql = "INSERT INTO schedules (user_id,date,category_id) VALUES (?, ?, ?)";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
 	
 					// SQL文を完成させる

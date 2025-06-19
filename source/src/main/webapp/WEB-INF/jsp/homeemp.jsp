@@ -8,38 +8,35 @@
 <link rel="stylesheet" type="text/css" href="/B1/css/common.css">
 </head>
 <body>
- <!-- ヘッダー（ここから） -->
-  <header>
-  <div class="header">
-  <div class="logo">
-  　<a href="/B1/LoginServlet"><img src="img/logo.png" height="130" alt="ロゴ"></a>
-  </div>
-  <nav class="nav">
-    <ul>
-     <li><a href="/B1/LoginServlet">ホーム</a></li>
-     <li><a href="/B1/ManuListServlet">マニュアル一覧</a></li>
-     <li><a href="/B1/UserUpServlet">ユーザー情報</a></li>
-    </ul>
-   </nav>
-   <div class="logout"> 
-   <a href="/B1/LoginServlet"><img src="img/logout.png"width="180" height="180" alt="ロゴ"></a>
-  </div>  
-   </div>
-  </header>
- <!-- ヘッダー（ここまで） -->
+ <!-- ヘッダー -->
+	<header>
+		<a href="/B1/LoginServlet">
+			<img src="img/logo.png" alt="NaviZaka"  height="130">
+		</a>
+		<nav>
+			<ul>
+			<li><a href="/B1/LoginServlet">ホーム</a></li>
+			<li><a href="/B1/ManuListServlet">マニュアル一覧</a></li>
+			<li><a href="/B1/UserUpServlet">ユーザー情報</a></li>
+			<li><a href="/B1/LoginServlet"><img src="img/logout.png" alt="ログアウト" width="100"></a>
+			</ul>
+		</nav>
+	</header>
  
  <!--ログイン者名表示 -->
    <p><span id="username"></span></p>
    
+   <div class=center>
  <!--　マニュアル更新依頼 -->
    <p>マニュアル更新依頼<span id="request-count" class="badge">0</span></p>
 　<!-- 今日のアルバイト表示 -->
    <p>今日のアルバイト<p>
 　<!-- 各種ボタン -->
-	<div class=button>
        <input type="submit"  class="button" name="submit" value="マニュアル作成">
        <input type="submit"  class="button" name="submit" value="ユーザー管理">
-      </div>
+       </div>
+   
+      
       
   <!-- フッダー(ここから) -->
         <footer>
