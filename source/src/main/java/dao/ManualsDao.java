@@ -145,5 +145,43 @@ public class ManualsDao {
     	
     	return manual;
     		
-    }   	
+    }   
+    public Manual getManualByTaskId(String taskId) {
+        Manual manual = null;
+        Connection conn = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/b1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+                "root", "password"
+            );
+            PreparedStatement pStmt = conn.prepareStatement(
+                "SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
+                "m.body AS manualBody, m.created_at AS createDate, m.updated_at AS updateDate " +
+                "FROM MANUALS m " +
+                "JOIN CATEGORIES c ON m.category_id = c.id " +
+                "JOIN TASKS t ON m.task_id = t.id " +
+                "WHERE m.task_id = ? " +
+                "LIMIT 1"
+            );
+            pStmt.setInt(1, Integer.parseInt(taskId));
+            ResultSet rs = pStmt.executeQuery();
+            if (rs.next()) {
+                manual = new Manual();
+                manual.setCategoryName(rs.getString("categoryName"));
+                manual.setTaskName(rs.getString("taskName"));
+                manual.setManualBody(rs.getString("manualBody"));
+                manual.setCreateDate(rs.getTimestamp("createDate"));
+                manual.setUpdateDate(rs.getTimestamp("updateDate"));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            manual = null;
+        } finally {
+            if (conn != null) {
+                try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+        }
+        return manual;
+    }
 }
