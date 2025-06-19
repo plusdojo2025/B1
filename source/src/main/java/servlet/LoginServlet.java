@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UsersDao;
 import dto.Users;
@@ -60,11 +61,22 @@ public class LoginServlet extends HttpServlet {
 			//結果はtrue　or　falseで戻って来る
 			boolean loginok = ud.isLoginOK(us);
 			
+			
 			//usersテーブルに会った場合
 			if(loginok == true) {
+				Users userInfo = ud.userInfo(email);
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("user", userInfo);
+				//usersでrole取得
+				String role = userInfo.getRole();
+				
+		        if("社員".equalsIgnoreCase(role)) {
 				//homeempにリダイレクト
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeEmpServlet.java");
-				dispatcher.forward(request, response);
+				 response.sendRedirect(request.getContextPath() + "/HomeEmpServlet");
+		        }else {
+		        	response.sendRedirect(request.getContextPath() + "/HomePartServlet");
+		        }
 			}else {
 			//なかった場合
 				doGet(request, response);

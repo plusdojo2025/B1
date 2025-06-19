@@ -66,4 +66,5 @@ public class SchedulesDto {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 }

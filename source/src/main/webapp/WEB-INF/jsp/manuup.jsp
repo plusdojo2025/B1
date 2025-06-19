@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>マニュアル更新|NaviZaka</title>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/manuup.css'/>">
 </head>
 <body>
 <!-- ヘッダー（ここから） -->
@@ -29,17 +29,18 @@
   <!-- ヘッダー（ここまで） -->
 	<p id="message">メッセージエリア</p>
 <br>
-<select name="category" required>
-  <option value="" disabled selected>カテゴリを選択してください</option>
-  <option value="dog">犬</option>
-  <option value="cat">猫</option>
-  <option value="rabbit">うさぎ</option>
-</select>
 
+<!-- required=必ず選択させる。選択していないと警告が表示される。 -->
+<form>
 	<table>
       <tr>
         <td>
-        	<input type="text" name="name" id="name" placeholder="カテゴリ（キッチンなど）" class="form">
+        	<select name="category" required>
+  					<option value="" disabled selected>カテゴリを選択してください</option>
+  					<option value="dog">犬</option>
+  					<option value="cat">猫</option>
+  					<option value="rabbit">うさぎ</option>
+			</select>
         </td>
       	<td>
       		<p>累計</p>
@@ -56,7 +57,12 @@
     <table>
       <tr>
         <td>
-        	<input type="text" name="name" id="name" placeholder="業務名（皿洗いなど）" class="form">
+        	<select name="category" required>
+  				<option value="" disabled selected>業務名を選択してください</option>
+  				<option value="dog">犬</option>
+  				<option value="cat">猫</option>
+  				<option value="rabbit">うさぎ</option>
+			</select>        	
         </td>
       	<td>
       		<p>更新後</p>
@@ -71,16 +77,50 @@
       </tr>
     </table>
 	<input type="text" id="name" name="name">
-  	<button type="submit" style="background-color: red; color: white;">いいね</button>
+  	<button type="submit">いいね</button>
 	<br>
 	<textarea id="message" name="message" rows="5" cols="40">テキスト表示エリア</textarea>
 	<br>
 	<button type="submit">更新</button>
-	
+</form>
+
+
+<br>
+<!-- プルダウン＋テキストボックス共用 -->
+<input type="text" id="input-text" list="options" placeholder="選択または入力">
+<datalist id="options">
+  <option value="りんご">
+  <option value="ばなな">
+  <option value="みかん">
+</datalist>
+<br>
+<button onclick="addOption()">追加</button>
+
   <!-- フッダー(ここから) -->
-  <footer>
+<footer>
   	<p class="copyright">&copy;せんこうはなび</p>
-  </footer>
+</footer>
 <!-- フッダー(ここまで) -->
+<script>
+
+  /* 項目追加の処理 */
+  function addOption() {
+	    const input = document.getElementById("input-text");
+	    const datalist = document.getElementById("options");
+	    const value = input.value.trim();
+
+	    // 既存オプションの重複チェック
+	    const exists = Array.from(datalist.options).some(opt => opt.value === value);
+
+	    if (value && !exists) {
+	      const newOption = document.createElement("option");
+	      newOption.value = value;
+	      datalist.appendChild(newOption);
+	      input.value = ""; // 入力欄をクリア
+	    } else if (exists) {
+	      alert("すでに存在する項目です。");
+	    }
+	  }
+</script>
 </body>
 </html>

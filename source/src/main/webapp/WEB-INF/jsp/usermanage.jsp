@@ -26,7 +26,7 @@
 		</nav>
 	</header>
 	
-	<form method="GET" class="idpas" id="idpas">
+	<form method="POST" action="/B1/UserManageServlet">
 		<!-- 日付ピッカー -->
 		<input type="date" name="workday">
 		
@@ -35,48 +35,65 @@
 		
 		<!-- 横並びの為div -->
 		<div class=row>
-
 			<!-- 業務選択 -->
 			<div class="selectContainer">
-				<p>アルバイトA</p>
-				<p>330p</p>
-				<div class=select_work>
-					<select id="work" name="work">
-						<c:forEach var="task" items="${taskList}">
-							<option value="${task.id}">${task.task}</option>
-						</c:forEach>
-					</select>
+				<div class=job_block>
+					<p>アルバイトA</p>
+					<p>330p</p>
+					<div class=select_work>
+						<select id="work" name="work1">
+							<c:forEach items="${taskList}" var="task" varStatus="status">
+								<option value="${status.index + 1}">${task.task}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<!-- 追加ボタン -->
+					<button type="button" onclick="addSelect1(this)" class="button">+</button>
 				</div>
-				<!-- 追加ボタン -->
-				<button type="button" onclick="addSelect(this)" class="button">+</button>
 				
-				<p>アルバイトB</p>
-				<p>330p</p>
-				<div class=select_work>
-					<select id="work" name="work">
-						<option value="dish">dish</option>
-					</select>
+				<div class=job_block>
+					<p>アルバイトB</p>
+					<p>330p</p>
+					<div class=select_work>
+						<select id="work" name="work2">
+							<c:forEach items="${taskList}" var="task" varStatus="status">
+								<option value="${status.index + 1}">${task.task}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<!-- 追加ボタン -->
+					<button type="button" onclick="addSelect2(this)" class="button">+</button>
 				</div>
-				<!-- 追加ボタン -->
-				<button type="button" onclick="addSelect(this)" class="button">+</button>
 				
-				<p>アルバイトC</p>
-				<p>330p</p>
-				<div class=select_work>
-					<select id="work" name="work">
-						<option value="dish">dish</option>
-					</select>
+				<div class=job_block>
+					<p>アルバイトC</p>
+					<p>330p</p>
+					<div class=select_work>
+						<select id="work" name="work3">
+							<c:forEach items="${taskList}" var="task" varStatus="status">
+								<option value="${status.index + 1}">${task.task}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<!-- 追加ボタン -->
+					<button type="button" onclick="addSelect3(this)" class="button">+</button>
 				</div>
-				<!-- 追加ボタン -->
-				<button type="button" onclick="addSelect(this)" class="button">+</button>
 			</div>
-			
 		</div>
 		
 		<!-- 登録ボタン -->
 		<div class="register-button">
 			<input type="submit" name="regist_usermanage" value="登録" id="regist_usermanage" class="button">
 		</div>
+		
+		
+		<!-- 新しく追加される -->
+		<div id="options-data" style="display:none;">
+		  <c:forEach items="${taskList}" var="task" varStatus="status">
+				<option value="${status.index + 1}">${task.task}</option>
+			</c:forEach>
+		</div>
+		
 	</form>
 	
 	<!-- フッター -->
@@ -84,11 +101,5 @@
 		<p class="copyright">&copy;せんこうはなび</p>
 	</footer>
 </body>
-<script src="<c:url value='/js/usermanage.js'/>">
-	const optionsHtml = `
-	<c:forEach var="task" items="${taskList}">
-	<option value="${task.id}">${task.task}</option>
-	</c:forEach>
-	`;
-</script>
+<script src="<c:url value='/js/usermanage.js'/>"></script>
 </html>

@@ -58,18 +58,13 @@ public class UserManageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		// フォームから送られてきた業務IDを受け取る
-	    String task1 = request.getParameter("1");
-	    String task2 = request.getParameter("2");
-	    String task3 = request.getParameter("3");
-	    String task4 = request.getParameter("4");
-	    String task5 = request.getParameter("5");
-	    String task6 = request.getParameter("6");
-	    String task7 = request.getParameter("7");
-	    String task8 = request.getParameter("8");
-	    String task9 = request.getParameter("9");
+		String work1[] = request.getParameterValues("work1");
+		String work2[] = request.getParameterValues("work2");
+		String work3[] = request.getParameterValues("work3");
 		
-	    
-	   	    }
+		//daoに送る
+		
+		}
 	}
 
 
