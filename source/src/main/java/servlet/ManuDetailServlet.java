@@ -36,27 +36,37 @@ public class ManuDetailServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		
-		 // パラメータから manualId を取得
+		 // リクエストパラメータから manualId を取得
 		 String manualIdStr = request.getParameter("manualId");
-
+		 
+		 
+		    // manualId が null でなく、数字のみかどうかをチェック
 		    if (manualIdStr != null && manualIdStr.matches("\\d+")) {
+		    	// String から int に変換
 		        int manualId = Integer.parseInt(manualIdStr);
-
+		        
+		        // DAOクラスを使ってDBからマニュアルデータを取得
 		        ManualsDao dao = new ManualsDao();
 		        Manual manual = dao.getManualById(manualId);  
-
+		        
+		        
 		        if (manual != null) {
+		        	// リクエスト属性に manual をセット
 		            request.setAttribute("manual", manual);
-
+		            
+		            // セッションにも manualId をセット
 		            HttpSession session = request.getSession();
 		            session.setAttribute("manualId", manualId);
 
+		            // 詳細表示用JSPへフォワード（内部転送）
 		            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
 		            dispatcher.forward(request, response);
 		        } else {
+		        	// manual が見つからなかった場合、マニュアル一覧ページへリダイレクト
 		            response.sendRedirect("/B1/ManuListServlet");
 		        }
 		    } else {
+		    	// manualId パラメータが不正な場合も一覧ページへリダイレクト	
 		        response.sendRedirect("/B1/ManuListServlet");
 		    }
 	}
