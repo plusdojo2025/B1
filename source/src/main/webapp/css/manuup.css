@@ -57,3 +57,10 @@ input[type="text"]{
 	border-radius: 0.5em;
 }
 
+button[type="submit"]{
+	border: 2px solid #ec7d6a;
+	background-color: #FFFFEE;
+	border-radius: 0.5em;
+}
+
+
