@@ -36,7 +36,7 @@ public class ManuDetailServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		
-		 // ① パラメータから manualId を取得
+		 // パラメータから manualId を取得
 		 String manualIdStr = request.getParameter("manualId");
 
 		    if (manualIdStr != null && manualIdStr.matches("\\d+")) {

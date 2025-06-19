@@ -139,3 +139,9 @@ textarea {
     white-space: pre-wrap;
     color: #333;
 }
+.logo {
+	height: 130px;
+}
+.logout {
+	width: 100px;
+}
