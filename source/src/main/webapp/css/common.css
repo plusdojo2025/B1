@@ -63,6 +63,11 @@ input[type="text"]{
 	background-color: #FFFFEE;
 	border-radius: 0.5em;
 }
+input[type="password"]{
+	border: 2px solid #ec7d6a;
+	background-color: #FFFFEE;
+	border-radius: 0.5em;
+}
 
 /*centerクラス*/
 .center{

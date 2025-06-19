@@ -14,6 +14,7 @@
   </header>
   <!-- ヘッダー（ここまで） -->
 <div class="wrapper">
+<div class="center">
    <!-- メッセージエリア -->
   <p id="message">氏名が入力されていません。</p> 
     <!-- ユーザー登録フォーム -->
@@ -25,13 +26,12 @@
     </form>
     
     <div class=radio>
-        <input type="radio" name="num_of_inq" value="社員">社員
-		<input type="radio" name="num_of_inq" value="アルバイト">アルバイト
+        <label><input type="radio" name="num_of_inq" value="社員">社員</label>
+		<label><input type="radio" name="num_of_inq" value="アルバイト">アルバイト</label>
 	  </div>
-	  <div class=button>
        <input type="submit"  class="button" name="submit" value="登録">
-      </div>
     </div>
+</div>
      <!-- フッダー(ここから) -->
         <footer>
         <p class="copyright">&copy;せんこうはなび</p>
