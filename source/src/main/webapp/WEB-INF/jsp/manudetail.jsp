@@ -11,9 +11,8 @@
 <body>
 <!-- ヘッダー（ここから） -->
   	<header>
-  		<div class="logo">
-  　			<a href="/B1/LoginServlet"><img src="img/logo.png"alt="ロゴ" height="130" width="400"></a>
-  		</div>
+  　			<a href="/B1/LoginServlet"><img src="img/logo.png"alt="ロゴ" class="logo"></a>
+  	
   		<nav class="nav">
     		<ul>
     			<li><a href="/B1/LoginServlet">ホーム</a></li>
@@ -21,9 +20,9 @@
      			<li><a href="/B1/UserUpServlet">ユーザー情報</a></li>
     		</ul>
    		</nav>
-   		<div class="logout"> 
-   			<a href="/B1/LoginServlet"><img src="img/logout.png"alt="ログアウト"></a>
-  		</div>  
+   		
+   	    <a href="/B1/LoginServlet"><img src="img/logout.png"alt="ログアウト" class="logout"></a>
+  		 
 
 
   	</header>

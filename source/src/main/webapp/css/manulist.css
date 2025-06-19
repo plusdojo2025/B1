@@ -141,9 +141,4 @@ input[type="text"]{
 .logout {
 	width: 100px;
 }
-/* フッター */
-footer{
-	background-color: #FFFFEE;
-	text-align: center;
-	padding: 10px 0 10px 0;
-}
+
