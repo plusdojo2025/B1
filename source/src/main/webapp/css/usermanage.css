@@ -1,0 +1,35 @@
+/* 横並びにするラッパー */
+.row {
+	display: flex;
+	gap: 20px;
+}
+
+/* 各カラムの見た目調整 */
+.um, .selectContainer {
+	flex-shrink: 0;
+}
+
+.selectContainer select,
+.selectContainer button {
+	display: block;
+	margin-bottom: 5px;
+}
+
+  /* 登録ボタン用の余白 */
+.register-button {
+  	text-align: center;
+	margin-top: 20px;
+}
+
+/*３列にする*/
+.row{
+	justify-content: center;
+}
+.selectContainer{
+	display: flex;
+	text-align: center;
+}
+.job_block{
+	margin-right: 20px;
+}
+.
