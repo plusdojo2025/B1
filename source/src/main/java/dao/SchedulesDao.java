@@ -3,12 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Timestamp;
 
-import dto.Users;
-
-public class SchedulesDao {
+/*public class SchedulesDao {
 	//ログイン確認
 		public boolean isLoginOK(Users user) {
 			Connection conn = null;
@@ -118,4 +115,36 @@ public class SchedulesDao {
 			return result;
 		}
 
+}*/
+
+public class SchedulesDao {
+    private final String JDBC_URL = "jdbc:mysql://localhost:3306/b1";
+    private final String DB_USER = "root";
+    private final String DB_PASS = "password";
+
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean insert(int userId, int categoryId, Timestamp date) {
+        String sql = "INSERT INTO schedules (user_id, category_id, date, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())";
+
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            stmt.setInt(2, categoryId);
+            stmt.setTimestamp(3, date);
+
+            return stmt.executeUpdate() == 1;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
