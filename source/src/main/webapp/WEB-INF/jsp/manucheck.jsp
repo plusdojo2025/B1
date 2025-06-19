@@ -32,7 +32,7 @@
    <pre class="manual-body">${manualBody}</pre>
    
    <form action="${pageContext.request.contextPath}/CompleteServlet" method="post" class="complete-form">
-        <input type="hidden" name="categoryId" value="${categoryId}" />
+        <input type="hidden" name="taskId" value="${taskId}" />
         <button type="submit" class=button>完了</button>
     </form>
   </main>

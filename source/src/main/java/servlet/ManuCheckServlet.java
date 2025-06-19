@@ -32,18 +32,18 @@ public class ManuCheckServlet extends HttpServlet {
 		*/
 		
 		//category_id取得
-		String categoryId = request.getParameter("categoryId");
+		String taskId = request.getParameter("taskId");
 		
 		
 	
 		//カテゴリ名とマニュアル本文を取得
 		ManualsDao dao = new ManualsDao();
-		Manual manual = dao.getManualByCategoryId(categoryId);
+		Manual manual = dao.getManualByTaskId(taskId);
 		
 		//リクエスト属性にセット
         request.setAttribute("taskName", manual.getTaskName());
         request.setAttribute("manualBody", manual.getManualBody());
-        request.setAttribute("categoryId", categoryId);
+        request.setAttribute("taskId", taskId);
         
         //jspに渡す
         request.getRequestDispatcher("/WEB-INF/jsp/manucheck.jsp").forward(request, response);

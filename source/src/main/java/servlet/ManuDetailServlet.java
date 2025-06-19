@@ -31,6 +31,11 @@ public class ManuDetailServlet extends HttpServlet {
 		throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		//今はセッションスコープが未定のためダミーデータで表示
+		int user_id=1;
+		int manual_id=1;
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
 		dispatcher.forward(request, response);
 	}
