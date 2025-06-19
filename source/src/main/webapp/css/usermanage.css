@@ -20,3 +20,16 @@
   	text-align: center;
 	margin-top: 20px;
 }
+
+/*３列にする*/
+.row{
+	justify-content: center;
+}
+.selectContainer{
+	display: flex;
+	text-align: center;
+}
+.job_block{
+	margin-right: 20px;
+}
+.

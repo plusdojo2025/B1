@@ -35,48 +35,65 @@
 		
 		<!-- 横並びの為div -->
 		<div class=row>
-
 			<!-- 業務選択 -->
 			<div class="selectContainer">
-				<p>アルバイトA</p>
-				<p>330p</p>
-				<div class=select_work>
-					<select id="work" name="work">
-						<c:forEach var="task" items="${taskList}">
-							<option value="${task.id}">${task.task}</option>
-						</c:forEach>
-					</select>
+				<div class=job_block>
+					<p>アルバイトA</p>
+					<p>330p</p>
+					<div class=select_work>
+						<select id="work" name="work">
+							<c:forEach var="task" items="${taskList}">
+								<option value="${task.id}">${task.task}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<!-- 追加ボタン -->
+					<button type="button" onclick="addSelect(this)" class="button">+</button>
 				</div>
-				<!-- 追加ボタン -->
-				<button type="button" onclick="addSelect(this)" class="button">+</button>
 				
-				<p>アルバイトB</p>
-				<p>330p</p>
-				<div class=select_work>
-					<select id="work" name="work">
-						<option value="dish">dish</option>
-					</select>
+				<div class=job_block>
+					<p>アルバイトB</p>
+					<p>330p</p>
+					<div class=select_work>
+						<select id="work" name="work">
+							<c:forEach var="task" items="${taskList}">
+								<option value="${task.id}">${task.task}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<!-- 追加ボタン -->
+					<button type="button" onclick="addSelect(this)" class="button">+</button>
 				</div>
-				<!-- 追加ボタン -->
-				<button type="button" onclick="addSelect(this)" class="button">+</button>
 				
-				<p>アルバイトC</p>
-				<p>330p</p>
-				<div class=select_work>
-					<select id="work" name="work">
-						<option value="dish">dish</option>
-					</select>
+				<div class=job_block>
+					<p>アルバイトC</p>
+					<p>330p</p>
+					<div class=select_work>
+						<select id="work" name="work">
+							<c:forEach var="task" items="${taskList}">
+								<option value="${task.id}">${task.task}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<!-- 追加ボタン -->
+					<button type="button" onclick="addSelect(this)" class="button">+</button>
 				</div>
-				<!-- 追加ボタン -->
-				<button type="button" onclick="addSelect(this)" class="button">+</button>
 			</div>
-			
 		</div>
 		
 		<!-- 登録ボタン -->
 		<div class="register-button">
 			<input type="submit" name="regist_usermanage" value="登録" id="regist_usermanage" class="button">
 		</div>
+		
+		
+		<!-- 新しく追加される -->
+		<div id="options-data" style="display:none;">
+		  <c:forEach var="task" items="${taskList}">
+		    <option value="${task.id}">${task.task}</option>
+		  </c:forEach>
+		</div>
+		
 	</form>
 	
 	<!-- フッター -->
