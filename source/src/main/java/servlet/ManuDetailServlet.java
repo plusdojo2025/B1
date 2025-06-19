@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dao.ManualsDao;
+import dto.Manual;
 /**
  * Servlet implementation class ManuDetailServlet
  */
@@ -32,12 +35,30 @@ public class ManuDetailServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		//今はセッションスコープが未定のためダミーデータで表示
-		int user_id=1;
-		int manual_id=1;
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
-		dispatcher.forward(request, response);
+		 // ① パラメータから manualId を取得
+		 String manualIdStr = request.getParameter("manualId");
+
+		    if (manualIdStr != null && manualIdStr.matches("\\d+")) {
+		        int manualId = Integer.parseInt(manualIdStr);
+
+		        ManualsDao dao = new ManualsDao();
+		        Manual manual = dao.getManualById(manualId);  
+
+		        if (manual != null) {
+		            request.setAttribute("manual", manual);
+
+		            HttpSession session = request.getSession();
+		            session.setAttribute("manualId", manualId);
+
+		            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
+		            dispatcher.forward(request, response);
+		        } else {
+		            response.sendRedirect("/B1/ManuListServlet");
+		        }
+		    } else {
+		        response.sendRedirect("/B1/ManuListServlet");
+		    }
 	}
 
 	/**

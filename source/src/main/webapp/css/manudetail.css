@@ -62,3 +62,80 @@ button[type="submit"]{
 	background-color: #FFFFEE;
 	border-radius: 0.5em;
 }
+/* 全体中央寄せと基本レイアウト */
+body {
+    font-family: 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* マニュアル本文の枠 */
+.manual-body {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1.8;
+    font-size: 16px;
+    color: #444;
+    white-space: pre-wrap; /* 改行保持 */
+}
+
+/* 評価スター */
+.star {
+    font-size: 28px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.star:hover,
+.star.selected {
+    color: #f5b301;
+}
+
+/* コメントボックス */
+textarea {
+    width: 60%;
+    height: 100px;
+    margin: 20px 0;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.manual-body-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.manual-body-box {
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 25px;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: left;
+    margin: 0;
+    padding-left: 25px;
+    padding-right: 25px;
+    white-space: pre-wrap;
+    color: #333;
+}
