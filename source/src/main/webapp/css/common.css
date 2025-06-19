@@ -68,3 +68,12 @@ input[type="text"]{
 .center{
 	text-align: center;
 }
+
+/*全てのaタグ*/
+.link{
+	color: #ec7d6a;
+	text-decoration: none;
+}
+.link:hover {
+	color: #D3381C;
+}

@@ -37,7 +37,9 @@
 </form>
 	
 	<!-- 新規登録 -->
-	<p>新規登録はこちら</p>
+	<p>
+		<a href="<c:url value='/RegistServlet'/>"class="link">新規登録はこちら</a>
+	</p>
 
 	<!-- フッター -->
 	<footer>
