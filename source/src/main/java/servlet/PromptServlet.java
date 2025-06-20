@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ManuMakeServlet {
-
+public class PromptServlet {
+	
 	/**
 	 * Servlet implementation class UpdateDeleteServlet
 	 */
@@ -31,5 +31,24 @@ public class ManuMakeServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/prompt.jsp");
 			dispatcher.forward(request, response);
 		}
-
+		
+		protected void doPost(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			
+			//フォームページで送られた内容(キーワード)を受け取る
+			//request.setCharacterEncoding("UTF-8");
+			//int category_id = Integer.parseInt(request.getParameter("category_id"));
+			//String category = request.getParameter("category");
+	        //int task_id = Integer.parseInt(request.getParameter("task_id"));
+			//String task = request.getParameter("task");
+			//String body = request.getParam
+			
+			//プロンプトを完成させる
+			
+			// 結果ページにフォワードする→prompt.jspへ
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/prompt.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+	
 }
