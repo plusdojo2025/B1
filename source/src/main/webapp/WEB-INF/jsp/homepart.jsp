@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="dto.Users" %>
+
+<%
+    Users loginUser = (Users) session.getAttribute("loginUser");
+    if (loginUser == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,25 +36,19 @@
  <!-- ヘッダー（ここまで） -->
  
  <!--ログイン者名表示 -->
-   <p><span id="username"></span></p>
+   <p>ログインユーザー：<strong><%= loginUser.getName() %></strong></p>
 <div class=center>
    <!-- 更新マニュアル通知 -->
 	<form action="${pageContext.request.contextPath}/RegisterServlet" method="post">
-	<input type="text"  name="username" placeholder="更新マニュアル通知が表示されます" class="form">
+	<input type="text"  name="username" placeholder="更新マニュアル通知が表示されます" class="form" readonly>
 	</form>
 　<!-- 今日の業務表示 -->
    <p>今日の業務<p>
-   <input type="text"  name="username" placeholder="今日の業務が表示されます" class="form">
+   <input type="text"  name="username" placeholder="今日の業務が表示されます" class="form" readonly>
 </div>
    <footer>
         <p class="copyright">&copy;せんこうはなび</p>
         </footer>
-   <script>
-    // サーバーから取得したログインユーザー名（仮のJavaScript　実際はJava）
-    const loggedInUserName = "山田太郎";
-
-    // HTMLに表示
-    document.getElementById("username").textContent = loggedInUserName;
-    </script>
+  
 </body>
 </html>

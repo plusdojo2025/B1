@@ -32,8 +32,10 @@
 　<!-- 今日のアルバイト表示 -->
    <p>今日のアルバイト<p>
 　<!-- 各種ボタン -->
-       <input type="submit"  class="button" name="submit" value="マニュアル作成">
-       <input type="submit"  class="button" name="submit" value="ユーザー管理">
+       <!-- <input type="submit"  class="button" name="submit" value="マニュアル作成">
+       <input type="submit"  class="button" name="submit" value="ユーザー管理"> -->
+		<button class="button" name="submit" value="マニュアル作成" onclick="location.href='${pageContext.request.contextPath}/ManuMakeServlet'">マニュアル作成</button>
+		<button class="button" name="submit" value="ユーザー管理" onclick="location.href='${pageContext.request.contextPath}/UserManageServlet'">ユーザー管理</button>
        </div>
    
       

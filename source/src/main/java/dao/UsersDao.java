@@ -108,6 +108,8 @@ public class UsersDao {
 						conn.close();
 					} catch (SQLException e) {
 						e.printStackTrace();
+						
+						
 					}
 				}
 			}

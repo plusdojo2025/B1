@@ -30,9 +30,7 @@
 	<h2>${manual.categoryName}｜${manual.taskName}</h2>
 
 <div class="manual-body-container">
-    <div class="manual-body-box">
-    ${manual.manualBody}
-    </div>
+    <div class="manual-body-box"><c:out value="${manual.manualBody}" /></div>
 </div>
 
 <!-- 評価 -->
