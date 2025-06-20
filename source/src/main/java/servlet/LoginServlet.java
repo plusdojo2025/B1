@@ -66,8 +66,10 @@ public class LoginServlet extends HttpServlet {
 			if(loginok == true) {
 				Users userInfo = ud.userInfo(email);
 				
+				
 				HttpSession session = request.getSession();
-				session.setAttribute("user", userInfo);
+				session.setAttribute("id", userInfo.getId());
+				
 				//usersでrole取得
 				String role = userInfo.getRole();
 				

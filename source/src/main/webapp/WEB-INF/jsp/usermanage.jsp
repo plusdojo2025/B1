@@ -28,7 +28,7 @@
 	
 	<form method="POST" action="/B1/UserManageServlet">
 		<!-- 日付ピッカー -->
-		<input type="date" name="workday">
+		<input type="date" name="workday" required>
 		
 		<!-- メッセージエリア -->
 		<p id="message"></p> 
