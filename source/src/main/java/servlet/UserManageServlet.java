@@ -76,8 +76,9 @@ public class UserManageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		//ユーザーID
-		String userIdStr = request.getParameter("partTimeUserId");
-		int userId = Integer.parseInt(userIdStr);
+		int userId1 = Integer.parseInt(request.getParameter("userId1"));
+		int userId2 = Integer.parseInt(request.getParameter("userId2"));
+		int userId3 = Integer.parseInt(request.getParameter("userId3"));
 		
 		//日付
 		String workdayStr = request.getParameter("workday");
@@ -102,18 +103,16 @@ public class UserManageServlet extends HttpServlet {
 		SchedulesDao dao = new SchedulesDao();
 		
 		
-		for (String categoryIdStr : work1) {
-	        int categoryId = Integer.parseInt(categoryIdStr);
-	        dao.insert(userId, categoryId, workdayTimestamp);
-	    }
-		for (String categoryIdStr : work2) {
-	        int categoryId = Integer.parseInt(categoryIdStr);
-	        dao.insert(userId, categoryId, workdayTimestamp);
-	    }
-		for (String categoryIdStr : work3) {
-	        int categoryId = Integer.parseInt(categoryIdStr);
-	        dao.insert(userId, categoryId, workdayTimestamp);
-	    }
+		for (String cid : work1) {
+		    dao.insert(userId1, Integer.parseInt(cid), workdayTimestamp);
+		}
+		for (String cid : work2) {
+		    dao.insert(userId2, Integer.parseInt(cid), workdayTimestamp);
+		}
+		for (String cid : work3) {
+		    dao.insert(userId3, Integer.parseInt(cid), workdayTimestamp);
+		}
+		
 		response.sendRedirect("UserManageServlet");
 		
 		}

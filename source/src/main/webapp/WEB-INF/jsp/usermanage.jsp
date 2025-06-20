@@ -38,6 +38,7 @@
 			<!-- 業務選択 -->
 			<div class="selectContainer">
 				<div class=job_block>
+				<input type="hidden" name="userId1" value="${userA.id}">
 					<p>${userA.name}</p>
 					<p>330p</p>
 					<div class=select_work>
@@ -52,6 +53,7 @@
 				</div>
 				
 				<div class=job_block>
+				<input type="hidden" name="userId2" value="${userB.id}">
 					<p>${userB.name}</p>
 					<p>330p</p>
 					<div class=select_work>
@@ -66,6 +68,7 @@
 				</div>
 				
 				<div class=job_block>
+				<input type="hidden" name="userId3" value="${userC.id}">
 					<p>${userC.name}</p>
 					<p>330p</p>
 					<div class=select_work>
