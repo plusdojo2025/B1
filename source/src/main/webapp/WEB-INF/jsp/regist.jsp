@@ -14,23 +14,21 @@
   </header>
   <!-- ヘッダー（ここまで） -->
 <div class="wrapper">
-<div class="center">
+	<div class="center">
    <!-- メッセージエリア -->
-  <p id="message">氏名が入力されていません。</p> 
+ 	 <p id="message">氏名が入力されていません。</p> 
     <!-- ユーザー登録フォーム -->
-    <form action="${pageContext.request.contextPath}/RegisterServlet" method="post">
-		氏名<br><input type="text" name="username" placeholder="氏名を入力" class="form"><br>
+    <form action="${pageContext.request.contextPath}/RegistServlet" method="post">
+		氏名<br><input type="text" name="name" placeholder="氏名を入力" class="form"><br>
 		ID<br><input type="text" name="email" id="email" placeholder="メールアドレスを入力" class="form"><br>
         パスワード(英大文字・英小文字・数字の3種を含む8文字以上20字以下)<br><input type="password" name="pw" id="pw" placeholder="パスワードを入力" class="form"><br>
-        パスワード(確認)<br><input type="password" name="pw" id="pw" placeholder="パスワードを入力" class="form"><br>
+        パスワード(確認)<br><input type="password" name="pw2" id="pw2" placeholder="パスワードを入力" class="form"><br>
+        <label><input type="radio" name="role" value="社員"> 社員</label>
+        <label><input type="radio" name="role" value="アルバイト"> アルバイト</label><br><br>
+        
+        <input type="submit" class="button" value="登録">
     </form>
-    
-    <div class=radio>
-        <label><input type="radio" name="num_of_inq" value="社員">社員</label>
-		<label><input type="radio" name="num_of_inq" value="アルバイト">アルバイト</label>
-	  </div>
-       <input type="submit"  class="button" name="submit" value="登録">
-    </div>
+ 	</div>
 </div>
      <!-- フッダー(ここから) -->
         <footer>

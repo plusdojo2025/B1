@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CategoriesDao;
 import dao.SchedulesDao;
-import dao.TasksDao;
-import dto.TasksDto;
+import dao.UsersDao;
+import dto.Categories;
+import dto.Users;
 
 /**
  * Servlet implementation class UserManageServlet
@@ -37,18 +39,30 @@ public class UserManageServlet extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+    	
+    	//アルバイト名前取得
+    	// 仮で3人のアルバイトメールアドレスを指定して取得
+    	UsersDao usersDao = new UsersDao();
+    	Users userA = usersDao.userInfo("dojouser3@plusdojo.jp");
+    	Users userB = usersDao.userInfo("dojouser4@plusdojo.jp");
+    	Users userC = usersDao.userInfo("dojouser5@plusdojo.jp");
+
+    	// JSPに渡す
+    	request.setAttribute("userA", userA);
+    	request.setAttribute("userB", userB);
+    	request.setAttribute("userC", userC);
 
         // 業務一覧を取得してリクエストにセット
-        TasksDao tasksDao = new TasksDao();
-        List<TasksDto> taskList = tasksDao.findAll();
+    	CategoriesDao CategoriesDao = new CategoriesDao();
+        List<Categories> CategorieList = CategoriesDao.findAll();
         
    
-        System.out.println("業務件数: " + taskList.size());
-        for (TasksDto task : taskList) {
-            System.out.println(task.getId() + ": " + task.getTask());
+        System.out.println("業務件数: " + CategorieList.size());
+        for (Categories Categorie : CategorieList) {
+            System.out.println(Categorie.getId() + ": " + Categorie.getCategory());
         }
         
-        request.setAttribute("taskList", taskList);
+        request.setAttribute("taskList", CategorieList);
 
         // JSP にフォワード
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/usermanage.jsp");
@@ -62,8 +76,9 @@ public class UserManageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		//ユーザーID
-		String userIdStr = request.getParameter("partTimeUserId");
-		int userId = Integer.parseInt(userIdStr);
+		int userId1 = Integer.parseInt(request.getParameter("userId1"));
+		int userId2 = Integer.parseInt(request.getParameter("userId2"));
+		int userId3 = Integer.parseInt(request.getParameter("userId3"));
 		
 		//日付
 		String workdayStr = request.getParameter("workday");
@@ -88,18 +103,16 @@ public class UserManageServlet extends HttpServlet {
 		SchedulesDao dao = new SchedulesDao();
 		
 		
-		for (String categoryIdStr : work1) {
-	        int categoryId = Integer.parseInt(categoryIdStr);
-	        dao.insert(userId, categoryId, workdayTimestamp);
-	    }
-		for (String categoryIdStr : work2) {
-	        int categoryId = Integer.parseInt(categoryIdStr);
-	        dao.insert(userId, categoryId, workdayTimestamp);
-	    }
-		for (String categoryIdStr : work3) {
-	        int categoryId = Integer.parseInt(categoryIdStr);
-	        dao.insert(userId, categoryId, workdayTimestamp);
-	    }
+		for (String cid : work1) {
+		    dao.insert(userId1, Integer.parseInt(cid), workdayTimestamp);
+		}
+		for (String cid : work2) {
+		    dao.insert(userId2, Integer.parseInt(cid), workdayTimestamp);
+		}
+		for (String cid : work3) {
+		    dao.insert(userId3, Integer.parseInt(cid), workdayTimestamp);
+		}
+		
 		response.sendRedirect("UserManageServlet");
 		
 		}

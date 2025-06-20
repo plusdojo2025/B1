@@ -18,10 +18,10 @@
 		</a>
 		<nav>
 			<ul>
-			<li><a href="/B1/LoginServlet">ホーム</a></li>
-			<li><a href="/B1/ManuListServlet">マニュアル一覧</a></li>
-			<li><a href="/B1/UserUpServlet">ユーザー情報</a></li>
-			<li><a href="/B1/LoginServlet"><img src="img/logout.png" alt="ログアウト" width="100"></a>
+			<li><a href="<c:url value='/HomeServlet' />">ホーム</a></li>
+			<li><a href="<c:url value='/ManuListServlet' />">マニュアル一覧</a></li>
+			<li><a href="<c:url value='/UserUpServlet' />">ユーザー情報</a></li>
+			<li><a href="<c:url value='/LoginServlet' />"><img src="img/logout.png" alt="ログアウト" width="100"></a>
 			</ul>
 		</nav>
 	</header>
@@ -38,12 +38,13 @@
 			<!-- 業務選択 -->
 			<div class="selectContainer">
 				<div class=job_block>
-					<p>アルバイトA</p>
+				<input type="hidden" name="userId1" value="${userA.id}">
+					<p>${userA.name}</p>
 					<p>330p</p>
 					<div class=select_work>
 						<select id="work" name="work1">
-							<c:forEach items="${taskList}" var="task" varStatus="status">
-								<option value="${status.index + 1}">${task.task}</option>
+							<c:forEach items="${taskList}" var="category" varStatus="status">
+								<option value="${category.id}">${category.category}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -52,12 +53,13 @@
 				</div>
 				
 				<div class=job_block>
-					<p>アルバイトB</p>
+				<input type="hidden" name="userId2" value="${userB.id}">
+					<p>${userB.name}</p>
 					<p>330p</p>
 					<div class=select_work>
 						<select id="work" name="work2">
-							<c:forEach items="${taskList}" var="task" varStatus="status">
-								<option value="${status.index + 1}">${task.task}</option>
+							<c:forEach items="${taskList}" var="category" varStatus="status">
+								<option value="${category.id}">${category.category}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -66,12 +68,13 @@
 				</div>
 				
 				<div class=job_block>
-					<p>アルバイトC</p>
+				<input type="hidden" name="userId3" value="${userC.id}">
+					<p>${userC.name}</p>
 					<p>330p</p>
 					<div class=select_work>
 						<select id="work" name="work3">
-							<c:forEach items="${taskList}" var="task" varStatus="status">
-								<option value="${status.index + 1}">${task.task}</option>
+							<c:forEach items="${taskList}" var="category" varStatus="status">
+								<option value="${category.id}">${category.category}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -89,8 +92,8 @@
 		
 		<!-- 新しく追加される -->
 		<div id="options-data" style="display:none;">
-		  <c:forEach items="${taskList}" var="task" varStatus="status">
-				<option value="${status.index + 1}">${task.task}</option>
+		  	<c:forEach items="${taskList}" var="category" varStatus="status">
+				<option value="${category.id}">${category.category}</option>
 			</c:forEach>
 		</div>
 		

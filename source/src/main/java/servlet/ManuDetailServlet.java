@@ -77,10 +77,10 @@ public class ManuDetailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// もしもログインしていなかったらマニュアル詳細サーブレットにリダイレクトする
-			HttpSession session = request.getSession();
-			if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/ManuDetailServlet");
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/B1/LoginServlet");
 			return;
 	}
 	}
