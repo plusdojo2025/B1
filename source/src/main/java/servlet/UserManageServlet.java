@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CategoriesDao;
 import dao.SchedulesDao;
-import dao.TasksDao;
-import dto.TasksDto;
+import dao.UsersDao;
+import dto.Categories;
+import dto.Users;
 
 /**
  * Servlet implementation class UserManageServlet
@@ -37,18 +39,30 @@ public class UserManageServlet extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+    	
+    	//アルバイト名前取得
+    	// 仮で3人のアルバイトメールアドレスを指定して取得
+    	UsersDao usersDao = new UsersDao();
+    	Users userA = usersDao.userInfo("dojouser3@plusdojo.jp");
+    	Users userB = usersDao.userInfo("dojouser4@plusdojo.jp");
+    	Users userC = usersDao.userInfo("dojouser5@plusdojo.jp");
+
+    	// JSPに渡す
+    	request.setAttribute("userA", userA);
+    	request.setAttribute("userB", userB);
+    	request.setAttribute("userC", userC);
 
         // 業務一覧を取得してリクエストにセット
-        TasksDao tasksDao = new TasksDao();
-        List<TasksDto> taskList = tasksDao.findAll();
+    	CategoriesDao CategoriesDao = new CategoriesDao();
+        List<Categories> CategorieList = CategoriesDao.findAll();
         
    
-        System.out.println("業務件数: " + taskList.size());
-        for (TasksDto task : taskList) {
-            System.out.println(task.getId() + ": " + task.getTask());
+        System.out.println("業務件数: " + CategorieList.size());
+        for (Categories Categorie : CategorieList) {
+            System.out.println(Categorie.getId() + ": " + Categorie.getCategory());
         }
         
-        request.setAttribute("taskList", taskList);
+        request.setAttribute("taskList", CategorieList);
 
         // JSP にフォワード
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/usermanage.jsp");
