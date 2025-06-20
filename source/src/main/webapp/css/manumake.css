@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/*エラーメッセージ*/
+#error_message{
+  text-align: center;
+}
+
+/*画面内コンテンツを真ん中にする*/
+.wrapper {
+  margin: 0 auto 0 auto;	/* 中央揃え */
+  width: 700px;			/* 幅を固定 */
+}
+
+/*作成フォーム*/
+form{
+	margin: 20px;
+}
+
+/*下半分のやつ*/
+.textarea{
+ text-align: center;
+}
+
+/*ボタン配置*/
+.manumake{
+  text-align: center;
+}
+
+/*テキストエリア*/
+textarea {
+  resize: none;
+  width:350px;
+  height:200px;
+  overflow: auto;
+}
