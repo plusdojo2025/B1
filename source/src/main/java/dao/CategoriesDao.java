@@ -58,32 +58,56 @@ public class CategoriesDao {
 
         return list;
     }
+    
+    // 業務からIDを取得
+ 	public int getId(String category) {
+ 		Connection conn = null;
+ 		String id = null;
+ 		
+ 		try {
+ 		// JDBCドライバを読み込む
+ 		Class.forName("com.mysql.cj.jdbc.Driver");
+
+ 		// データベースに接続する
+ 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b1?"
+ 				+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+ 				"root", "password");
+ 		
+ 		// SELECT文を準備する
+ 		String sql = "select * from categories where task = ?";
+ 		PreparedStatement pStmt = conn.prepareStatement(sql);
+ 		pStmt.setString(1, category);
+ 		
+ 		// SELECT文を実行し、結果表を取得する
+ 		ResultSet rs = pStmt.executeQuery();
+ 		
+ 		if (rs.next()) {
+ 		// 名前を取得
+ 		id = rs.getString("id");
+ 		}
+ 		
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} catch (ClassNotFoundException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			// データベースを切断
+ 			if (conn != null) {
+ 				try {
+ 					conn.close();
+ 				} catch (SQLException e) {
+ 					e.printStackTrace();
+ 				}
+ 			}
+ 		}
+ 	    // 結果を返す
+ 	   int category_id = Integer.parseInt(id);
+        return category_id;
+   }
+ 	
+ 	 
+ 
 }
 
-    /*
-    // IDで業務を取得
-    public TasksDto findById(int id) {
-        String sql = "SELECT * FROM tasks WHERE id = ?";
-        TasksDto task = null;
+   
 
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, id);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    task = new TasksDto();
-                    task.setId(rs.getInt("id"));
-                    task.setTask(rs.getString("task"));
-                    task.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
-                    task.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return task;
-    }
-}
-*/
