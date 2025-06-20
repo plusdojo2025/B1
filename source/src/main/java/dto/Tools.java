@@ -43,5 +43,7 @@ public class Tools implements Serializable{
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
-
+	
+	//コンストラクタ　引数無し
+	public Tools() {}
 }
