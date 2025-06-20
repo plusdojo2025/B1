@@ -1,18 +1,3 @@
-/*ヘッダー仮*/
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-}
-
-.logo{
-	text-align: left;
-}
-
-.logout{
-	text-align: right;
-}
 
 .nav ul{
   margin: 20 0 20 0;
@@ -35,8 +20,9 @@
 }
 /*入力フォーム*/
 .wrapper {
-  margin: 0 auto 0 auto;	/* 中央揃え */
-  width: 700px;			/* 幅を固定 */
+  margin: 0 auto;	/* 中央揃え */
+ 
+  text-align: center;			/* 幅を固定 */
 }
 
 .upload{
@@ -48,13 +34,6 @@
 
  }
  
-.radio{
-  text-align: center;
-}
-
-.button{
-  text-align: center;
-}
 
 #name{
 	width: 100%
