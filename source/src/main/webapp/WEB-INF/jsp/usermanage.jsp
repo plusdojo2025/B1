@@ -49,6 +49,7 @@
 					<p>${pointA}</p>
 					<div class=select_work>
 						<select id="work" name="work1">
+							<option value="">-- 選択しない --</option>
 							<c:forEach items="${taskList}" var="category" varStatus="status">
 								<option value="${category.id}">${category.category}</option>
 							</c:forEach>
@@ -64,6 +65,7 @@
 					<p>${pointB}</p>
 					<div class=select_work>
 						<select id="work" name="work2">
+							<option value="">-- 選択しない --</option>
 							<c:forEach items="${taskList}" var="category" varStatus="status">
 								<option value="${category.id}">${category.category}</option>
 							</c:forEach>
@@ -79,6 +81,7 @@
 					<p>${pointC}</p>
 					<div class=select_work>
 						<select id="work" name="work3">
+							<option value="">-- 選択しない --</option>
 							<c:forEach items="${taskList}" var="category" varStatus="status">
 								<option value="${category.id}">${category.category}</option>
 							</c:forEach>
