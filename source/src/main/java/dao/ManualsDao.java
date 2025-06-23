@@ -32,7 +32,7 @@ public class ManualsDao {
         			//マニュアルテーブルをカテゴリ、タスクテーブルと結合
         			//必要な情報を取得（カテゴリ名、タスク名、本文、作成・更新日
         			"SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-        			"m.body AS manualBody, m.created_at AS createDate, m.updated_at AS updateDate " +
+        			"m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
         			"FROM MANUALS m " +
         			"JOIN CATEGORIES c ON m.category_id = c.id " +
         			"JOIN TASKS t ON m.task_id = t.id " +
@@ -63,10 +63,10 @@ public class ManualsDao {
         	 
         } catch (SQLException e) {
 			e.printStackTrace();
-			list = null;
+			//list = null;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			list = null;
+			//list = null;
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -74,7 +74,7 @@ public class ManualsDao {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-					list = null;
+					//list = null;
 				}
 			}
 		}
@@ -101,7 +101,7 @@ public class ManualsDao {
         	PreparedStatement pStmt = conn.prepareStatement(
         			
         			"SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-        			"m.body AS manualBody, m.created_at AS createDate, m.updated_at AS updateDate " +
+        			"m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
         			"FROM MANUALS m " +
         			"JOIN CATEGORIES c ON m.category_id = c.id " +
         			"JOIN TASKS t ON m.task_id = t.id " +
@@ -158,7 +158,7 @@ public class ManualsDao {
             );
             PreparedStatement pStmt = conn.prepareStatement(
                 "SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-                "m.body AS manualBody, m.created_at AS createDate, m.updated_at AS updateDate " +
+                "m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
                 "FROM MANUALS m " +
                 "JOIN CATEGORIES c ON m.category_id = c.id " +
                 "JOIN TASKS t ON m.task_id = t.id " +
@@ -196,7 +196,7 @@ public class ManualsDao {
             );
             PreparedStatement pStmt = conn.prepareStatement(
                 "SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-                "m.body AS manualBody, m.created_at AS createDate, m.updated_at AS updateDate " +
+                "m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
                 "FROM MANUALS m " +
                 "JOIN CATEGORIES c ON m.category_id = c.id " +
                 "JOIN TASKS t ON m.task_id = t.id " +

@@ -30,6 +30,8 @@
     <div class="manual-body-box"><c:out value="${manual.manualBody}" /></div>
 </div>
 
+<form action="/B1/ManuDetailServlet" method="POST">
+
 <!-- 評価 -->
 <div>
     評価：
@@ -42,7 +44,6 @@
 </div>
 
 <!-- コメント入力 -->
-<form action="/B1/ManuDetailServlet" method="POST">
     <p>
         <textarea name="comment" rows="4" cols="50" placeholder="コメント"></textarea>
     </p>

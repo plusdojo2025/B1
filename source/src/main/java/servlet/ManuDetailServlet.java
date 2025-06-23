@@ -92,18 +92,31 @@ public class ManuDetailServlet extends HttpServlet {
 		String ratingStr = request.getParameter("rating");
 		
 		int manualId = Integer.parseInt(manualIdStr);
+		int rating = Integer.parseInt(ratingStr);
 		int userId = (int) session.getAttribute("id");
 		
 		//DTO生成
 		Reviews review = new Reviews();
 		review.setManual_id(manualId);
 		review.setUser_id(userId);
-		review.setReview(ratingStr);
+		review.setReview(rating);
 		review.setComment(comment);
 		
 		//DAO呼び出し
 		ReviewsDao dao = new ReviewsDao();
-		dao.insertReview(review);
+		boolean success = dao.insertReview(userId, manualId, rating, comment);
+		
+		//投稿成功後は詳細ページにリダイレクト
+		 if (success) {
+		        response.sendRedirect("/B1/ManuDetailServlet?manualId=" + manualId);
+		    } else {
+		        request.setAttribute("errorMessage", "レビューの投稿に失敗しました。");
+		        ManualsDao mDao = new ManualsDao();
+		        Manual manual = mDao.getManualById(manualId);
+		        request.setAttribute("manual", manual);
+		        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
+		        dispatcher.forward(request, response);
+		    }
 		
 	}
 	
