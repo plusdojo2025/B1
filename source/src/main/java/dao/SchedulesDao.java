@@ -3,7 +3,10 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /*public class SchedulesDao {
 	//ログイン確認
@@ -146,5 +149,33 @@ public class SchedulesDao {
             e.printStackTrace();
             return false;
         }
+    }
+    //ユーザーIDと今日で業務を取得する
+    public List<String> getTodayCategories(int userId) {
+        List<String> categories = new ArrayList<>();
+
+        String sql = "SELECT c.category " +
+                     "FROM schedules s " +
+                     "JOIN categories c ON s.category_id = c.id " +
+                     "WHERE s.user_id = ? AND DATE(s.date) = CURDATE()";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                categories.add(rs.getString("category"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return categories;
+    }
+
+    private Connection getConnection() throws Exception {
+        return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
     }
 }

@@ -3,3 +3,8 @@
 input[type="text"]{
 	padding: 40px 50px;
 }
+	
+ul{
+	list-style: none;
+	padding-left: 0;
+}

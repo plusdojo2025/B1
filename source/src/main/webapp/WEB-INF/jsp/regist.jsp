@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>ユーザー登録</title>
-<link rel="stylesheet" type="text/css" href="/B1/css/common.css">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>"> 
 </head>
 <body>
 <!-- ヘッダー（ここから） -->
   <header>
-  　<a href="/B1/LoginServlet"><img src="img/logo.png"  height="130" alt="ロゴ"></a>
+  　<a href="<c:url value='/RegistServlet'/>">
+ 	<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
+ 	</a>
   </header>
   <!-- ヘッダー（ここまで） -->
 <div class="wrapper">

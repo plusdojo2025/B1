@@ -21,15 +21,15 @@
 <body>
  <!-- ヘッダー（ここから） -->
   <header>
-		<a href="/B1/LoginServlet">
-			<img src="img/logo.png" alt="NaviZaka"  height="130">
+		<a href="<c:url value='/LoginServlet'/>">
+			<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
 		</a>
 		<nav>
 			<ul>
-			<li><a href="/B1/LoginServlet">ホーム</a></li>
-			<li><a href="/B1/ManuListServlet">マニュアル一覧</a></li>
-			<li><a href="/B1/UserUpServlet">ユーザー情報</a></li>
-			<li><a href="/B1/LoginServlet"><img src="img/logout.png" alt="ログアウト" width="100"></a>
+			<li><a href="<c:url value='/HomeServlet' />">ホーム</a></li>
+			<li><a href="<c:url value='/ManuListServlet' />">マニュアル一覧</a></li>
+			<li><a href="<c:url value='/UserUpServlet' />">ユーザー情報</a></li>
+			<li><a href="<c:url value='/LoginServlet' />"><img src="<c:url value='/img/logout.png' />" alt="ログアウト" width="100"></a>
 			</ul>
 		</nav>
 	</header>
@@ -43,8 +43,17 @@
 	<input type="text"  name="username" placeholder="更新マニュアル通知が表示されます" class="form" readonly>
 	</form>
 　<!-- 今日の業務表示 -->
-   <p>今日の業務<p>
-   <input type="text"  name="username" placeholder="今日の業務が表示されます" class="form" readonly>
+   <p>今日の業務</p>
+<ul>
+	<c:forEach var="task" items="${todayTasks}">
+    	<li>
+			<a href="${pageContext.request.contextPath}/ManuListServlet?category=${task}">
+				${task}
+			</a>
+		</li>
+ 	</c:forEach>
+</ul>
+
 </div>
    <footer>
         <p class="copyright">&copy;せんこうはなび</p>
