@@ -7,35 +7,34 @@
 <meta charset="UTF-8">
 <title>マニュアル作成|NaviZaka</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>">
-	<link rel="stylesheet" href="<c:url value='/css/manumake.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/css/manumake.css'/>">
 </head>
 <body>
   <!-- ヘッダー（ここから） -->
 <header>
-		<a href="/B1/LoginServlet">
-			<img src="img/logo.png" alt="NaviZaka"  height="130">
+		<a href="<c:url value='/LoginServlet'/>">
+			<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
 		</a>
 		<nav>
 			<ul>
 			<li><a href="<c:url value='/HomeServlet' />">ホーム</a></li>
 			<li><a href="<c:url value='/ManuListServlet' />">マニュアル一覧</a></li>
 			<li><a href="<c:url value='/UserUpServlet' />">ユーザー情報</a></li>
-			<li><a href="<c:url value='/LoginServlet' />"><img src="img/logout.png" alt="ログアウト" width="100"></a>
+			<li><a href="<c:url value='/LoginServlet' />"><img src="<c:url value='/img/logout.png' />" alt="ログアウト" width="100"></a>
 			</ul>
 		</nav>
-	</header>
+</header>
   <!-- ヘッダー（ここまで） -->
-  <div class="wrapper">
-  <table>
+<div class=area>
+<table>
 <tr>
 <!-- プロンプト表示フォーム -->
 <td>
-<textarea id="error_message" name="prompt">${prompt}</textarea>
+<textarea id="prompt" name="prompt">${prompt}</textarea>
 <br>
-<div class=area>
 <!-- コピーボタン -->
 <div class="manumake">
-<button type="submit" class="button" onclick="copy()">コピー</button> 
+<button type="button" class="button" onclick="copy()">コピー</button> 
 </div>
 </td>
 <!-- マニュアル本体保存フォーム -->
@@ -62,4 +61,5 @@
   </footer>
   <!-- フッダー(ここまで) -->
 </body>
+<script src="<c:url value='/js/form.js'/>"></script>
 </html>

@@ -1,48 +1,22 @@
 
-.nav ul{
-  margin: 20 0 20 0;
-  padding: 0;
-  list-style-type: none;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  font-size: 20px;
-}
-
-/*フッダー仮*/
-.copyright{
-  text-align: center;
-}
-
-/*エラーメッセージ*/
-#error_message{
-  text-align: center;
-}
 /*入力フォーム*/
 .wrapper {
-  margin: 0 auto;	/* 中央揃え */
- 
-  text-align: center;			/* 幅を固定 */
+  margin: 0 auto;	
+  width: 470px;
+  text-align: center;			
 }
 
-.upload{
-  margin: 0 auto;
- }
- 
-.tips{
-	font-size: 10px;
-
- }
- 
-
-#name{
-	width: 100%
+form input,
+form textarea,
+form select,
+form button {
+  margin: 8px 0;  /* 上下に8pxのマージン、左右は0 */
 }
 
-#email{
-	width: 100%
+.button{
+	margin: 20px;
 }
 
-#pw{
-	width: 100%
+#error_message{
+	text-align: center;
 }

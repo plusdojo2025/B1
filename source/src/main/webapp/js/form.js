@@ -87,13 +87,11 @@ function addForm(button) {
 
 //テキストエリア内のテキストをコピー
 function copy() {
-    // コピー対象をJavaScript上で変数として定義する
-    var copyText = document.getElementById("prompt");
+  const copyText = document.getElementById("prompt");
 
-    // コピー対象のテキストを選択する
-    copyText.select();
-
-    // 選択しているテキストをクリップボードにコピーする
-    document.execCommand("Copy");
-
+  navigator.clipboard.writeText(copyText.value).then(() => {
+    alert("コピーしました！");
+  }).catch(err => {
+    alert("コピーに失敗しました：" + err);
+  });
 }
