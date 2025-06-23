@@ -70,12 +70,12 @@ input[type="password"]{
 }
 
 /*centerクラス*/
-.center　{
+.center{
 	text-align: center;
 }
 
 /*全てのaタグ*/
-.link　{
+.link{
 	color: #ec7d6a;
 	text-decoration: none;
 }
