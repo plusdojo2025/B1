@@ -27,7 +27,7 @@
   <!-- ヘッダー（ここまで） -->
   
 <div class="wrapper">
-<p>${result}</p>
+<p id="error_message">${result}</p>
 <form id="prompt_form" method="POST" action="<c:url value='/PromptServlet' />">
 <table class="make">
 <tr>
