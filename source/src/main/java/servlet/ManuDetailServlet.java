@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ManualsDao;
+import dao.ReviewsDao;
 import dto.Manual;
+import dto.Reviews;
 /**
  * Servlet implementation class ManuDetailServlet
  */
@@ -83,5 +85,26 @@ public class ManuDetailServlet extends HttpServlet {
 			response.sendRedirect("/B1/LoginServlet");
 			return;
 	}
+		//パラメータを取得
+		request.setCharacterEncoding("UTF-8");
+		String comment = request.getParameter("comment");
+		String manualIdStr = request.getParameter("manualId");
+		String ratingStr = request.getParameter("rating");
+		
+		int manualId = Integer.parseInt(manualIdStr);
+		int userId = (int) session.getAttribute("id");
+		
+		//DTO生成
+		Reviews review = new Reviews();
+		review.setManual_id(manualId);
+		review.setUser_id(userId);
+		review.setReview(ratingStr);
+		review.setComment(comment);
+		
+		//DAO呼び出し
+		ReviewsDao dao = new ReviewsDao();
+		dao.insertReview(review);
+		
 	}
+	
 }
