@@ -93,9 +93,8 @@
 </td>
 <!-- 手順 -->
 <th rowspan="2">手順</th>
-<span class=process_work>
-<td rowspan="2"><input type="text" name="process" id="process" class="form"></td>
-</span>
+<td rowspan="2" class=process_work><input type="text" name="process" id="process" class="form"></td>
+
 </tr>
 <tr>
 <td></td>
@@ -110,7 +109,7 @@
 <input type="submit"  class="button" name="submit"  value="プロンプト作成">
 </div>
 </form>
-<table>
+</div>
   <!-- フッダー(ここから) -->
   <footer>
     <p class="copyright">&copy;せんこうはなび</p>
