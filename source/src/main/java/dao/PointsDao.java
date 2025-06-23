@@ -3,59 +3,105 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import dto.Points;
 
 public class PointsDao {
 
 	// データベースにアクセスするconnectionを用意（初期値をnullとする）
-	// 最終的に結果を返すpointsListを用意する
-	public List<Points> select(Points po) {
-		Connection conn = null;
-		List<Points> poList = new ArrayList<Points>();
+	// Point(評価)の取得
+	public int point(int user_id) {
+			Connection conn = null;
+					
+			int score = 0;
+			
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B1?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+
+				// SQL文を準備する
+				// connとsqlをまとめる→pstmt
+				String sql = "SELECT point FROM points WHERE user_id = ?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+		        // プレースホルダーに値をセット
+		        pStmt.setInt(1, user_id);
+				
+				// SQL文を実行し、結果表を取得する rsにexecuteQueryを代入
+				ResultSet rs = pStmt.executeQuery();
+
+				if (rs.next()) {
+				    score = rs.getInt("point");
+				}
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					
+					}
+				}
+			}
+
+			// 結果を返す
+			return score;
+		}
 	
-		try {
-			// JDBCドライバを読み込む
-			// JDBC Javaからデータベースにアクセスするもの
-			Class.forName("com.mysql.cj.jdbc.Driver");
+	// pointの追加
+	public boolean addPoint(int user_id, int addValue) {
+	    Connection conn = null;
+	    boolean result = false;
 
-			// データベースに接続する
-			//webapp、root,password以外は定型文
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
-    
-			// SQL文を準備する
-			// connとsqlをまとめる→pstmt
-			String sql = "SELECT id, user_id, point, createdAt;  updatedAt; FROM Points WHERE id LIKE ? AND user_id LIKE ? AND point LIKE ? AND createdAt LIKE ? AND updatedAt LIKE ? ORDER BY number";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			
-			
-		    // 2. ポイント更新
-		    public void updatePoint(int id, int newPoint) throws SQLException {
-		        String sql = "UPDATE points SET point = ? WHERE id = ?";
-		        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-		            stmt.setInt(1, newPoint);
-		            stmt.setInt(2, id);
-		            stmt.executeUpdate();
-		        }
-		    }
-			
-			
-    		// データベースを切断
- 			if (conn != null) {
- 				try {
- 					conn.close();
- 				} catch (SQLException e) {
- 					e.printStackTrace();
- 				}
- 			}
- 		
+	    try {
+	        // JDBCドライバを読み込む
+	        Class.forName("com.mysql.cj.jdbc.Driver");
 
- 		// 結果を返す
- 		return result;
- 	}
+	        // DB接続
+	        conn = DriverManager.getConnection(
+	            "jdbc:mysql://localhost:3306/B1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
+	            "root", "password"
+	        );
+
+	        // SQL：加算処理
+	        String sql = "UPDATE points SET point = point + ? WHERE user_id = ?";
+	        PreparedStatement pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, addValue);     // 加算するポイント
+	        pstmt.setInt(2, user_id);      // 対象ユーザーID
+
+	        int rowsUpdated = pstmt.executeUpdate();
+
+	        // 成功判定（1行以上更新されていれば成功）
+	        result = (rowsUpdated > 0);
+
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return result;
+	}
+
+	
+	
 }
