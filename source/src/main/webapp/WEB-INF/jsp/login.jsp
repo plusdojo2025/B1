@@ -12,16 +12,16 @@
 <body>
 	<!-- ヘッダー -->
 	<header>
-		<a href="/B1/LoginServlet">
-			<img src="img/logo.png" alt="NaviZaka" height="130">
+		<a href="<c:url value='/LoginServlet'/>">
+			<img src="<c:url value='/img/logo.png' />" alt="NaviZaka" height="130">
 		</a>
 	</header>
 	<!-- ヘッダーここまで -->
 
-<form method="POST" action="/B1/LoginServlet" class="idpas" id="idpas">
+<form method="POST" action="<c:url value='/LoginServlet'/>" class="idpas" id="idpas">
 	<!-- メッセージエリア -->
 	<div id="center">
-		<p id="massage">
+		<p id="message">
 		<c:if test="${not empty message}">
 			${message}
 		</c:if>
@@ -49,5 +49,6 @@
 	<footer>
 	<p class="copyright">&copy;せんこうはなび</p>
 	</footer>
+	<script src="<c:url value='/js/login.js'/>"></script>
 </body>
 </html>
