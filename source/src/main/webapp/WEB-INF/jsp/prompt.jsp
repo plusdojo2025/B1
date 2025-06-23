@@ -41,6 +41,10 @@
 <!-- マニュアル本体保存フォーム -->
 <form id="manual_form" method="POST" action="<c:url value='/ResultServlet' />">
 <td>
+<!-- カテゴリId取得 -->
+<input type="hidden" name="category_id" value="${category_id}">
+<!-- タスクId取得 -->
+<input type="hidden" name="task_id" value="${task_id}">
 <textarea id="manual" name="manual" placeholder="生成されたマニュアル本文を貼り付けてください"></textarea>
 <br>
 <!-- 保存ボタン -->

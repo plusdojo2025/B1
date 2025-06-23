@@ -49,14 +49,15 @@ public class PromptServlet extends HttpServlet {
 		//カテゴリIDを取得
 		CategoriesDao cateDao = new CategoriesDao();
 		int category_id = cateDao.getId(category);
+		System.out.println("カテゴリID:"+category_id);
 		
 		//taskデータを登録
 		TasksDao taskDao = new TasksDao();
 		taskDao.insert(task);
-		
-		
+		//タスクIDを取得
+		int task_id = taskDao.getId(task);	
+		System.out.println("タスクID:"+task_id);
 				
-		/*
 		//出力するプロンプト文
 		// StringBuilderを使って文章組み立て
 	    StringBuilder prompt = new StringBuilder();
@@ -114,10 +115,13 @@ public class PromptServlet extends HttpServlet {
 	    prompt.append("・目標時間\n");
 	    prompt.append(min != null ? min : "0").append("分");
 	    prompt.append(sec != null ? sec : "0").append("秒\n");
-	    */
+	    
+	    //System.out.print(prompt);
 
 		// 結果ページにフォワードする→prompt.jspへ
-		//request.setAttribute("prompt", prompt);
+		request.setAttribute("prompt", prompt);
+		request.setAttribute("category_id", category_id);
+		request.setAttribute("task_id", task_id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/prompt.jsp");
 		dispatcher.forward(request, response);
 	}
