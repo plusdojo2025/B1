@@ -13,20 +13,20 @@
 <body>
 	<!-- ヘッダー -->
 	<header>
-		<a href="/B1/LoginServlet">
-			<img src="img/logo.png" alt="NaviZaka"  height="130">
+		<a href="<c:url value='/LoginServlet'/>">
+			<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
 		</a>
 		<nav>
 			<ul>
 			<li><a href="<c:url value='/HomeServlet' />">ホーム</a></li>
 			<li><a href="<c:url value='/ManuListServlet' />">マニュアル一覧</a></li>
 			<li><a href="<c:url value='/UserUpServlet' />">ユーザー情報</a></li>
-			<li><a href="<c:url value='/LoginServlet' />"><img src="img/logout.png" alt="ログアウト" width="100"></a>
+			<li><a href="<c:url value='/LoginServlet' />"><img src="<c:url value='/img/logout.png' />" alt="ログアウト" width="100"></a>
 			</ul>
 		</nav>
 	</header>
 	
-	<form method="POST" action="/B1/UserManageServlet">
+	<form method="POST" action="<c:url value='/UserManageServlet'/>">
 		<!-- 日付ピッカー -->
 		<input type="date" name="workday" required>
 		
