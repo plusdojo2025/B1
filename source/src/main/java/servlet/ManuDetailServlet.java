@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ChecksDao;
 import dao.ManualsDao;
 import dao.ReviewsDao;
 import dto.Manual;
@@ -59,6 +60,18 @@ public class ManuDetailServlet extends HttpServlet {
 		            // セッションにも manualId をセット
 		            HttpSession session = request.getSession();
 		            session.setAttribute("manualId", manualId);
+		            
+		            //ログインユーザーのIDをセッションから取得
+		            Object usersIdObj = session.getAttribute("id");
+		            boolean hasChecked = false;
+		            if(usersIdObj != null) {
+		            	int userId = (int) usersIdObj;
+		            	//checksDaoを使って完了済みかチェック
+		            	ChecksDao checksDao = new ChecksDao();
+		            	hasChecked = checksDao.hasChecked(userId,manualId);
+		            }
+		            //hasCheckdをリクエスト属性にセットして、JSPで完了状態を表示可能に
+		            request.setAttribute("hasChecked", hasChecked);
 
 		            // 詳細表示用JSPへフォワード（内部転送）
 		            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
@@ -85,15 +98,37 @@ public class ManuDetailServlet extends HttpServlet {
 			response.sendRedirect("/B1/LoginServlet");
 			return;
 	}
-		//パラメータを取得
+		
 		request.setCharacterEncoding("UTF-8");
+	    int userId = (int) session.getAttribute("id");
+	    
+	    String action = request.getParameter("action");
+	    String manualIdStr = request.getParameter("manualId");
+	    
+	    if (manualIdStr == null || !manualIdStr.matches("\\d+")) {
+	    	response.sendRedirect("/B1/ManuListServlet");
+	    	return;
+	    }
+	    
+	    int manualId = Integer.parseInt(manualIdStr);
+	    
+	    if ("completeCheck".equals(action)) {
+	    	//完了チェック処理
+	    	ChecksDao checksDao = new ChecksDao();
+	    	if (!checksDao.hasChecked(userId, manualId)) {
+	    		checksDao.insertCheck(userId, manualId);
+	    	}
+	    	response.sendRedirect("/B1/ManuDetailServlet?manualId=" + manualId);
+	    	return;
+	    	}
+	    
+		//レビュー投稿処理
+		//パラメータを取得
+		
 		String comment = request.getParameter("comment");
-		String manualIdStr = request.getParameter("manualId");
 		String ratingStr = request.getParameter("rating");
 		
-		int manualId = Integer.parseInt(manualIdStr);
 		int rating = Integer.parseInt(ratingStr);
-		int userId = (int) session.getAttribute("id");
 		
 		//DTO生成
 		Reviews review = new Reviews();

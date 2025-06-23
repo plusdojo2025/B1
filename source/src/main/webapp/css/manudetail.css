@@ -1,67 +1,4 @@
 @charset "UTF-8";
-
-body {
-  background-color: #FFFFFF;
-}
-
-/* ヘッダー */
-header{
-	background-color: #FFFFEE;
-	display: flex;
-	padding: 0 30px;
-	align-items: center;
-}
-header nav{
-	margin-left: auto;
-}
-header ul{
-	list-style: none;
-	display: flex;
-}
-header ul li{
-	margin-left: 20px;
-}
-header a {
-	color: #ec7d6a;
-	text-decoration: none;
-}
-header a:hover {
-	color: #D3381C;
-}
-
-/* フッター */
-footer{
-	background-color: #FFFFEE;
-	text-align: center;
-	padding: 10px 0 10px 0;
-	
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-}
-
-/* 全てのボタン */
-.button{
-	padding: 10px 40px;
-	border: none;
-	background-color: #ec7d6a;
-	color: #FFFFEE;
-	font-weight: bold;
-	border-radius: 1em;
-}
-
-/* 全てのテキストボックス */
-input[type="text"]{
-	border: 2px solid #ec7d6a;
-	background-color: #FFFFEE;
-	border-radius: 0.5em;
-}
-
-button[type="submit"]{
-	border: 2px solid #ec7d6a;
-	background-color: #FFFFEE;
-	border-radius: 0.5em;
-}
 /* 全体中央寄せと基本レイアウト */
 body {
     font-family: 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
@@ -144,4 +81,8 @@ textarea {
 }
 .logout {
 	width: 100px;
+}
+button.button {
+  margin-top: 15px;   /* 上の余白を15pxに */
+  margin-bottom: 15px; /* 下の余白も15pxに */
 }
