@@ -31,7 +31,13 @@
 		<input type="date" name="workday" required>
 		
 		<!-- メッセージエリア -->
-		<p id="message"></p> 
+		<div class=center>
+			<p id="message">
+				<c:if test="${not empty message}">
+					${message}
+				</c:if>
+			</p> 
+		</div>
 		
 		<!-- 横並びの為div -->
 		<div class=row>
@@ -40,7 +46,7 @@
 				<div class=job_block>
 				<input type="hidden" name="userId1" value="${userA.id}">
 					<p>${userA.name}</p>
-					<p>330p</p>
+					<p>${pointA}</p>
 					<div class=select_work>
 						<select id="work" name="work1">
 							<c:forEach items="${taskList}" var="category" varStatus="status">
@@ -55,7 +61,7 @@
 				<div class=job_block>
 				<input type="hidden" name="userId2" value="${userB.id}">
 					<p>${userB.name}</p>
-					<p>330p</p>
+					<p>${pointB}</p>
 					<div class=select_work>
 						<select id="work" name="work2">
 							<c:forEach items="${taskList}" var="category" varStatus="status">
@@ -70,7 +76,7 @@
 				<div class=job_block>
 				<input type="hidden" name="userId3" value="${userC.id}">
 					<p>${userC.name}</p>
-					<p>330p</p>
+					<p>${pointC}</p>
 					<div class=select_work>
 						<select id="work" name="work3">
 							<c:forEach items="${taskList}" var="category" varStatus="status">

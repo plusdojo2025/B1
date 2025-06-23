@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CategoriesDao;
+import dao.PointsDao;
 import dao.SchedulesDao;
 import dao.UsersDao;
 import dto.Categories;
@@ -47,10 +48,19 @@ public class UserManageServlet extends HttpServlet {
     	Users userB = usersDao.userInfo("dojouser4@plusdojo.jp");
     	Users userC = usersDao.userInfo("dojouser5@plusdojo.jp");
 
+    	//daoを使ってユーザーポイント取得
+    	PointsDao pointsDao = new PointsDao();
+    	int pointA = pointsDao.point(userA.getId());
+    	int pointB = pointsDao.point(userB.getId());
+    	int pointC = pointsDao.point(userC.getId());
+    	
     	// JSPに渡す
     	request.setAttribute("userA", userA);
     	request.setAttribute("userB", userB);
     	request.setAttribute("userC", userC);
+    	request.setAttribute("pointA", pointA);
+    	request.setAttribute("pointB", pointB);
+    	request.setAttribute("pointC", pointC);
 
         // 業務一覧を取得してリクエストにセット
     	CategoriesDao CategoriesDao = new CategoriesDao();
@@ -113,7 +123,9 @@ public class UserManageServlet extends HttpServlet {
 		    dao.insert(userId3, Integer.parseInt(cid), workdayTimestamp);
 		}
 		
-		response.sendRedirect("UserManageServlet");
+		//メッセージエリアのプログラム
+		request.setAttribute("message", "登録が完了しました");
+		doGet(request, response);
 		
 		}
 	}
