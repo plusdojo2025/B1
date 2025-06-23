@@ -82,7 +82,8 @@ public class LoginServlet extends HttpServlet {
 		        	response.sendRedirect(request.getContextPath() + "/HomePartServlet");
 		        }
 			}else {
-			//なかった場合
+			//なかった場合　メッセージエリア
+				request.setAttribute("message", "ログイン失敗しました。");
 				doGet(request, response);
 			}
 			 //ログイン処理を行う

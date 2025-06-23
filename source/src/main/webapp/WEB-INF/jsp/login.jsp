@@ -20,8 +20,12 @@
 
 <form method="POST" action="/B1/LoginServlet" class="idpas" id="idpas">
 	<!-- メッセージエリア -->
-	<div id="massage">
-		<p></p>
+	<div id="center">
+		<p id="massage">
+		<c:if test="${not empty message}">
+			${message}
+		</c:if>
+		</p>
 	</div>
 	
 	<!-- id入力 -->

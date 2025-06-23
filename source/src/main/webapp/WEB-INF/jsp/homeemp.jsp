@@ -1,11 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="dto.Users" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    Users loginUser = (Users) session.getAttribute("loginUser");
+    if (loginUser == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>ホーム</title>
 <link rel="stylesheet" type="text/css" href="/B1/css/common.css">
+<link rel="stylesheet" type="text/css" href="/B1/css/homeemp.css">
 </head>
 <body>
  <!-- ヘッダー -->
@@ -24,13 +38,18 @@
 	</header>
  
  <!--ログイン者名表示 -->
-   <p><span id="username"></span></p>
+   <p>ログインユーザー：<strong><%= loginUser.getName() %></strong></p>
    
    <div class=center>
  <!--　マニュアル更新依頼 -->
    <p>マニュアル更新依頼<span id="request-count" class="badge">0</span></p>
 　<!-- 今日のアルバイト表示 -->
    <p>今日のアルバイト<p>
+<ul>
+	<c:forEach var="Parttimer" items="${todayParttimer}">
+    <li>${Parttimer.name}</li>
+  	</c:forEach>
+</ul>
 　<!-- 各種ボタン -->
        <!-- <input type="submit"  class="button" name="submit" value="マニュアル作成">
        <input type="submit"  class="button" name="submit" value="ユーザー管理"> -->

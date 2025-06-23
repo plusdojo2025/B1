@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import dto.Users;
 
@@ -239,4 +241,52 @@ public class UsersDao {
 			
 		}
 
+		
+		//社員用ホーム画面で今日のアルバイト一覧を取得するメソッド
+		
+		// UsersDao.java に追加
+		public List<Users> getTodayParttimer() {
+		    List<Users> ParttimerList = new ArrayList<>();
+		    Connection conn = null;
+
+		    try {
+		        Class.forName("com.mysql.cj.jdbc.Driver");
+		        conn = DriverManager.getConnection(
+		            "jdbc:mysql://localhost:3306/b1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
+		            "root", "password");
+
+		        String sql = """
+		            SELECT DISTINCT u.* FROM schedules s
+		            JOIN users u ON s.user_id = u.id
+		            WHERE DATE(s.date) = CURDATE()
+		              AND u.role = 'アルバイト'
+		        """;
+
+		        PreparedStatement ps = conn.prepareStatement(sql);
+		        ResultSet rs = ps.executeQuery();
+
+		        while (rs.next()) {
+		            Users user = new Users(
+		                rs.getInt("id"),
+		                rs.getString("name"),
+		                rs.getString("email"),
+		                rs.getString("pw"),
+		                rs.getString("role"),
+		                rs.getTimestamp("created_at"),
+		                rs.getTimestamp("updated_at")
+		            );
+		            ParttimerList.add(user);
+		        }
+
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        if (conn != null) {
+		            try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+		        }
+		    }
+
+		    return ParttimerList;
+		}
+		
 }
