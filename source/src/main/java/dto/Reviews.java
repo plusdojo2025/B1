@@ -27,7 +27,7 @@ public class Reviews implements Serializable {
   	}
   	
   	public void setManual_id(int manual_id) {
-  		this.id = manual_id;
+  		this.manual_id = manual_id;
   	}
   	
   	public int getUser_id() {
@@ -35,23 +35,23 @@ public class Reviews implements Serializable {
   	}
   	
   	public void setUser_id(int user_id) {
-  		this.id = user_id;
+  		this.user_id = user_id;
   	}
   	
   	public String getReview() {
   		return review;
   	}
   	
-  	public void setReview(int review) {
-  		this.id = review;
+  	public void setReview(String review) {
+  		this.review = review;
   	}
   	
   	public String getComment() {
   		return comment;
   	}
   	
-  	public void setComment(int comment) {
-  		this.id = comment;
+  	public void setComment(String comment) {
+  		this.comment = comment;
   	}
   	
     public Timestamp getCreatedAt() {
@@ -83,6 +83,10 @@ public class Reviews implements Serializable {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
   	}
+
+	public Reviews() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
   	
 }
 
