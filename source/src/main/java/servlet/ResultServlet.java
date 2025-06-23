@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ManualsDao;
+import dto.Manual;
+
 
 /**
  * Servlet implementation class UpdateDeleteServlet
@@ -35,26 +38,27 @@ public class ResultServlet extends HttpServlet {
 			throws ServletException, IOException {
 		//リクエストスコープを取得する
 		request.setCharacterEncoding("UTF-8");
-		String manual = request.getParameter("manual");
-		
+		int categoryId = Integer.parseInt(request.getParameter("category_id"));
+		int taskId = Integer.parseInt(request.getParameter("task_id"));
+		String manualBody = request.getParameter("manual");
 		
 		//登録処理
+		ManualsDao manuDao = new ManualsDao();
+		Manual manuDto = new Manual(categoryId,taskId,manualBody);
+		boolean result = manuDao.insert(manuDto);
+		String resultMessage = "";
 		
 		//結果を返す
-		/*
 		if (result) { // 登録成功
-			String result = "保存しました。";
-			request.setAttribute("result",result);
+			resultMessage = "マニュアルを保存しました。";
+			request.setAttribute("result",resultMessage);
 		} else { // 登録失敗
-			String result = "保存できませんでした。";
-			request.setAttribute("result",result);
+			resultMessage = "マニュアルを保存できませんでした。";
+			request.setAttribute("result",resultMessage);
 		}
-		*/
-		
-		String result = "保存しました。";
-		request.setAttribute("result",result);
 		
 		// 結果ページにフォワードする→情報追加.jspへ
+		request.setAttribute("result",resultMessage);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/form.jsp");
 		dispatcher.forward(request, response);
 	}

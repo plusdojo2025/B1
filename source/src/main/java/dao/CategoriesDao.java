@@ -74,7 +74,7 @@ public class CategoriesDao {
  				"root", "password");
  		
  		// SELECT文を準備する
- 		String sql = "select * from categories where task = ?";
+ 		String sql = "select * from categories where category = ?";
  		PreparedStatement pStmt = conn.prepareStatement(sql);
  		pStmt.setString(1, category);
  		
