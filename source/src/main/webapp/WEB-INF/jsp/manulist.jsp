@@ -44,7 +44,7 @@
      </a>
     </span>
     <span class="task-date">
-     <fmt:formatDate value="${manual.createDate}" pattern="yyyy/MM/dd" />
+     <fmt:formatDate value="${manual.createdAt}" pattern="yyyy/MM/dd" />
     </span>
    </p>
   </c:forEach>

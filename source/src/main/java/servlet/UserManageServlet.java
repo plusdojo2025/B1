@@ -114,13 +114,19 @@ public class UserManageServlet extends HttpServlet {
 		
 		
 		for (String cid : work1) {
+			if (cid != null && !cid.isEmpty()){//もし選択されてたら
 		    dao.insert(userId1, Integer.parseInt(cid), workdayTimestamp);
+			}
 		}
 		for (String cid : work2) {
+			if (cid != null && !cid.isEmpty()) {
 		    dao.insert(userId2, Integer.parseInt(cid), workdayTimestamp);
+			}
 		}
 		for (String cid : work3) {
+			if (cid != null && !cid.isEmpty()) {
 		    dao.insert(userId3, Integer.parseInt(cid), workdayTimestamp);
+			}
 		}
 		
 		//メッセージエリアのプログラム

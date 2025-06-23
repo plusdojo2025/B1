@@ -8,7 +8,7 @@ public class Reviews implements Serializable {
 	private int id; 	   		// 番号
 	private int manual_id;		//マニュアルID
 	private int user_id;   		// 評価した人（ユーザーid）
-	private String review;  	// 評価
+	private int review;  	// 評価
 	private String comment;		//コメント
     private Timestamp createdAt; //登録日
     private Timestamp updatedAt; //更新日
@@ -27,7 +27,7 @@ public class Reviews implements Serializable {
   	}
   	
   	public void setManual_id(int manual_id) {
-  		this.id = manual_id;
+  		this.manual_id = manual_id;
   	}
   	
   	public int getUser_id() {
@@ -35,23 +35,23 @@ public class Reviews implements Serializable {
   	}
   	
   	public void setUser_id(int user_id) {
-  		this.id = user_id;
+  		this.user_id = user_id;
   	}
   	
-  	public String getReview() {
+  	public int getReview() {
   		return review;
   	}
   	
-  	public void setReview(int review) {
-  		this.id = review;
+  	public void setReview(int rating) {
+  		this.review = rating;
   	}
   	
   	public String getComment() {
   		return comment;
   	}
   	
-  	public void setComment(int comment) {
-  		this.id = comment;
+  	public void setComment(String comment) {
+  		this.comment = comment;
   	}
   	
     public Timestamp getCreatedAt() {
@@ -73,7 +73,7 @@ public class Reviews implements Serializable {
     
     
   //コンストラクタ 情報取得用
-  	public Reviews(int id, int manual_id, int user_id, String review, String comment, Timestamp createdAt, Timestamp updatedAt) {
+  	public Reviews(int id, int manual_id, int user_id, int review, String comment, Timestamp createdAt, Timestamp updatedAt) {
   		super();
   		this.id = id;
   		this.manual_id = manual_id;
@@ -83,6 +83,10 @@ public class Reviews implements Serializable {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
   	}
+
+	public Reviews() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
   	
 }
 
