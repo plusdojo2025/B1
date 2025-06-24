@@ -1,7 +1,7 @@
 // manual.js
 function toggleManual(id) {
   const el = document.getElementById(id);
-  const isVisible = el.style.display === "block";
+  const isVisible = window.getComputedStyle(el).display === "block";
 
   if (isVisible) {
     el.style.display = "none";
