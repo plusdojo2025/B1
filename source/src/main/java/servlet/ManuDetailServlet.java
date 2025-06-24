@@ -92,12 +92,14 @@ public class ManuDetailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		/*
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 			return;
 	}
+		*/
 		
 		request.setCharacterEncoding("UTF-8");
 		
@@ -116,9 +118,10 @@ public class ManuDetailServlet extends HttpServlet {
 	    
 	    int manualId = Integer.parseInt(manualIdStr);
 	    
+	    //完了チェック処理
 	    if ("completeCheck".equals(action)) {
 	    	
-	    	//完了チェック処理
+	    	// 未完了ならチェックを登録
 	    	ChecksDao checksDao = new ChecksDao();
 	    	if (!checksDao.hasChecked(userId, manualId)) {
 	    		checksDao.insertCheck(userId, manualId);
@@ -134,6 +137,7 @@ public class ManuDetailServlet extends HttpServlet {
 		String comment = request.getParameter("comment");
 		String ratingStr = request.getParameter("rating");
 		
+		//数値に変換
 		int rating = Integer.parseInt(ratingStr);
 		
 		//DTO生成
@@ -155,6 +159,8 @@ public class ManuDetailServlet extends HttpServlet {
 		        ManualsDao mDao = new ManualsDao();
 		        Manual manual = mDao.getManualById(manualId);
 		        request.setAttribute("manual", manual);
+		        
+		        //jspにフォワード
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
 		        dispatcher.forward(request, response);
 		    }
