@@ -4,6 +4,10 @@ package dao;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import dto.Manual;
 
 	public class ChecksDao {
 		
@@ -89,6 +93,37 @@ import java.sql.ResultSet;
 
 			        return false;
 			    }
+			    
+			 // 未チェックのmanual_idとtask_id、task名を取得（アルバイト用ホーム画面の更新通知表示用）
+			    public List<Manual> getUncheckedManualsByUser(int userId) {
+			        List<Manual> list = new ArrayList<>();
+			        String sql = """
+			            SELECT m.id, t.task AS taskName
+			        	FROM manuals m
+			        	JOIN tasks t ON m.task_id = t.id
+			        	JOIN checks c ON m.id = c.manual_id
+			        	WHERE c.user_id = ? AND c.has_check = false
+			        	""";
+
+			        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
+			             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+			            stmt.setInt(1, userId);
+			            ResultSet rs = stmt.executeQuery();
+
+			            while (rs.next()) {
+			                Manual manual = new Manual();
+			                manual.setId(rs.getInt("id"));
+			                manual.setTaskName(rs.getString("taskName"));
+			                list.add(manual);
+			            }
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+
+			        return list;
+			    }
+			    
 			
 		}
 	
