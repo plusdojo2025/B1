@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.Reviews;
+
 public class ReviewsDao {
 	
 	
@@ -264,7 +266,54 @@ public class ReviewsDao {
 
 	 
 				
-}
+
     
+//レビューがついてるマニュアルのIDを全て取得
+public List<Reviews> getId() {
+	Connection conn = null;
+	List<Reviews> reviewsList = new ArrayList<Reviews>();
 
+	try {
+		// JDBCドライバを読み込む
+		Class.forName("com.mysql.cj.jdbc.Driver");
 
+		// データベースに接続する
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b1?"
+				+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+				"root", "password");
+
+		// SQL文を準備する
+		String sql = "SELECT manual_id from reviews";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+		// SQL文を実行し、結果表を取得する
+		ResultSet rs = pStmt.executeQuery();
+
+		// 結果表をコレクションにコピーする
+		while (rs.next()) {
+			Reviews reviews = new Reviews(rs.getInt("manual_id"));
+			reviewsList.add(reviews);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+		reviewsList = null;
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+		reviewsList = null;
+	} finally {
+		// データベースを切断
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				reviewsList = null;
+			}
+		}
+	}
+
+	// 結果を返す
+	return reviewsList;
+}
+
+}
