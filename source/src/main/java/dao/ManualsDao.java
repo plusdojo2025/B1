@@ -279,4 +279,54 @@ public class ManualsDao {
 		}
 		return result;
     }
+    
+    //category_idとtask_idを使用してid,body（マニュアル本体）を取得する
+   	public Manual getBody(int category_id, int task_id) {
+   	    Connection conn = null;
+   	    PreparedStatement pStmt = null;
+   	    ResultSet rs = null;
+       	Manual mn = new Manual();
+   	    try {
+   	        // JDBCドライバを読み込む
+   	        Class.forName("com.mysql.cj.jdbc.Driver");
+
+   	        // データベースに接続する
+   	        conn = DriverManager.getConnection(
+   	            "jdbc:mysql://localhost:3306/B1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+   	            "root", "password");
+
+   	    	        // SQL文を準備する
+   	    	        String sql = "SELECT id,body FROM manuals WHERE category_id = ? AND task_id = ?;";
+   	    	        pStmt = conn.prepareStatement(sql);
+   	    	        pStmt.setInt(1, category_id);
+   	    	        pStmt.setInt(2, task_id);
+
+   	    	        // SQLを実行して結果を取得
+   	    	        rs = pStmt.executeQuery();
+
+   	    	        // 結果をリストに追加
+   	    	        rs.next();
+
+   	    	        	mn.setId(rs.getInt("id"));
+   	    	        	mn.setManualBody(rs.getString("body"));					
+   	   
+   	    	        
+
+   	    	    } catch (SQLException | ClassNotFoundException e) {
+   	    	        e.printStackTrace();
+   	    	    } finally {
+   	    	        // リソースのクローズ
+   	    	        try {
+   	    	            if (rs != null) rs.close();
+   	    	            if (pStmt != null) pStmt.close();
+   	    	            if (conn != null) conn.close();
+   	    	        } catch (SQLException e) {
+   	    	            e.printStackTrace();
+   	    	        }
+   	    	    }
+
+   	    	    return mn;
+   	    	}
+
+    
 }
