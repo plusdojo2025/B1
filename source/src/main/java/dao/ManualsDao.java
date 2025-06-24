@@ -32,7 +32,7 @@ public class ManualsDao {
         			//マニュアルテーブルをカテゴリ、タスクテーブルと結合
         			//必要な情報を取得（カテゴリ名、タスク名、本文、作成・更新日
         			"SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-        			"m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
+        			"m.body AS manualBody, m.created_at AS createDate, m.updated_at AS updateDate " +
         			"FROM MANUALS m " +
         			"JOIN CATEGORIES c ON m.category_id = c.id " +
         			"JOIN TASKS t ON m.task_id = t.id " +
@@ -54,8 +54,8 @@ public class ManualsDao {
         		 manual.setManualBody(rs.getString("manualBody"));     //マニュアル本文セット
         		 
         		 //日時系はDate型にセット
-        		 manual.setCreatedAt(rs.getTimestamp("createdAt"));
-        		 manual.setUpdatedAt(rs.getTimestamp("updatedAt"));
+        		 manual.setCreateDate(rs.getTimestamp("createDate"));
+        		 manual.setUpdateDate(rs.getTimestamp("updateDate"));
         		 
         		 //リストに追加
         		 list.add(manual);
@@ -63,10 +63,10 @@ public class ManualsDao {
         	 
         } catch (SQLException e) {
 			e.printStackTrace();
-			//list = null;
+			list = null;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			//list = null;
+			list = null;
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -74,7 +74,7 @@ public class ManualsDao {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-					//list = null;
+					list = null;
 				}
 			}
 		}
@@ -101,7 +101,7 @@ public class ManualsDao {
         	PreparedStatement pStmt = conn.prepareStatement(
         			
         			"SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-        			"m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
+        			"m.body AS manualBody, m.created_at AS createDate, m.updated_at AS updateDate " +
         			"FROM MANUALS m " +
         			"JOIN CATEGORIES c ON m.category_id = c.id " +
         			"JOIN TASKS t ON m.task_id = t.id " +
@@ -122,8 +122,8 @@ public class ManualsDao {
         		 manual.setCategoryName(rs.getString("categoryName"));   // カテゴリ名
                  manual.setTaskName(rs.getString("taskName"));           // タスク名
                  manual.setManualBody(rs.getString("manualBody"));       // 本文
-                 manual.setCreatedAt(rs.getTimestamp("createdAt"));    // 作成日
-                 manual.setUpdatedAt(rs.getTimestamp("updateAt"));    // 更新日
+                 manual.setCreateDate(rs.getTimestamp("createDate"));    // 作成日
+                 manual.setUpdateDate(rs.getTimestamp("updateDate"));    // 更新日
         	}
         	
     	} catch (SQLException e) {
@@ -158,7 +158,7 @@ public class ManualsDao {
             );
             PreparedStatement pStmt = conn.prepareStatement(
                 "SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-                "m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
+                "m.body AS manualBody, m.created_at AS createDate, m.updated_at AS updateDate " +
                 "FROM MANUALS m " +
                 "JOIN CATEGORIES c ON m.category_id = c.id " +
                 "JOIN TASKS t ON m.task_id = t.id " +
@@ -172,8 +172,8 @@ public class ManualsDao {
                 manual.setCategoryName(rs.getString("categoryName"));
                 manual.setTaskName(rs.getString("taskName"));
                 manual.setManualBody(rs.getString("manualBody"));
-                manual.setCreatedAt(rs.getTimestamp("createdAt"));
-                manual.setUpdatedAt(rs.getTimestamp("updatedAt"));
+                manual.setCreateDate(rs.getTimestamp("createDate"));
+                manual.setUpdateDate(rs.getTimestamp("updateDate"));
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -196,7 +196,7 @@ public class ManualsDao {
             );
             PreparedStatement pStmt = conn.prepareStatement(
                 "SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-                "m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
+                "m.body AS manualBody, m.created_at AS createDate, m.updated_at AS updateDate " +
                 "FROM MANUALS m " +
                 "JOIN CATEGORIES c ON m.category_id = c.id " +
                 "JOIN TASKS t ON m.task_id = t.id " +
@@ -210,8 +210,8 @@ public class ManualsDao {
                 manual.setId(rs.getInt("id"));
                 manual.setCategoryName(rs.getString("categoryName"));
                 manual.setTaskName(rs.getString("taskName"));
-                manual.setCreatedAt(rs.getTimestamp("createdAt"));
-                manual.setUpdatedAt(rs.getTimestamp("updatedAt"));
+                manual.setCreateDate(rs.getTimestamp("createDate"));
+                manual.setUpdateDate(rs.getTimestamp("updateDate"));
                 
                 String body = rs.getString("manualBody");
                 if (body != null) {
@@ -230,56 +230,4 @@ public class ManualsDao {
         return manual;
     }
     
-<<<<<<< HEAD
-    //マニュア本体を登録
-    public boolean insert(Manual manual) {
-    	Connection conn = null;
-		boolean result = false;
-		
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b1?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
-
-			// SQL文を準備する
-			String sql = "INSERT INTO manuals VALUES (0, ?, ?, ?, default, default)";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			
-			// SQL文を完成させる
-			if (manual.getCategoryId() != null) {
-				pStmt.setInt(1, manual.getCategoryId());
-			}
-			if (manual.getTaskId() != null) {
-				pStmt.setInt(2, manual.getTaskId());
-			}
-			if (manual.getManualBody() != null) {
-				pStmt.setString(3, manual.getManualBody());
-			}
-			
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
-				result = true;
-			}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return result;
-    }
-=======
->>>>>>> parent of 2d11bf0 (2025/06/24 安井)
 }
