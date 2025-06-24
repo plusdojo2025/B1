@@ -19,9 +19,9 @@
 <link rel="stylesheet" href="<c:url value='/css/homepart.css' />">
 </head>
 <body>
- <!-- ヘッダー（ここから） -->
+ <!--ヘッダー（ここから）-->
   <header>
-		<a href="<c:url value='/LoginServlet'/>">
+		<a href="<c:url value='/HomeServlet'/>">
 			<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
 		</a>
 		<nav>
@@ -33,16 +33,31 @@
 			</ul>
 		</nav>
 	</header>
- <!-- ヘッダー（ここまで） -->
+ <!--ヘッダー（ここまで）-->
  
  <!--ログイン者名表示 -->
    <p>ログインユーザー：<strong><%= loginUser.getName() %></strong></p>
 <div class=center>
-   <!-- 更新マニュアル通知 -->
-	<form action="${pageContext.request.contextPath}/RegisterServlet" method="post">
-	<input type="text"  name="username" placeholder="更新マニュアル通知が表示されます" class="form" readonly>
-	</form>
-　<!-- 今日の業務表示 -->
+   <!--更新マニュアル通知-->
+	<!--<form action="${pageContext.request.contextPath}/RegisterServlet" method="post">-->
+	<c:if test="${not empty uncheckedManuals}">
+    <p>更新マニュアル（${uncheckedCount}件）:</p>
+    <ul>
+        <c:forEach var="manual" items="${uncheckedManuals}">
+            <li>
+                <a href="${pageContext.request.contextPath}/ManuListServlet?manualId=${manual.id}">
+                    ${manual.taskName}
+                </a>
+            </li>
+        </c:forEach>
+    </ul>
+</c:if>
+<c:if test="${empty uncheckedManuals}">
+    <p>更新されたマニュアルはありません。</p>
+</c:if>
+	
+	<!--/form>-->
+　<!--今日の業務表示-->
    <p>今日の業務</p>
 <ul>
 	<c:forEach var="task" items="${todayTasks}">

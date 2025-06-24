@@ -92,19 +92,25 @@ public class ManuDetailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		/*
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/B1/LoginServlet");
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 			return;
 	}
+		*/
 		
 		request.setCharacterEncoding("UTF-8");
+		
+		//セッションからユーザーIDを取得
 	    int userId = (int) session.getAttribute("id");
 	    
+	    //リクエストからactionとmanualIdを取得
 	    String action = request.getParameter("action");
 	    String manualIdStr = request.getParameter("manualId");
 	    
+	    //manualId入力チェック
 	    if (manualIdStr == null || !manualIdStr.matches("\\d+")) {
 	    	response.sendRedirect(request.getContextPath() + "/ManuListServlet");
 	    	return;
@@ -112,12 +118,15 @@ public class ManuDetailServlet extends HttpServlet {
 	    
 	    int manualId = Integer.parseInt(manualIdStr);
 	    
+	    //完了チェック処理
 	    if ("completeCheck".equals(action)) {
-	    	//完了チェック処理
+	    	
+	    	// 未完了ならチェックを登録
 	    	ChecksDao checksDao = new ChecksDao();
 	    	if (!checksDao.hasChecked(userId, manualId)) {
 	    		checksDao.insertCheck(userId, manualId);
 	    	}
+	    	//詳細ページリダイレクト
 	    	response.sendRedirect(request.getContextPath() + "/ManuDetailServlet?manualId=" + manualId);
 	    	return;
 	    	}
@@ -128,6 +137,7 @@ public class ManuDetailServlet extends HttpServlet {
 		String comment = request.getParameter("comment");
 		String ratingStr = request.getParameter("rating");
 		
+		//数値に変換
 		int rating = Integer.parseInt(ratingStr);
 		
 		//DTO生成
@@ -149,6 +159,8 @@ public class ManuDetailServlet extends HttpServlet {
 		        ManualsDao mDao = new ManualsDao();
 		        Manual manual = mDao.getManualById(manualId);
 		        request.setAttribute("manual", manual);
+		        
+		        //jspにフォワード
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
 		        dispatcher.forward(request, response);
 		    }

@@ -70,7 +70,15 @@ public class Reviews implements Serializable {
         this.updatedAt = updatedAt;
     }
     
-    
+    public String toString() {
+        return "Reviews{id=" + id + 
+               ", manual_id='" + manual_id + '\'' + 
+               ", user_id='" + user_id + '\'' + 
+               ", review='" + review + '\'' +
+               ", comment='" + comment + '\'' +
+               ", createdAt=" + createdAt +
+               ", updatedAt=" + updatedAt + '}';
+    }
     
   //コンストラクタ 情報取得用
   	public Reviews(int id, int manual_id, int user_id, int review, String comment, Timestamp createdAt, Timestamp updatedAt) {
@@ -86,6 +94,10 @@ public class Reviews implements Serializable {
 
 	public Reviews() {
 		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public Reviews(int manual_id) {
+	    this.manual_id = manual_id;
 	}
   	
 }

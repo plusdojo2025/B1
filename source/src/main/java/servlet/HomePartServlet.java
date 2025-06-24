@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ChecksDao;
 import dao.SchedulesDao;
+import dto.Manual;
 import dto.Users;
 
 /**
@@ -47,6 +49,11 @@ public class HomePartServlet extends HttpServlet {
 	    List<String> categoryList = dao.getTodayCategories(userId);
 
 	    request.setAttribute("todayTasks", categoryList);
+		
+		ChecksDao checksDao = new ChecksDao();
+		List<Manual> uncheckedManuals = checksDao.getUncheckedManualsByUser(userId);
+		request.setAttribute("uncheckedManuals", uncheckedManuals);
+		request.setAttribute("uncheckedCount", uncheckedManuals.size());
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/homepart.jsp");
 		dispatcher.forward(request, response);
