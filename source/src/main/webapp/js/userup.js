@@ -3,7 +3,7 @@ let formObj = document.getElementById('user_form');
 let errorMessageObj = document.getElementById('error_message');
 
 
-const pwPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+const pwPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,20}$/;
 
 formObj.onsubmit = function(event) {
  const first_pw = formObj.first_pw.value;

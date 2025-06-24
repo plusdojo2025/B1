@@ -17,8 +17,8 @@ import dto.Users;
 /**
  * Servlet implementation class UpdateDeleteServlet
  */
-@WebServlet("/UserUpServlet")
-public class UserUpServlet extends HttpServlet {
+@WebServlet("/UserUpServlet2")
+public class UserUpServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -27,17 +27,15 @@ public class UserUpServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// ユーザー情報の取得
-		// ログインサーブレットから渡されたemail情報を受け取る
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		Users user0 = (Users)session.getAttribute("user");
-		String email = user0.getEmail();
-		UsersDao uDao = new UsersDao();
-		Users user = uDao.userInfo(email);
-		session.setAttribute("user", user);
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/B1/LoginServlet");
+			return;
+		}
 
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userup.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userup2.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -59,15 +57,8 @@ public class UserUpServlet extends HttpServlet {
 				request.setAttribute("result", new Result("更新失敗！", "ユーザー情報を更新できませんでした。", "/B1/UserUpServlet"));
 		}
 		
-		//更新後の情報を取得
-		HttpSession session = request.getSession();
-		Users new_user = UserDao.userInfo(email);
-		session.setAttribute("updated_user", new_user);
-		
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userup.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userup2.jsp");
 		dispatcher.forward(request, response);
 	}
 }
-
-

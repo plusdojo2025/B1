@@ -12,7 +12,7 @@
 <body>
  <!-- ヘッダー（ここから） -->
 <header>
-		<a href="<c:url value='/LoginServlet'/>">
+		<a href="<c:url value='/HomeServlet'/>">
 			<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
 		</a>
 		<nav>

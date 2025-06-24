@@ -143,23 +143,15 @@ public class UsersDao {
 				// SQL文を完成させる
 				if (update.getName() != null) {
 					pStmt.setString(1, update.getName());
-				} else {
-					pStmt.setString(1, "%");
-				}
+				} 
 				if (update.getEmail() != null) {
 					pStmt.setString(2, update.getEmail());
-				} else {
-					pStmt.setString(2, "%");
-				}
+				} 
 				if (update.getPw() != null) {
 					pStmt.setString(3, update.getPw());
-				} else {
-					pStmt.setString(3, "%");
 				}
 				if (update.getRole() != null) {
 					pStmt.setString(4, update.getRole());
-				} else {
-					pStmt.setString(4, "%");
 				}
 				pStmt.setInt(5, update.getId());
 

@@ -29,39 +29,39 @@
 	<p id="error_message"><c:out value="${result.message}" /></p> 
 	<div class=wrapper>
 		<!-- 入力フォーム -->
-		<form id="user_form" method="POST" action="<c:url value='/UserUpServlet2' />">
-			<input type="hidden" name="id" value="${user.id}">
+		<form id="user_form" method="POST" action="<c:url value='/UserUpServlet' />">
+			<input type="hidden" name="id" value="${updated_user.id}">
 			<table class="upload">
 				<tr>
 				<th><label>氏名</label></th>
 				</tr>
 				<tr>
-				    <td><input type="text" name="name" id="name" value="${user.name}" placeholder="氏名を入力" class="form"></td>
+				    <td><input type="text" name="name" id="name" value="${updated_user.name}" placeholder="氏名を入力" class="form"></td>
 				</tr>
 				<tr>
 					<th><label>ID</label></th>
 				</tr>
 				<tr>
-					<td><input type="text" name="email" id="email" value="${user.email}" placeholder="メールアドレスを入力" class="form"></td>
+					<td><input type="text" name="email" id="email" value="${updated_user.email}" placeholder="メールアドレスを入力" class="form"></td>
 				</tr>
 				<tr>
 					<th><label>PW<span class="tips">(英大文字・英小文字・数字の3種を含む8文字以上20字以下)</span></label></th>
 				</tr>
 				<tr>
-					<td><input type="text" name="first_pw" id="pw1" value="${user.pw}" placeholder="パスワードを入力" class="form">
+					<td><input type="text" name="first_pw" id="pw1" value="${updated_user.pw}" placeholder="パスワードを入力" class="form">
 					</td>
 				</tr>
 				<tr>
 					<th><label>PW(確認)</label></th>
 				</tr>
 				<tr>
-					<td><input type="text" name="second_pw" id="pw" value="${user.pw}" placeholder="パスワードを入力" class="form">
+					<td><input type="text" name="second_pw" id="pw" value="${updated_user.pw}" placeholder="パスワードを入力" class="form">
 					</td>
 				</tr>
 			</table>
 			<div class=radio>
-				<input type="radio" name="role" value="社員" ${user.role == '社員' ? 'checked' : ''} >社員
-				<input type="radio" name="role" value="アルバイト" ${user.role == 'アルバイト' ? 'checked' : ''}>アルバイト
+				<input type="radio" name="role" value="社員" ${updated_user.role == '社員' ? 'checked' : ''} >社員
+				<input type="radio" name="role" value="アルバイト" ${updated_user.role == 'アルバイト' ? 'checked' : ''}>アルバイト
 			</div>
 			<input type="submit"  class="button" name="submit" value="変更">
 		</form>
