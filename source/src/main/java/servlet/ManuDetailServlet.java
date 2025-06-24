@@ -74,15 +74,15 @@ public class ManuDetailServlet extends HttpServlet {
 		            request.setAttribute("hasChecked", hasChecked);
 
 		            // 詳細表示用JSPへフォワード（内部転送）
-		            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
+		            RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/ManudetailServlet");
 		            dispatcher.forward(request, response);
 		        } else {
 		        	// manual が見つからなかった場合、マニュアル一覧ページへリダイレクト
-		            response.sendRedirect("/B1/ManuListServlet");
+		            response.sendRedirect(request.getContextPath() + "/ManuListServlet");
 		        }
 		    } else {
 		    	// manualId パラメータが不正な場合も一覧ページへリダイレクト	
-		        response.sendRedirect("/B1/ManuListServlet");
+		        response.sendRedirect(request.getContextPath() + "/ManuListServlet");
 		    }
 	}
 
@@ -106,7 +106,7 @@ public class ManuDetailServlet extends HttpServlet {
 	    String manualIdStr = request.getParameter("manualId");
 	    
 	    if (manualIdStr == null || !manualIdStr.matches("\\d+")) {
-	    	response.sendRedirect("/B1/ManuListServlet");
+	    	response.sendRedirect(request.getContextPath() + "/ManuListServlet");
 	    	return;
 	    }
 	    
@@ -118,7 +118,7 @@ public class ManuDetailServlet extends HttpServlet {
 	    	if (!checksDao.hasChecked(userId, manualId)) {
 	    		checksDao.insertCheck(userId, manualId);
 	    	}
-	    	response.sendRedirect("/B1/ManuDetailServlet?manualId=" + manualId);
+	    	response.sendRedirect(request.getContextPath() + "/ManuDetailServlet?manualId=" + manualId);
 	    	return;
 	    	}
 	    
@@ -143,7 +143,7 @@ public class ManuDetailServlet extends HttpServlet {
 		
 		//投稿成功後は詳細ページにリダイレクト
 		 if (success) {
-		        response.sendRedirect("/B1/ManuDetailServlet?manualId=" + manualId);
+		        response.sendRedirect(request.getContextPath() + "/ManuDetailServlet?manualId=" + manualId);
 		    } else {
 		        request.setAttribute("errorMessage", "レビューの投稿に失敗しました。");
 		        ManualsDao mDao = new ManualsDao();
