@@ -9,6 +9,24 @@ public class Manual {
     private String taskName;     // 業務名
     private Date createDate;  // 登録日
     private Date updateDate;  // 更新日
+    
+    //コンストラクター
+    public Manual() {
+		super();
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public Manual(int id, String categoryName, String manualBody, String taskName, Date createDate, Date updateDate) {
+		super();
+		this.id = id;
+		this.categoryName = categoryName;
+		this.manualBody = manualBody;
+		this.taskName = taskName;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+	}
+
+	
 
     // ゲッター・セッター
     public String getCategoryName() {return categoryName;}
