@@ -100,11 +100,15 @@ public class ManuDetailServlet extends HttpServlet {
 	}
 		
 		request.setCharacterEncoding("UTF-8");
+		
+		//セッションからユーザーIDを取得
 	    int userId = (int) session.getAttribute("id");
 	    
+	    //リクエストからactionとmanualIdを取得
 	    String action = request.getParameter("action");
 	    String manualIdStr = request.getParameter("manualId");
 	    
+	    //manualId入力チェック
 	    if (manualIdStr == null || !manualIdStr.matches("\\d+")) {
 	    	response.sendRedirect(request.getContextPath() + "/ManuListServlet");
 	    	return;
@@ -113,11 +117,13 @@ public class ManuDetailServlet extends HttpServlet {
 	    int manualId = Integer.parseInt(manualIdStr);
 	    
 	    if ("completeCheck".equals(action)) {
+	    	
 	    	//完了チェック処理
 	    	ChecksDao checksDao = new ChecksDao();
 	    	if (!checksDao.hasChecked(userId, manualId)) {
 	    		checksDao.insertCheck(userId, manualId);
 	    	}
+	    	//詳細ページリダイレクト
 	    	response.sendRedirect(request.getContextPath() + "/ManuDetailServlet?manualId=" + manualId);
 	    	return;
 	    	}
