@@ -230,6 +230,7 @@ public class ManualsDao {
         return manual;
     }
     
+<<<<<<< HEAD
     //マニュア本体を登録
     public boolean insert(Manual manual) {
     	Connection conn = null;
@@ -279,4 +280,6 @@ public class ManualsDao {
 		}
 		return result;
     }
+=======
+>>>>>>> parent of 2d11bf0 (2025/06/24 安井)
 }

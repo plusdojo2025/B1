@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class Manual {
 	private int id;
+<<<<<<< HEAD
     private Integer categoryId; // カテゴリID
     private Integer taskId;     //業務ID
     private String categoryName;
@@ -70,6 +71,13 @@ public class Manual {
 	}
 	
 	public Manual() {};
+=======
+    private String categoryName; // カテゴリ名
+    private String manualBody;   // 本文）
+    private String taskName;     // 業務名
+    private Date createDate;  // 登録日
+    private Date updateDate;  // 更新日
+>>>>>>> parent of 2d11bf0 (2025/06/24 安井)
 
 }
 
