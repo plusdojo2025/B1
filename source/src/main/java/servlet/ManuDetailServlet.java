@@ -74,7 +74,7 @@ public class ManuDetailServlet extends HttpServlet {
 		            request.setAttribute("hasChecked", hasChecked);
 
 		            // 詳細表示用JSPへフォワード（内部転送）
-		            RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/ManudetailServlet");
+		            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manudetail.jsp");
 		            dispatcher.forward(request, response);
 		        } else {
 		        	// manual が見つからなかった場合、マニュアル一覧ページへリダイレクト

@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>マニュアル一覧|NaviZaka</title>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/manulist.css' />">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/manulist.css' />">
 </head>
 <body>
 <!-- ヘッダー（ここから） -->
@@ -37,18 +37,14 @@
  
  <!-- カテゴリ内のマニュアル一覧 -->
  <div class="manual-content" id="manual-${entry.key}" style="display:none;">
-  <c:forEach var="manual" items="${entry.value}">
-   <p class="task-line">
-    <span class="task-name">
-     <a href="ManuDetailServlet?manualId=${manual.id}">
-      ${manual.taskName}
-     </a>
-    </span>
+<c:forEach var="manual" items="${entry.value}">
+  <a href="<c:url value='/ManuDetailServlet' />?manualId=${manual.id}" class="task-line">
+    <span class="task-name">${manual.taskName}</span>
     <span class="task-date">
-     <fmt:formatDate value="${manual.createdAt}" pattern="yyyy/MM/dd" />
+      <fmt:formatDate value="${manual.createdAt}" pattern="yyyy/MM/dd" />
     </span>
-   </p>
-  </c:forEach>
+  </a>
+</c:forEach>
  </div>
 </c:forEach>
 
