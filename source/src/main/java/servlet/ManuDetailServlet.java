@@ -102,6 +102,7 @@ public class ManuDetailServlet extends HttpServlet {
 		*/
 		
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 		
 		//セッションからユーザーIDを取得
 	    int userId = (int) session.getAttribute("id");
