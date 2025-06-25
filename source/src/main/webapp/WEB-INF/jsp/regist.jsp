@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>"> 
 </head>
 <body>
-<!-- ヘッダー（ここから） -->
+<!-- ヘッダー（ここから）  -->
   <header>
   　<a href="<c:url value='/RegistServlet'/>">
  	<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
