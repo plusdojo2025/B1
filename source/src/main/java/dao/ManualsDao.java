@@ -31,12 +31,12 @@ public class ManualsDao {
         			
         			//マニュアルテーブルをカテゴリ、タスクテーブルと結合
         			//必要な情報を取得（カテゴリ名、タスク名、本文、作成・更新日
-        			"SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-        			"m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
-        			"FROM manuals m " +
-        			"JOIN categories c ON m.category_id = c.id " +
-        			"JOIN tasks t ON m.task_id = t.id " +
-        			"ORDER BY c.category, t.task "
+        			"select m.id, c.category as categoryName, t.task as taskName, " +
+        			"m.body as manualBody, m.created_at as createdAt, m.updated_at as updatedAt " +
+        			"from manuals m " +
+        			"join categories c on m.category_id = c.id " +
+        			"join tasks t on m.task_id = t.id " +
+        			"order by c.category, t.task "
         			);
         	
         	
@@ -100,13 +100,13 @@ public class ManualsDao {
     		// SQL文の準備
         	PreparedStatement pStmt = conn.prepareStatement(
         			
-        			"SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-        			"m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
-        			"FROM manuals m " +
-        			"JOIN categories c ON m.category_id = c.id " +
-        			"JOIN tasks t ON m.task_id = t.id " +
-        			"WHERE m.category_id = ? " +
-        			"LIMIT 1"
+        			"select m.id, c.category as categoryName, t.task as taskName, " +
+        			"m.body as manualBody, m.created_at as createdAt, m.updated_at as updatedAt " +
+        			"from manuals m " +
+        			"join categories c on m.category_id = c.id " +
+        			"join tasks t on m.task_id = t.id " +
+        			"where m.category_id = ? " +
+        			"limit 1"
         			);
         	
         	//値セッツ
@@ -157,13 +157,13 @@ public class ManualsDao {
                 "root", "password"
             );
             PreparedStatement pStmt = conn.prepareStatement(
-                "SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-                "m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
-                "FROM manuals m " +
-                "JOIN categories c ON m.category_id = c.id " +
-                "JOIN tasks t ON m.task_id = t.id " +
-                "WHERE m.task_id = ? " +
-                "LIMIT 1"
+                "select m.id, c.category as categoryName, t.task as taskName, " +
+                "m.body as manualBody, m.created_at as createdAt, m.updated_at as updatedAt " +
+                "from manuals m " +
+                "join categories c on m.category_id = c.id " +
+                "join tasks t on m.task_id = t.id " +
+                "where m.task_id = ? " +
+                "limit 1"
             );
             pStmt.setInt(1, Integer.parseInt(taskId));
             ResultSet rs = pStmt.executeQuery();
@@ -195,13 +195,13 @@ public class ManualsDao {
                 "root", "password"
             );
             PreparedStatement pStmt = conn.prepareStatement(
-                "SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
-                "m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
-                "FROM manuals m " +
-                "JOIN categories c ON m.category_id = c.id " +
-                "JOIN tasks t ON m.task_id = t.id " +
-                "WHERE m.id = ? " +  // ← manualテーブルのIDで検索
-                "LIMIT 1"
+                "select m.id, c.category as categoryName, t.task as taskName, " +
+                "m.body as manualBody, m.created_at as createdAt, m.updated_at as updatedAt " +
+                "from manuals m " +
+                "join categories c on m.category_id = c.id " +
+                "join tasks t on m.task_id = t.id " +
+                "where m.id = ? " +  // ← manualテーブルのIDで検索
+                "limit 1"
             );
             pStmt.setInt(1, id);
             ResultSet rs = pStmt.executeQuery();
@@ -245,7 +245,7 @@ public class ManualsDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "INSERT INTO manuals VALUES (0, ?, ?, ?, default, default)";
+			String sql = "insert into manuals values (0, ?, ?, ?, default, default)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
@@ -292,11 +292,11 @@ public class ManualsDao {
 
    	        // データベースに接続する
    	        conn = DriverManager.getConnection(
-   	            "jdbc:mysql://localhost:3306/B1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+   	            "jdbc:mysql://localhost:3306/b1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
    	            "root", "password");
 
    	    	        // SQL文を準備する
-   	    	        String sql = "SELECT id,body FROM manuals WHERE category_id = ? AND task_id = ?;";
+   	    	        String sql = "select id,body from manuals where category_id = ? and task_id = ?;";
    	    	        pStmt = conn.prepareStatement(sql);
    	    	        pStmt.setInt(1, category_id);
    	    	        pStmt.setInt(2, task_id);

@@ -27,7 +27,7 @@ public class UsersDao {
 					"root", "password");
 
 			// SELECT文を準備する
-			String sql = "SELECT count(*) FROM USERS WHERE email=? AND pw=?";
+			String sql = "select count(*) from users where email=? and pw=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, user.getEmail());
 			pStmt.setString(2, user.getPw());
@@ -78,7 +78,7 @@ public class UsersDao {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "INSERT INTO USERS VALUES (0, ?, ?, ?, ?, DEFAULT, DEFAULT)";
+				String sql = "insert into users values (0, ?, ?, ?, ?, default, default)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -137,7 +137,7 @@ public class UsersDao {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "UPDATE USERS SET name=?, email=?, pw=?, role=?, updated_at=DEFAULT WHERE id=?";
+				String sql = "update users set name=?, email=?, pw=?, role=?, updated_at=default WHERE id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -194,7 +194,7 @@ public class UsersDao {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "select * from USERS where email = ?";	
+				String sql = "select * from users where email = ?";	
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				pStmt.setString(1, email);
 				
@@ -248,10 +248,10 @@ public class UsersDao {
 		            "root", "password");
 
 		        String sql = """
-		            SELECT DISTINCT u.* FROM schedules s
-		            JOIN users u ON s.user_id = u.id
-		            WHERE DATE(s.date) = CURDATE()
-		              AND u.role = 'アルバイト'
+		            select distinct u.* from schedules s
+		            join users u on s.user_id = u.id
+		            where date(s.date) = curdate()
+		              and u.role = 'アルバイト'
 		        """;
 
 		        PreparedStatement ps = conn.prepareStatement(sql);

@@ -20,13 +20,13 @@ public class PointsDao {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B1?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b1?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
 				// SQL文を準備する
 				// connとsqlをまとめる→pstmt
-				String sql = "SELECT point FROM points WHERE user_id = ?";
+				String sql = "select point from points where user_id = ?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 		        // プレースホルダーに値をセット
@@ -72,12 +72,12 @@ public class PointsDao {
 
 	        // DB接続
 	        conn = DriverManager.getConnection(
-	            "jdbc:mysql://localhost:3306/B1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
+	            "jdbc:mysql://localhost:3306/b1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
 	            "root", "password"
 	        );
 
 	        // SQL：加算処理
-	        String sql = "UPDATE points SET point = point + ? WHERE user_id = ?";
+	        String sql = "update points set point = point + ? where user_id = ?";
 	        PreparedStatement pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(1, addValue);     // 加算するポイント
 	        pstmt.setInt(2, user_id);      // 対象ユーザーID
