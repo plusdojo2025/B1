@@ -35,7 +35,7 @@ public class ReviewsDao {
 			e1.printStackTrace();
 		}
 		
-	    String sql = "INSERT INTO Reviews (user_id, manual_id, review, comment, created_at, updated_at) " +
+	    String sql = "INSERT INTO reviews (user_id, manual_id, review, comment, created_at, updated_at) " +
 	                 "VALUES (?,  ?, ?, ?, NOW(), NOW())";
 
 	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -143,7 +143,7 @@ public class ReviewsDao {
 				// connとsqlをまとめる→pstmt
 				//String sql = "SELECT AVG(review) FROM (SELECT review FROM reviews WHERE manual_id = ? AND updated_at >= DATE_SUB(NOW(), INTERVAL 15 DAY) ) AS review_avg_half;";
 				// マニュアルが更新されて以降の評価の平均点
-				String sql = "SELECT AVG(review) FROM REVIEWS WHERE manual_id = ? AND created_at >( SELECT updated_at FROM MANUALS WHERE id = ?)";
+				String sql = "SELECT AVG(review) FROM reviews WHERE manual_id = ? AND created_at >( SELECT updated_at FROM manuals WHERE id = ?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
