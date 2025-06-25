@@ -24,7 +24,7 @@
 <body>
  <!-- ヘッダー -->
 	<header>
-		<a href="<c:url value='/LoginServlet'/>">
+		<a href="<c:url value='/HomeServlet'/>">
 			<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
 		</a>
 		<nav>
@@ -53,8 +53,9 @@
 　<!-- 各種ボタン -->
        <!-- <input type="submit"  class="button" name="submit" value="マニュアル作成">
        <input type="submit"  class="button" name="submit" value="ユーザー管理"> -->
-		<button class="button" name="submit" value="マニュアル作成" onclick="location.href='${pageContext.request.contextPath}/FormServlet'">マニュアル作成</button>
-		<button class="button" name="submit" value="ユーザー管理" onclick="location.href='${pageContext.request.contextPath}/UserManageServlet'">ユーザー管理</button>
+		<button class="button" name="submit" value="マニュアル作成" onclick="location.href='<c:url value='/FormServlet' />'">マニュアル作成</button>
+		<button class="button" name="submit" value="ユーザー管理" onclick="location.href='<c:url value='/UserManageServlet' />'">ユーザー管理</button>
+		<button class="button" name="submit" value="ユーザー管理" onclick="location.href='<c:url value='/ManuUpServlet' />'">マニュアル更新</button>
        </div>
    
       
