@@ -33,9 +33,9 @@ public class ManualsDao {
         			//必要な情報を取得（カテゴリ名、タスク名、本文、作成・更新日
         			"SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
         			"m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
-        			"FROM MANUALS m " +
-        			"JOIN CATEGORIES c ON m.category_id = c.id " +
-        			"JOIN TASKS t ON m.task_id = t.id " +
+        			"FROM manuals m " +
+        			"JOIN categories c ON m.category_id = c.id " +
+        			"JOIN tasks t ON m.task_id = t.id " +
         			"ORDER BY c.category, t.task "
         			);
         	
@@ -102,9 +102,9 @@ public class ManualsDao {
         			
         			"SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
         			"m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
-        			"FROM MANUALS m " +
-        			"JOIN CATEGORIES c ON m.category_id = c.id " +
-        			"JOIN TASKS t ON m.task_id = t.id " +
+        			"FROM manuals m " +
+        			"JOIN categories c ON m.category_id = c.id " +
+        			"JOIN tasks t ON m.task_id = t.id " +
         			"WHERE m.category_id = ? " +
         			"LIMIT 1"
         			);
@@ -159,9 +159,9 @@ public class ManualsDao {
             PreparedStatement pStmt = conn.prepareStatement(
                 "SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
                 "m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
-                "FROM MANUALS m " +
-                "JOIN CATEGORIES c ON m.category_id = c.id " +
-                "JOIN TASKS t ON m.task_id = t.id " +
+                "FROM manuals m " +
+                "JOIN categories c ON m.category_id = c.id " +
+                "JOIN tasks t ON m.task_id = t.id " +
                 "WHERE m.task_id = ? " +
                 "LIMIT 1"
             );
@@ -197,9 +197,9 @@ public class ManualsDao {
             PreparedStatement pStmt = conn.prepareStatement(
                 "SELECT m.id, c.category AS categoryName, t.task AS taskName, " +
                 "m.body AS manualBody, m.created_at AS createdAt, m.updated_at AS updatedAt " +
-                "FROM MANUALS m " +
-                "JOIN CATEGORIES c ON m.category_id = c.id " +
-                "JOIN TASKS t ON m.task_id = t.id " +
+                "FROM manuals m " +
+                "JOIN categories c ON m.category_id = c.id " +
+                "JOIN tasks t ON m.task_id = t.id " +
                 "WHERE m.id = ? " +  // ← manualテーブルのIDで検索
                 "LIMIT 1"
             );
