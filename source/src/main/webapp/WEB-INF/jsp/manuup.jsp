@@ -35,7 +35,7 @@
 
 	<!-- required=必ず選択させる。選択していないと警告が表示される。 -->
 	<form id="manual_form" method="POST"
-		action="<c:url value='/ManuUpServlet' />">
+		action="<c:url value='/ManuUpServlet' />"onreset="handleFormReset()">
 
 
 				<!-- カテゴリ -->
@@ -58,7 +58,8 @@
 								</c:forEach> 
 						</select>
 					</div>
-		<input type="reset" value="リセット">
+		<input type="button" value="リセット" onclick="clearFormInputs();">
+		
 		<input type="submit" value="絞り込む">
 
 		<!-- 評価 -->
@@ -103,26 +104,31 @@
 	<!-- フッダー(ここまで) -->
 
 	<script>
+	function clearFormInputs() {
+		  const form = document.getElementById('manual_form');
 
-  /* 項目追加の処理 */
-  function addOption() {
-	    const input = document.getElementById("input-text");
-	    const datalist = document.getElementById("options");
-	    const value = input.value.trim();
+    // セレクトボックスをリセット（先頭に戻す）
+    form.querySelectorAll('select').forEach(select => {
+      select.selectedIndex = 0;
+    });
 
-	    // 既存オプションの重複チェック
-	    const exists = Array.from(datalist.options).some(opt => opt.value === value);
+    // テキストエリアの内容をクリア
+    form.querySelectorAll('textarea').forEach(textarea => {
+      textarea.value = '';
+    });
 
-	    if (value && !exists) {
-	      const newOption = document.createElement("option");
-	      newOption.value = value;
-	      datalist.appendChild(newOption);
-	      input.value = ""; // 入力欄をクリア
-	    } else if (exists) {
-	      alert("すでに存在する項目です。");
-	    }
-	  }
-  
+    // テキスト入力をクリア（もしあれば）
+    form.querySelectorAll('input[type="text"]').forEach(input => {
+      input.value = '';
+    });
+
+    // 星評価のクリア
+    document.getElementById('rating').value = 0;
+    document.querySelectorAll('.star').forEach(star => {
+      star.textContent = '☆'; // 初期の表示に戻す
+    });
+  }
+
   
 </script>
 </body>
