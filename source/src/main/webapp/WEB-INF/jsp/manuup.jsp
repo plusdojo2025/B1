@@ -1,104 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>マニュアル更新|NaviZaka</title>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/manuup.css'/>">
+<title>マニュアル更新 | NaviZaka</title>
+
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/common.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/manuup.css'/>">
 </head>
 <body>
-<!-- ヘッダー（ここから） -->
-<header>
-		<a href="/B1/LoginServlet">
-			<img src="img/logo.png" alt="NaviZaka"  height="130">
+	<!-- ヘッダー（ここから） -->
+ <header>
+		<a href="<c:url value='/LoginServlet'/>">
+			<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
 		</a>
 		<nav>
 			<ul>
 			<li><a href="<c:url value='/HomeServlet' />">ホーム</a></li>
 			<li><a href="<c:url value='/ManuListServlet' />">マニュアル一覧</a></li>
 			<li><a href="<c:url value='/UserUpServlet' />">ユーザー情報</a></li>
-			<li><a href="<c:url value='/LoginServlet' />"><img src="img/logout.png" alt="ログアウト" width="100"></a>
+			<li><a href="<c:url value='/LoginServlet' />"><img src="<c:url value='/img/logout.png' />" alt="ログアウト" width="100"></a>
 			</ul>
 		</nav>
 	</header>
-  <!-- ヘッダー（ここまで） -->
-	<p id="message">メッセージエリア</p>
-<br>
+	<!-- ヘッダー（ここまで） -->
 
-<!-- required=必ず選択させる。選択していないと警告が表示される。 -->
-<form>
-	<table>
-      <tr>
-        <td>
-        	<select name="category" required>
-  					<option value="" disabled selected>カテゴリを選択してください</option>
-  					<option value="dog">犬</option>
-  					<option value="cat">猫</option>
-  					<option value="rabbit">うさぎ</option>
-			</select>
-        </td>
-      	<td>
-      		<p>累計</p>
-      		<div id="stars">
-        	<span class="star" data-star="1">☆</span>
-        	<span class="star" data-star="2">☆</span>
-        	<span class="star" data-star="3">☆</span>
-        	<span class="star" data-star="4">☆</span>
-        	<span class="star" data-star="5">☆</span>
-    		</div>
-      	</td>
-      </tr>
-    </table>
-    <table>
-      <tr>
-        <td>
-        	<select name="category" required>
-  				<option value="" disabled selected>業務名を選択してください</option>
-  				<option value="dog">犬</option>
-  				<option value="cat">猫</option>
-  				<option value="rabbit">うさぎ</option>
-			</select>        	
-        </td>
-      	<td>
-      		<p>更新後</p>
-      		<div id="stars">
-        	<span class="star" data-star="1">☆</span>
-        	<span class="star" data-star="2">☆</span>
-        	<span class="star" data-star="3">☆</span>
-        	<span class="star" data-star="4">☆</span>
-        	<span class="star" data-star="5">☆</span>
-    		</div>
-      	</td>
-      </tr>
-    </table>
-	<input type="text" id="name" name="name">
-  	<button type="submit">いいね</button>
-	<br>
-	<textarea id="message" name="message" rows="5" cols="40">テキスト表示エリア</textarea>
-	<br>
-	<button type="submit">更新</button>
-</form>
+	<!-- メッセージエリア -->
+	<p id="message">
+		<c:if test="${not empty message}">${message}</c:if>
+	</p>
+
+	<!-- required=必ず選択させる。選択していないと警告が表示される。 -->
+	<form id="manual_form" method="POST"
+		action="<c:url value='/ManuUpServlet' />">
 
 
-<br>
-<!-- プルダウン＋テキストボックス共用 -->
-<input type="text" id="input-text" list="options" placeholder="選択または入力">
-<datalist id="options">
-  <option value="りんご">
-  <option value="ばなな">
-  <option value="みかん">
-</datalist>
-<br>
-<button onclick="addOption()">追加</button>
+				<!-- カテゴリ -->
 
-  <!-- フッダー(ここから) -->
-<footer>
-  	<p class="copyright">&copy;せんこうはなび</p>
-</footer>
-<!-- フッダー(ここまで) -->
-<script>
+					<div id="category-data">
+						<select id="work" name="work1">
+							<option value="" disabled selected>カテゴリを選択してください</option>
+							<c:forEach items="${CategorieList}" var="category" varStatus="status">
+								<option value="${category.id}">${category.category}</option>
+							</c:forEach>							
+						</select>
+
+					</div> 
+					<!-- 業務名 -->
+					<div id="task-data">
+						<select name="taskId" id="task">
+ 							<option value="" disabled selected>業務を選択してください</option>
+								<c:forEach var="task" items="${TaskList}">
+									<option value="${task.id}">${task.task}</option>
+								</c:forEach> 
+						</select>
+					</div>
+		<input type="reset" value="リセット">
+		<input type="submit" value="絞り込む">
+
+		<!-- 評価 -->
+		<div>
+			累計： <span class="star" onclick="setRating(1)">☆</span> <span
+				class="star" onclick="setRating(2)">☆</span> <span class="star"
+				onclick="setRating(3)">☆</span> <span class="star"
+				onclick="setRating(4)">☆</span> <span class="star"
+				onclick="setRating(5)">☆</span> <input type="hidden" name="rating"
+				id="rating" value="0">
+				${review_score}
+		</div>
+		<!-- 評価 -->
+		<div>
+			更新後： <span class="star" onclick="setRating(1)">☆</span> <span
+				class="star" onclick="setRating(2)">☆</span> <span class="star"
+				onclick="setRating(3)">☆</span> <span class="star"
+				onclick="setRating(4)">☆</span> <span class="star"
+				onclick="setRating(5)">☆</span> <input type="hidden" name="rating"
+				id="rating" value="0">
+				${review_half_score}
+		</div>
+<!-- テキストエリア -->
+					<div id="text">
+						<textarea name="bodys" id="body">
+						${ManuBody.manualBody}
+						</textarea>
+					</div>
+<!-- コメントエリア -->
+<c:forEach var="e" items="${comments}" >
+					<div id="comment">
+						<textarea name="comments" id="comment">
+						${e}
+						</textarea>
+					</div>
+</c:forEach>
+  		<input type="hidden" name="manualId" value="${manual.id}" />
+  		<input type="submit" value="更新" />
+	</form>
+	
+	<!-- フッダー(ここから) -->
+	<footer>
+		<p class="copyright">&copy;せんこうはなび</p>
+	</footer>
+	<!-- フッダー(ここまで) -->
+
+	<script>
 
   /* 項目追加の処理 */
   function addOption() {

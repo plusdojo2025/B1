@@ -4,6 +4,12 @@ body {
   background-color: #FFFFFF;
 }
 
+.logo {
+	height: 130px;
+}
+.logout {
+	width: 100px;
+}
 /* ヘッダー */
 header{
 	background-color: #FFFFEE;
@@ -28,7 +34,9 @@ header a {
 header a:hover {
 	color: #D3381C;
 }
-
+#error_message{
+  text-align: center;
+}
 /* フッター */
 footer{
 	background-color: #FFFFEE;
@@ -63,4 +71,19 @@ button[type="submit"]{
 	border-radius: 0.5em;
 }
 
+/*作成フォーム*/
+form{
+	margin: 0 auto;
+}
 
+/*テキストエリア*/
+textarea {
+  resize: none;
+  width:400px;
+  height:300px;
+  overflow: auto;
+}
+
+#manual_form{
+	text-align: center;
+}
