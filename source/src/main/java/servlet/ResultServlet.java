@@ -14,7 +14,7 @@ import dto.Manual;
 
 
 /**
- * Servlet implementation class UpdateDeleteServlet
+ * Servlet implementation  class UpdateDeleteServlet
  */
 @WebServlet("/ResultServlet")
 public class ResultServlet extends HttpServlet {
