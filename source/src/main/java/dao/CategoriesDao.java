@@ -26,7 +26,7 @@ public class CategoriesDao {
 					"root", "password");
 			
 			//SQL文を準備
-			String sql = "SELECT * FROM CATEGORIES ORDER BY id";
+			String sql = "SELECT * FROM categories ORDER BY id";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を実行し、結果表を取得する
@@ -74,7 +74,7 @@ public class CategoriesDao {
  				"root", "password");
  		
  		// SELECT文を準備する
- 		String sql = "select * from CATEGORIES where category = ?";
+ 		String sql = "select * from categories where category = ?";
  		PreparedStatement pStmt = conn.prepareStatement(sql);
  		pStmt.setString(1, category);
  		
