@@ -129,7 +129,7 @@ public class UserManageServlet extends HttpServlet {
 			}
 		}
 		
-		//メッセージエリアのプログラム
+		// メッセージエリアのプログラム
 		request.setAttribute("message", "登録が完了しました");
 		doGet(request, response);
 		
