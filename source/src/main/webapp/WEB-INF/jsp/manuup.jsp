@@ -13,8 +13,8 @@
 </head>
 <body>
 	<!-- ヘッダー（ここから） -->
- <header>
-		<a href="<c:url value='/LoginServlet'/>">
+<header>
+		<a href="<c:url value='/HomeServlet'/>">
 			<img src="<c:url value='/img/logo.png' />" alt="NaviZaka"  height="130">
 		</a>
 		<nav>
@@ -25,7 +25,7 @@
 			<li><a href="<c:url value='/LoginServlet' />"><img src="<c:url value='/img/logout.png' />" alt="ログアウト" width="100"></a>
 			</ul>
 		</nav>
-	</header>
+</header>
 	<!-- ヘッダー（ここまで） -->
 
 	<!-- メッセージエリア -->
@@ -81,21 +81,18 @@
 				id="rating" value="0">
 				${review_half_score}
 		</div>
+	<br>
+		
 <!-- テキストエリア -->
-					<div id="text">
-						<textarea name="bodys" id="body">
-						${ManuBody.manualBody}
-						</textarea>
-					</div>
+				<textarea name="bodys" id="body" >${ManuBody.manualBody}</textarea>
+				<br>
 <!-- コメントエリア -->
-<c:forEach var="e" items="${comments}" >
-					<div id="comment">
-						<textarea name="comments" id="comment">
-						${e}
-						</textarea>
-					</div>
-</c:forEach>
-  		<input type="hidden" name="manualId" value="${manual.id}" />
+				<c:forEach var="e" items="${comments}" >
+				<textarea name="comments" id="comment" class="text" readonly>${e}</textarea>
+				</c:forEach>
+
+	<br>
+		<input type="hidden" name="manualId" value="${manual.id}" />
   		<input type="submit" value="更新" />
 	</form>
 	
@@ -125,6 +122,8 @@
 	      alert("すでに存在する項目です。");
 	    }
 	  }
+  
+  
 </script>
 </body>
 </html>
