@@ -74,7 +74,7 @@ import dto.Manual;
 
 			    // Optional: すでにチェック済みかどうかを確認（重複登録防止）
 			    public boolean hasChecked(int userId, int manualId) {
-			        String sql = "SELECT COUNT(*) FROM checks WHERE user_id = ? AND manual_id = ?";
+			        String sql = "SELECT COUNT(*) FROM checks WHERE user_id = ? AND manual_id = ? AND has_check = true";
 
 			        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
 			             PreparedStatement stmt = conn.prepareStatement(sql)) {
