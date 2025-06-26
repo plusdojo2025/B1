@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>マニュアル更新 | NaviZaka</title>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>">
-<link rel="stylesheet" href="<c:url value='/css/manuup.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/manuup.css'/>">
 </head>
 <body>
 <!-- ヘッダー（ここから） -->
