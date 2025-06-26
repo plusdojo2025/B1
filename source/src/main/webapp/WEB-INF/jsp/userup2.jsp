@@ -26,11 +26,11 @@
 </header>
 	<!-- ヘッダー（ここまで） -->
 	<!-- メッセージエリア -->
-	<p id="error_message"><c:out value="${result.message}" /></p> 
+	<p class="message" id="error_message"><c:out value="${result.message}" /></p> 
 	<div class=wrapper>
 		<!-- 入力フォーム -->
 		<form id="user_form" method="POST" action="<c:url value='/UserUpServlet' />">
-			<input type="hidden" name="id" value="${updated_user.id}">
+			<input type="hidden" name="id" value="${id}">
 			<table class="upload">
 				<tr>
 				<th><label>氏名</label></th>

@@ -26,7 +26,7 @@
 </header>
 	<!-- ヘッダー（ここまで） -->
 	<!-- メッセージエリア -->
-	<p id="error_message"><c:out value="${result.message}" /></p> 
+	<p class="message" id="error_message"><c:out value="${result.message}" /></p> 
 	<div class=wrapper>
 		<!-- 入力フォーム -->
 		<form id="user_form" method="POST" action="<c:url value='/UserUpServlet2' />">
