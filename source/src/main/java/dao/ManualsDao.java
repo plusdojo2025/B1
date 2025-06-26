@@ -327,6 +327,46 @@ public class ManualsDao {
 
    	    	    return mn;
    	    	}
+   	
+   	//manualsテーブルのbodyを更新する
+   	public boolean updateManual(String body, int category_id, int task_id) {
+   		Connection conn = null;
+   		PreparedStatement pStmt = null;
+   		boolean result = false;
 
+   		try {
+   			// JDBCドライバを読み込む
+   			Class.forName("com.mysql.cj.jdbc.Driver");
+
+   			// データベースに接続する
+   			conn = DriverManager.getConnection(
+   					"jdbc:mysql://localhost:3306/b1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+   					"root", "password");
+
+   			// SQL文を準備する
+   			String sql = "update manuals set body = ? where category_id = ? and task_id = ?;";
+   			pStmt = conn.prepareStatement(sql);
+   			pStmt.setString(1, body);
+   			pStmt.setInt(2, category_id);
+   			pStmt.setInt(3, task_id);
+
+   			int rows = pStmt.executeUpdate();
+   			result = (rows > 0); // 更新された行数が1以上ならtrue
+
+   		} catch (SQLException | ClassNotFoundException e) {
+   			e.printStackTrace();
+   		} finally {
+   			// リソースのクローズ
+   			try {
+   				if (pStmt != null) pStmt.close();
+   				if (conn != null) conn.close();
+   			} catch (SQLException e) {
+   				e.printStackTrace();
+   			}
+   		}
+
+   		// 結果を返す
+   		return result;
+   	}
     
 }
