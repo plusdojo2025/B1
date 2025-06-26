@@ -32,7 +32,7 @@
 		
 		<!-- メッセージエリア -->
 		<div class=center>
-			<p id="message">
+			<p class="message">
 				<c:if test="${not empty message}">
 					${message}
 				</c:if>

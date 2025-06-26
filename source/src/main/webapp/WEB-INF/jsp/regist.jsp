@@ -19,7 +19,7 @@
 <div class="wrapper">
 	<div class="center">
    <!-- メッセージエリア -->
-	<p id="error_message"><c:out value="${errorMsg}" /></p>
+	<p id="error_message" class=message><c:out value="${errorMsg}" /></p>
     <!-- ユーザー登録フォーム -->
   		<form id="user_form" action="${pageContext.request.contextPath}/RegistServlet" method="post">
 		氏名<br><input type="text" name="name" placeholder="氏名を入力" class="form"><br>
