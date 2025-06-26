@@ -82,3 +82,8 @@ input[type="password"]{
 .link:hover {
 	color: #D3381C;
 }
+
+/*エラーメッセージ*/
+#message{
+	color: red;
+}
