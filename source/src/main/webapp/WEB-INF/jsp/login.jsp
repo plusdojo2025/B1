@@ -21,7 +21,7 @@
 <form method="POST" action="<c:url value='/LoginServlet'/>" class="idpas" id="idpas">
 	<!-- メッセージエリア -->
 	<div id="center">
-		<p id="message">
+		<p id="message" class="message">
 		<c:if test="${not empty message}">
 			${message}
 		</c:if>
