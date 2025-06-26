@@ -296,7 +296,7 @@ public class ManualsDao {
    	            "root", "password");
 
    	    	        // SQL文を準備する
-   	    	        String sql = "select id,body from manuals where category_id = ? and task_id = ?;";
+   	    	        String sql = "select id,body from manuals where category_id = ? and task_id = ?";
    	    	        pStmt = conn.prepareStatement(sql);
    	    	        pStmt.setInt(1, category_id);
    	    	        pStmt.setInt(2, task_id);
@@ -344,7 +344,7 @@ public class ManualsDao {
    					"root", "password");
 
    			// SQL文を準備する
-   			String sql = "update manuals set body = ? where category_id = ? and task_id = ?;";
+   			String sql = "update manuals set body = ? where category_id = ? and task_id = ?";
    			pStmt = conn.prepareStatement(sql);
    			pStmt.setString(1, body);
    			pStmt.setInt(2, category_id);

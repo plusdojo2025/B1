@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CategoriesDao;
 import dao.ManualsDao;
@@ -31,13 +32,9 @@ public class ManuUpServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		/*
-		 * HttpSession session = request.getSession(); if (session.getAttribute("id") ==
-		 * null) { response.sendRedirect("/webapp/LoginServlet"); return; }
-		 */
 
 		// カテゴリ一覧を取得してリクエストにセット
+		request.setCharacterEncoding("UTF-8");
 		CategoriesDao CategoriesDao = new CategoriesDao();
 		List<Categories> CategorieList = CategoriesDao.findAll();
 
@@ -46,14 +43,15 @@ public class ManuUpServlet extends HttpServlet {
 			System.out.println(Categorie.getId() + ": " + Categorie.getCategory());
 		}
 
-		request.setAttribute("CategorieList", CategorieList);
-
+		// セッションスコープに格納する
+		HttpSession session = request.getSession();
+		session.setAttribute("CategorieList", CategorieList);
 		// タスク一覧を取得してリクエストにセット
 		// tDaoを作成
 		// TasksDtoはTasksDaoから
 		TasksDao tDao = new TasksDao();
 		List<TasksDto> TaskList = tDao.findAll();
-		request.setAttribute("TaskList", TaskList);
+		session.setAttribute("TaskList", TaskList);
 
 
 		// TODO Auto-generated method stub
@@ -68,41 +66,30 @@ public class ManuUpServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// もしもログインしていなかったらマニュアル変更サーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("id") == null) {
-//		response.sendRedirect("/B1/ManuUpServlet");
-//		return;
-		String category_id = request.getParameter("work1");
-		String task_id = request.getParameter("taskId");
-		int category_id_int = Integer.parseInt(category_id);
-		int task_id_int = Integer.parseInt(task_id);
-		// リクエストパラメータを取得する
-		// category_idはwork1（selectのname）へ
-		// task_idはtaskIdへ
-		// 青文字は(jsp)のname
-		// category_idとtask_idをint型に変換する
 		request.setCharacterEncoding("UTF-8");
+		// TODO Auto-generated method stub
+		//request.setCharacterEncoding("UTF-8");で文字文字コードをUTF-8に指定
+		//文字化けを防ぐ
+		
+		//int型に変換し、それぞれセット
+		int category_id = Integer.parseInt(request.getParameter("work1"));
+		int task_id = Integer.parseInt(request.getParameter("taskId"));
+
 		
 		//絞り込むボタンを押された時の処理
-		if(request.getParameter("submit").equals("search")) {
-		// categoryのidとtaskのidを使ってmanualsテーブルからbodyを取得するdaoをつくる
-
-		// select id,body from manuals where category_id = ? and task_id = ? ;
-		// id,bodyを取得してリクエストにセット
+		if(request.getParameter("submit").equals("絞り込み")) {
+			
+		// category_idとtask_idに対応したbodyをgetしてManuBodyにセット
 		//Manual型
-		// キッチン（ポテトサラダ・食器洗い）
-		// ホール（オーダー）のみ表示できる
 		  ManualsDao mDao = new ManualsDao(); 
-		  Manual ManuBody =mDao.getBody(category_id_int, task_id_int); 
+		  Manual ManuBody =mDao.getBody(category_id, task_id); 
 		  request.setAttribute("ManuBody", ManuBody);
 		  
 		  
 		  //レビューの値をマニュアルidから計算
 		  ReviewsDao rDao = new ReviewsDao();
-		  int review_avg = rDao.review_avg(ManuBody.getId());
-		  int review_avg_half = rDao.review_avg_half(ManuBody.getId());
+//		  int review_avg = rDao.review_avg(ManuBody.getId());
+//		  int review_avg_half = rDao.review_avg_half(ManuBody.getId());
 		  
 		  //comment
 		  // ManuBodyにidが含まれている
@@ -111,12 +98,12 @@ public class ManuUpServlet extends HttpServlet {
 		  //レビューの値をmanuup.jspにわたすためにリクエストスコープに格納する
 		  //review_avgをreview_scoreという名前で保存
 		  //review_avg_halfはreview_half_scoreで
-		  request.setAttribute("review_score", review_avg);
-		  request.setAttribute("review_half_score", review_avg_half);
+//		  request.setAttribute("review_score", review_avg);
+//		  request.setAttribute("review_half_score", review_avg_half);
 		  request.setAttribute("comments", comments); 
 		  Manual mn = new Manual();
-		  mn.setCategoryId(category_id_int);
-		  mn.setTaskId(task_id_int);
+		  mn.setCategoryId(category_id);
+		  mn.setTaskId(task_id);
 		  request.setAttribute("category_task_id", mn); 
 		  
 		  //jspにフォワード
@@ -132,10 +119,10 @@ public class ManuUpServlet extends HttpServlet {
 			ManualsDao mdao = new ManualsDao();
 
 			
-			boolean result = mdao.updateManual(body, category_id_int, task_id_int);
+			boolean result = mdao.updateManual(body, category_id, task_id);
 			if (result) { // 更新成功
 				request.setAttribute("result","更新成功！");
-				response.sendRedirect("/b1/ManuUpServlet");
+				doGet(request,response);
 				return;
 			} else { // 更新失敗
 				request.setAttribute("result","更新失敗！");
