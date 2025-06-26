@@ -74,9 +74,10 @@ public class ManuUpServlet extends HttpServlet {
 //		if (session.getAttribute("id") == null) {
 //		response.sendRedirect("/B1/ManuUpServlet");
 //		return;
-		int category_id = Integer.parseInt(request.getParameter("work1"));
-		int task_id = Integer.parseInt(request.getParameter("taskId"));
-		
+		String category_id = request.getParameter("work1");
+		String task_id = request.getParameter("taskId");
+		int category_id_int = Integer.parseInt(category_id);
+		int task_id_int = Integer.parseInt(task_id);
 		// リクエストパラメータを取得する
 		// category_idはwork1（selectのname）へ
 		// task_idはtaskIdへ
@@ -94,7 +95,7 @@ public class ManuUpServlet extends HttpServlet {
 		// キッチン（ポテトサラダ・食器洗い）
 		// ホール（オーダー）のみ表示できる
 		  ManualsDao mDao = new ManualsDao(); 
-		  Manual ManuBody =mDao.getBody(category_id, task_id); 
+		  Manual ManuBody =mDao.getBody(category_id_int, task_id_int); 
 		  request.setAttribute("ManuBody", ManuBody);
 		  
 		  
@@ -113,8 +114,10 @@ public class ManuUpServlet extends HttpServlet {
 		  request.setAttribute("review_score", review_avg);
 		  request.setAttribute("review_half_score", review_avg_half);
 		  request.setAttribute("comments", comments); 
-		  request.setAttribute("category_id", category_id); 
-		  request.setAttribute("task_id", task_id); 
+		  Manual mn = new Manual();
+		  mn.setCategoryId(category_id_int);
+		  mn.setTaskId(task_id_int);
+		  request.setAttribute("category_task_id", mn); 
 		  
 		  //jspにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manuup.jsp");
@@ -127,9 +130,13 @@ public class ManuUpServlet extends HttpServlet {
 			//UPDATE  manuals SET body = ?  WHERE category_id = ? && task_id = ?;
 			//daoに3つの引数を貰って実行するメソッドを作って、呼び出す
 			ManualsDao mdao = new ManualsDao();
-			boolean result = mdao.updateManual(body, category_id, task_id);
+
+			
+			boolean result = mdao.updateManual(body, category_id_int, task_id_int);
 			if (result) { // 更新成功
 				request.setAttribute("result","更新成功！");
+				response.sendRedirect("/b1/ManuUpServlet");
+				return;
 			} else { // 更新失敗
 				request.setAttribute("result","更新失敗！");
 			}

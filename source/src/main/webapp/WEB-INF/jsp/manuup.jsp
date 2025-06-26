@@ -36,29 +36,36 @@
 	<form id="manual_form" method="POST"
 		action="<c:url value='/ManuUpServlet' />"onreset="handleFormReset()">
 
-
+			${category_task_id.categoryId}
+			${category_task_id.taskId}
 				<!-- カテゴリ -->
-<!-- category_idスコープに値があるときはそれが選ばれた状態になるようにする -->
-					<div id="category-data">
-						<select id="work" name="work1">
-							<option value="" selected>カテゴリを選択してください</option>
-							<c:forEach items="${CategorieList}" var="category" varStatus="status">
-								<option value="${category.id}">${category.category}</option>
-							</c:forEach>							
-						</select>
+		<!-- category_idスコープに値があるときはそれが選ばれた状態になるようにする -->
+		<div id="category-data">
+			<select id="work" name="work1">
+			
+				<option value="" <c:if test="${empty category_task_id.categoryId}">selected</c:if>>カテゴリを選択してください</option>
+				<c:forEach items="${CategorieList}" var="category">
+					<option value="${category.id}"
+						<c:if test="${category.id == category_task_id.categoryId.toString()}">selected</c:if>>
+						${category.category}</option>
+				</c:forEach>
+			</select>
+		</div>
 
-					</div> 
-<!-- task_idスコープに値があるときはそれが選ばれた状態になるようにする -->
-					<!-- 業務名 -->
-					<div id="task-data">
-					
-						<select name="taskId" id="task">
- 							<option value="" selected>業務を選択してください</option>
-								<c:forEach var="task" items="${TaskList}">
-									<option value="${task.id}">${task.task}</option>
-								</c:forEach> 
-						</select>
-					</div>
+		<!-- task_idスコープに値があるときはそれが選ばれた状態になるようにする -->
+		<!-- 業務名 -->
+		<!-- task_idスコープに値があるときはそれが選ばれた状態になるようにする -->
+		<div id="task-data">
+			<select name="taskId" id="task">
+				<option value="" <c:if test="${empty category_task_id.taskId}">selected</c:if>>業務を選択してください</option>
+				<c:forEach var="task" items="${TaskList}">
+					<option value="${task.id}"
+						<c:if test="${task.id == category_task_id.taskId.toString()}">selected</c:if>>
+						${task.task}</option>
+				</c:forEach>
+			</select>
+		</div>
+
 		<input type="button" value="reset" onclick="clearFormInputs();" class="click">
 		
 		<input type="submit" name="submit" value="search" class="click">
