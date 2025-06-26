@@ -13,7 +13,9 @@ public class UsersTest {
 		//update();
 
 		//ユーザー情報取得テスト
-		userInfo();
+		//userInfo();
+		
+		userInfoById();
 	}
 	
 	//ユーザー登録
@@ -36,6 +38,13 @@ public class UsersTest {
 		String email="dojouser1@plusdojo.jp";
 		UsersDao uDao = new UsersDao();
 		Users user = uDao.userInfo(email);
+		System.out.println(user);
+	}
+	
+	public static void userInfoById() {
+		int id = 1;
+		UsersDao uDao = new UsersDao();
+		Users user = uDao.userInfoById(id);
 		System.out.println(user);
 	}
 	

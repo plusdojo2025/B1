@@ -54,15 +54,18 @@ public class UserUpServlet extends HttpServlet {
 		//更新処理を行う
 		UsersDao UserDao = new UsersDao();
 		if (UserDao.update(new Users(id,name, email, pw, role))) { // 更新成功
+			Users new_user = UserDao.userInfo(email);
+			request.setAttribute("updated_user", new_user);
 			request.setAttribute("result", new Result("更新成功！", "ユーザー情報を更新しました。", "/B1/UserUpServlet"));
+
 		} else { // 更新失敗
 				request.setAttribute("result", new Result("更新失敗！", "ユーザー情報を更新できませんでした。", "/B1/UserUpServlet"));
 		}
 		
 		//更新後の情報を取得
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 		Users new_user = UserDao.userInfo(email);
-		session.setAttribute("updated_user", new_user);
+	    request.setAttribute("updated_user", new_user);
 		
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userup.jsp");

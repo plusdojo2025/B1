@@ -178,7 +178,7 @@ public class UsersDao {
 			return result;
 		}
 		
-		//情報取得
+		//情報取得 emailから
 		public Users userInfo(String email) {
 			Connection conn = null;
 			boolean result = false;
@@ -232,6 +232,62 @@ public class UsersDao {
 	       return users;
 			
 		}
+		
+		//情報取得 idから
+		public Users userInfoById(int id) {
+			Connection conn = null;
+			boolean result = false;
+			Users users = null;
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b1?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+
+				// SQL文を準備する
+				String sql = "select * from users where id = ?";	
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				pStmt.setInt(1, id);
+						
+				// SELECT文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+						
+				if (rs.next()) {
+					int user_id = rs.getInt("id");
+			        String name = rs.getString("name");
+			        String mail = rs.getString("email");
+			        String password = rs.getString("pw");
+			        String other = rs.getString("role"); 
+			                
+			        Timestamp createdAt = rs.getTimestamp("created_at");
+			        Timestamp updatedAt = rs.getTimestamp("updated_at");
+
+			        users = new Users(user_id, name, mail, password, other, createdAt, updatedAt);
+					}
+				}catch (SQLException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} finally {
+					// データベースを切断
+					if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+					
+		// 結果を返す
+	    return users;
+					
+	}
+
 
 		
 		//社員用ホーム画面で今日のアルバイト一覧を取得するメソッド
