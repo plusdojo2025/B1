@@ -34,7 +34,7 @@
 	
 	<!-- PW入力 -->
 	<p class="login_text">パスワード</p>
-	<input type="text" name="pw" id="pw" class="text"><br>
+	<input type="password" name="pw" id="pw" class="text"><br>
 	
 	<!-- ログインボタン -->
 	<input type="submit" name="login" value="ログイン" id="loginbutton" class="button">
