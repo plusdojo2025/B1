@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <title>マニュアル更新 | NaviZaka</title>
 
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/css/common.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/manuup.css'/>">
 </head>
 <body>
@@ -39,28 +38,30 @@
 
 
 				<!-- カテゴリ -->
-
+<!-- category_idスコープに値があるときはそれが選ばれた状態になるようにする -->
 					<div id="category-data">
 						<select id="work" name="work1">
-							<option value="" disabled selected>カテゴリを選択してください</option>
+							<option value="" selected>カテゴリを選択してください</option>
 							<c:forEach items="${CategorieList}" var="category" varStatus="status">
 								<option value="${category.id}">${category.category}</option>
 							</c:forEach>							
 						</select>
 
 					</div> 
+<!-- task_idスコープに値があるときはそれが選ばれた状態になるようにする -->
 					<!-- 業務名 -->
 					<div id="task-data">
+					
 						<select name="taskId" id="task">
- 							<option value="" disabled selected>業務を選択してください</option>
+ 							<option value="" selected>業務を選択してください</option>
 								<c:forEach var="task" items="${TaskList}">
 									<option value="${task.id}">${task.task}</option>
 								</c:forEach> 
 						</select>
 					</div>
-		<input type="button" value="リセット" onclick="clearFormInputs();">
+		<input type="button" value="reset" onclick="clearFormInputs();" class="click">
 		
-		<input type="submit" value="絞り込む">
+		<input type="submit" name="submit" value="search" class="click">
 
 		<!-- 評価 -->
 		<div>
@@ -85,7 +86,8 @@
 	<br>
 		
 <!-- テキストエリア -->
-				<textarea name="bodys" id="body" >${ManuBody.manualBody}</textarea>
+				
+				<textarea name="body" id="body" >${ManuBody.manualBody}</textarea>
 				<br>
 <!-- コメントエリア -->
 				<c:forEach var="e" items="${comments}" >
@@ -94,42 +96,16 @@
 
 	<br>
 		<input type="hidden" name="manualId" value="${manual.id}" />
-  		<input type="submit" value="更新" />
+  		<input type="submit" name="submit" value="更新" class="click"/>
 	</form>
-	
+		<p>${result} </p>
 	<!-- フッダー(ここから) -->
 	<footer>
 		<p class="copyright">&copy;せんこうはなび</p>
 	</footer>
 	<!-- フッダー(ここまで) -->
 
-	<script>
-	function clearFormInputs() {
-		  const form = document.getElementById('manual_form');
+<script src="<c:url value='/js/manuup.js'/>"></script>
 
-    // セレクトボックスをリセット（先頭に戻す）
-    form.querySelectorAll('select').forEach(select => {
-      select.selectedIndex = 0;
-    });
-
-    // テキストエリアの内容をクリア
-    form.querySelectorAll('textarea').forEach(textarea => {
-      textarea.value = '';
-    });
-
-    // テキスト入力をクリア（もしあれば）
-    form.querySelectorAll('input[type="text"]').forEach(input => {
-      input.value = '';
-    });
-
-    // 星評価のクリア
-    document.getElementById('rating').value = 0;
-    document.querySelectorAll('.star').forEach(star => {
-      star.textContent = '☆'; // 初期の表示に戻す
-    });
-  }
-
-  
-</script>
 </body>
 </html>

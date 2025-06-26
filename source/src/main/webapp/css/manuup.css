@@ -1,52 +1,5 @@
 @charset "UTF-8";
 
-body {
-  background-color: #FFFFFF;
-}
-
-.logo {
-	height: 130px;
-}
-.logout {
-	width: 100px;
-}
-/* ヘッダー */
-header{
-	background-color: #FFFFEE;
-	display: flex;
-	padding: 0 30px;
-	align-items: center;
-}
-header nav{
-	margin-left: auto;
-}
-header ul{
-	list-style: none;
-	display: flex;
-}
-header ul li{
-	margin-left: 20px;
-}
-header a {
-	color: #ec7d6a;
-	text-decoration: none;
-}
-header a:hover {
-	color: #D3381C;
-}
-#error_message{
-  text-align: center;
-}
-/* フッター */
-footer{
-	background-color: #FFFFEE;
-	text-align: center;
-	padding: 10px 0 10px 0;
-	
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-}
 
 /* 全てのボタン */
 .button{
@@ -74,6 +27,7 @@ button[type="submit"]{
 /*作成フォーム*/
 form{
 	margin: 0 auto;
+
 }
 
 /* textクラス */
@@ -81,6 +35,7 @@ form{
 	display: flex;            /* 横並びにする */
   	gap: 20px;                /* 要素間の隙間 */
  	margin: 0 auto;
+ 	
 }
 
 /*テキストエリア*/
@@ -88,6 +43,9 @@ form{
 	width: 500px;
 	height: 200px;
 	font-size: 22px;
+		border: 2px solid #ec7d6a;
+	background-color: #FFFFEE;
+	border-radius: 0.5em;
 }
 
 #comment{
@@ -96,8 +54,17 @@ form{
 	font-size: 14px;
   	flex-direction: column; /* 縦に並べる */
   	gap: 10px; /* 要素間の間隔（任意） */
+  		border: 2px solid #ec7d6a;
+	background-color: #FFFFEE;
+	border-radius: 0.5em;
 }
 
 #manual_form{
 	text-align: center;
+}
+
+.click{
+	border: 2px solid #ec7d6a;
+	background-color: #FFFFEE;
+	border-radius: 0.5em;
 }

@@ -56,14 +56,6 @@ public class ManuUpServlet extends HttpServlet {
 		request.setAttribute("TaskList", TaskList);
 
 
-		 
-		//Reviewを取得してリクエストにセット
-		
-		
-		  
-		//commentを取得してリクエストにセット
-		  
-
 		// TODO Auto-generated method stub
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manuup.jsp");
 		dispatcher.forward(request, response);
@@ -82,18 +74,20 @@ public class ManuUpServlet extends HttpServlet {
 //		if (session.getAttribute("id") == null) {
 //		response.sendRedirect("/B1/ManuUpServlet");
 //		return;
-
+		int category_id = Integer.parseInt(request.getParameter("work1"));
+		int task_id = Integer.parseInt(request.getParameter("taskId"));
+		
 		// リクエストパラメータを取得する
 		// category_idはwork1（selectのname）へ
 		// task_idはtaskIdへ
 		// 青文字は(jsp)のname
 		// category_idとtask_idをint型に変換する
 		request.setCharacterEncoding("UTF-8");
-		int category_id = Integer.parseInt(request.getParameter("work1"));
-		int task_id = Integer.parseInt(request.getParameter("taskId"));
 		
-		
+		//絞り込むボタンを押された時の処理
+		if(request.getParameter("submit").equals("search")) {
 		// categoryのidとtaskのidを使ってmanualsテーブルからbodyを取得するdaoをつくる
+
 		// select id,body from manuals where category_id = ? and task_id = ? ;
 		// id,bodyを取得してリクエストにセット
 		//Manual型
@@ -119,24 +113,31 @@ public class ManuUpServlet extends HttpServlet {
 		  request.setAttribute("review_score", review_avg);
 		  request.setAttribute("review_half_score", review_avg_half);
 		  request.setAttribute("comments", comments); 
-		  
-		  //comment
-		  
-		  //更新ボタン押下後の処理
-			/*
-			 * int manualId = Integer.parseInt(request.getParameter("manual_id")); String
-			 * content = request.getParameter("content");
-			 * 
-			 * ManualsDao dao = new ManualsDao(); boolean result =
-			 * dao.updateManual(manualId, content);
-			 * 
-			 * if (result) { response.getWriter().println("更新に成功しました！"); } else {
-			 * response.getWriter().println("更新に失敗しました。"); }
-			 */
+		  request.setAttribute("category_id", category_id); 
+		  request.setAttribute("task_id", task_id); 
 		  
 		  //jspにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manuup.jsp");
 			dispatcher.forward(request, response);
+		
+		}else if(request.getParameter("submit").equals("更新")) {
+			//更新ボタンが押された時の処理
+			String body = request.getParameter("body");
+			
+			//UPDATE  manuals SET body = ?  WHERE category_id = ? && task_id = ?;
+			//daoに3つの引数を貰って実行するメソッドを作って、呼び出す
+			ManualsDao mdao = new ManualsDao();
+			boolean result = mdao.updateManual(body, category_id, task_id);
+			if (result) { // 更新成功
+				request.setAttribute("result","更新成功！");
+			} else { // 更新失敗
+				request.setAttribute("result","更新失敗！");
+			}
+			 //jspにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/manuup.jsp");
+			dispatcher.forward(request, response);
+		
+		}
 	}
 }
 
