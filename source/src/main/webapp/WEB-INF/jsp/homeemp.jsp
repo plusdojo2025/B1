@@ -42,7 +42,8 @@
    
    <div class=center>
  <!--　マニュアル更新依頼 -->
-   <p>マニュアル更新依頼<span id="request-count" class="badge">0</span></p>
+   <p>マニュアル更新依頼<span id="request-count" class="badge"></span></p>
+   <a href="<c:url value='/ManuUpServlet' />">食器洗い</a>
 　<!-- 今日のアルバイト表示 -->
    <p>今日のアルバイト<p>
 <ul>
