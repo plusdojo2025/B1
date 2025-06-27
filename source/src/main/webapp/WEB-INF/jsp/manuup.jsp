@@ -33,7 +33,7 @@
 <form id="manual_form" method="POST" action="<c:url value='/ManuUpServlet' />"onreset="handleFormReset()">
 
 <div class="container">
-<div class="left">
+<div class="lefts">
 <!-- カテゴリ -->
 <!-- category_idスコープに値があるときはそれが選ばれた状態になるようにする -->
 <div id="category-data">
@@ -66,7 +66,7 @@ ${category.category}</option>
 </div>
 
 <!-- 評価 -->
-<div class="right">
+<%-- <div class="right">
 <div>累計： <span class="star" onclick="setRating(1)">☆</span> 
 <span class="star" onclick="setRating(2)">☆</span> 
 <span class="star" onclick="setRating(3)">☆</span> 
@@ -74,10 +74,10 @@ ${category.category}</option>
 <span class="star" onclick="setRating(5)">☆</span> 
 <input type="hidden" name="rating" id="rating" value="0"> 
 ${review_score}
-</div>
+</div> --%>
 <br>
 <!-- 評価 -->
-<div>
+<%-- <div>
 更新後： <span class="star" onclick="setRating(1)">☆</span> 
 <span class="star" onclick="setRating(2)">☆</span> 
 <span class="star" onclick="setRating(3)">☆</span> 
@@ -85,7 +85,7 @@ ${review_score}
 <span class="star" onclick="setRating(5)">☆</span> 
 <input type="hidden" name="rating"id="rating" value="0">
 ${review_half_score}
-</div>
+</div> --%>
 </div>
 </div>
 <br>
