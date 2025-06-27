@@ -58,7 +58,7 @@ import java.util.List;
 			// 結果を返す
 			return loginResult;
 		}
-		
+
 		public boolean insert(int user_id,String date,int category_id) {
 			Connection conn = null;
 			boolean result = false;
@@ -76,7 +76,7 @@ import java.util.List;
 					// SQL文を準備する
 					String sql = "INSERT INTO schedules (user_id,date,category_id) VALUES (?, ?, ?)";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
-	
+
 					// SQL文を完成させる
 					if (user_id != 0) {
 						pStmt.setInt(1, user_id);
@@ -93,7 +93,7 @@ import java.util.List;
 					} else {
 						pStmt.setString(3, "");
 					}
-	
+
 					// SQL文を実行する
 					if (pStmt.executeUpdate() == 1) {
 						result = true;
@@ -112,7 +112,7 @@ import java.util.List;
 						}
 					}
 				}
-			
+
 
 			// 結果を返す
 			return result;
@@ -121,61 +121,61 @@ import java.util.List;
 }*/
 
 public class SchedulesDao {
-    private final String JDBC_URL = "jdbc:mysql://localhost:3306/b1";
-    private final String DB_USER = "root";
-    private final String DB_PASS = "password";
+	private final String JDBC_URL = "jdbc:mysql://localhost:3306/b1";
+	private final String DB_USER = "root";
+	private final String DB_PASS = "password";
 
-    static {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	static {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    public boolean insert(int userId, int categoryId, Timestamp date) {
-        String sql = "INSERT INTO schedules (user_id, category_id, date, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())";
+	public boolean insert(int userId, int categoryId, Timestamp date) {
+		String sql = "INSERT INTO schedules (user_id, category_id, date, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())";
 
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, userId);
-            stmt.setInt(2, categoryId);
-            stmt.setTimestamp(3, date);
+			stmt.setInt(1, userId);
+			stmt.setInt(2, categoryId);
+			stmt.setTimestamp(3, date);
 
-            return stmt.executeUpdate() == 1;
+			return stmt.executeUpdate() == 1;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    //ユーザーIDと今日で業務を取得する
-    public List<String> getTodayCategories(int userId) {
-        List<String> categories = new ArrayList<>();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	//ユーザーIDと今日で業務を取得する
+	public List<String> getTodayCategories(int userId) {
+		List<String> categories = new ArrayList<>();
 
-        String sql = "SELECT c.category " +
-                     "FROM schedules s " +
-                     "JOIN categories c ON s.category_id = c.id " +
-                     "WHERE s.user_id = ? AND DATE(s.date) = CURDATE()";
+		String sql = "SELECT c.category " +
+				"FROM schedules s " +
+				"JOIN categories c ON s.category_id = c.id " +
+				"WHERE s.user_id = ? AND DATE(s.date) = CURDATE()";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-             
-            stmt.setInt(1, userId);
-            ResultSet rs = stmt.executeQuery();
+		try (Connection conn = getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                categories.add(rs.getString("category"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+			stmt.setInt(1, userId);
+			ResultSet rs = stmt.executeQuery();
 
-        return categories;
-    }
+			while (rs.next()) {
+				categories.add(rs.getString("category"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-    private Connection getConnection() throws Exception {
-        return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-    }
+		return categories;
+	}
+
+	private Connection getConnection() throws Exception {
+		return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
+	}
 }

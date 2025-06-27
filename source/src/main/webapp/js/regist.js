@@ -10,12 +10,12 @@ formObj.onsubmit = function(event) {
 	const pw2 = document.getElementById("pw2").value;
  
  //空欄でエラー出るか
-   if (pw2 !== pw ) {
-    errorMessageObj.textContent = 'パスワードが一致しません';
-    event.preventDefault();
-   }else if (!pwPattern.test(pw)) {
-  errorMessageObj.textContent = 'パスワードは英大文字・小文字・数字を含む8〜20文字で入力してください';
-  event.preventDefault();
-  }
+	if (pw2 !== pw ) {
+	errorMessageObj.textContent = 'パスワードが一致しません';
+	event.preventDefault();
+	}else if (!pwPattern.test(pw)) {
+ 	errorMessageObj.textContent = 'パスワードは英大文字・小文字・数字・記号を含む8〜20文字で入力してください';
+	 event.preventDefault();
+	}
 };
 });
