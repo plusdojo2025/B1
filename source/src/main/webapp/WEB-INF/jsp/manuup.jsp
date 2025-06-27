@@ -72,7 +72,7 @@ ${category.category}</option>
 <span class="star" onclick="setRating(3)">☆</span> 
 <span class="star" onclick="setRating(4)">☆</span> 
 <span class="star" onclick="setRating(5)">☆</span> 
-<input type="hidden" name="rating" id="rating" value="0">
+<input type="hidden" name="rating" id="rating" value="0"> 
 ${review_score}
 </div>
 <br>
