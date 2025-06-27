@@ -22,39 +22,38 @@ import dto.Users;
 @WebServlet("/HomePartServlet")
 public class HomePartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HomePartServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public HomePartServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
-	    Users loginUser = (Users) session.getAttribute("loginUser");
+		Users loginUser = (Users) session.getAttribute("loginUser");
 
-	    if (loginUser == null) {
-	        response.sendRedirect("login.jsp");
-	        return;
-	    }
+		if (loginUser == null) {
+			response.sendRedirect("login.jsp");
+			return;
+		}
 
-	    int userId = loginUser.getId();
-	    SchedulesDao dao = new SchedulesDao();
-	    List<String> categoryList = dao.getTodayCategories(userId);
+		int userId = loginUser.getId();
+		SchedulesDao dao = new SchedulesDao();
+		List<String> categoryList = dao.getTodayCategories(userId);
 
-	    request.setAttribute("todayTasks", categoryList);
-		
+		request.setAttribute("todayTasks", categoryList);
+
 		ChecksDao checksDao = new ChecksDao();
 		List<Manual> uncheckedManuals = checksDao.getUncheckedManualsByUser(userId);
 		request.setAttribute("uncheckedManuals", uncheckedManuals);
 		request.setAttribute("uncheckedCount", uncheckedManuals.size());
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/homepart.jsp");
 		dispatcher.forward(request, response);
 	}

@@ -50,6 +50,10 @@ form{
   width: 300px; /* 必要に応じて調整 */
 }
 
+.lefts{
+	transform: translateX(-150px); /* 中央から左へ40pxずらす */
+}
+
 /* textクラス */
 .text{
 	display: flex;            /* 横並びにする */

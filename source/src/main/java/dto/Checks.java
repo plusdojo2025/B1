@@ -45,16 +45,16 @@ public class Checks {
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updated_at = updatedAt;
 	}
-	
+
 	//コンストラクタ 情報取得用
-    public Checks(int id, int user_id, int manual_id, boolean has_check, Timestamp created_at,Timestamp updated_at) {
-    	this.id= id;
+	public Checks(int id, int user_id, int manual_id, boolean has_check, Timestamp created_at,Timestamp updated_at) {
+		this.id= id;
 		this.user_id = user_id;
 		this.manual_id = manual_id;
 		this.has_check = has_check;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
-    }
-    
-   
+	}
+
+
 }

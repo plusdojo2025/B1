@@ -19,28 +19,28 @@ import dto.Users;
 @WebServlet("/HomeEmpServlet")
 public class HomeEmpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HomeEmpServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public HomeEmpServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		// アルバイト取得
-	    UsersDao dao = new UsersDao();
-	    List<Users> todayParttimer = dao.getTodayParttimer();
 
-	    // リクエストにセット
-	    request.setAttribute("todayParttimer", todayParttimer);
-		
+		// アルバイト取得
+		UsersDao dao = new UsersDao();
+		List<Users> todayParttimer = dao.getTodayParttimer();
+
+		// リクエストにセット
+		request.setAttribute("todayParttimer", todayParttimer);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/homeemp.jsp");
 		dispatcher.forward(request, response);
 	}
