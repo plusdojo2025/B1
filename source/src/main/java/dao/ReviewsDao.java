@@ -232,7 +232,7 @@ public class ReviewsDao {
 
 	        // データベースに接続する
 	        conn = DriverManager.getConnection(
-	            "jdbc:mysql://localhost:3306/B1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	            "jdbc:mysql://localhost:3306/b1?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 	            "root", "password");
 
 	        // SQL文を準備する
